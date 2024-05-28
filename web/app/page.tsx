@@ -1,9 +1,13 @@
-import React from 'react'
+import Header from "@/components/Header";
+import React from "react";
 
 const DefaultPage = () => {
   return (
-    <div>Hello World</div>
-  )
-}
+    <div>
+      <Header />
+      Hello World
+    </div>
+  );
+};
 
-export default DefaultPage
+export default DefaultPage;
