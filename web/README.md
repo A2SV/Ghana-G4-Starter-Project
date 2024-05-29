@@ -52,4 +52,4 @@ npm run dev
 * Stage ```git add .```
 * Commit ```git commit -m (eg.)"rebased from web"```
 * Push ```git push```
-* Create a PR 
+* Create a PR to the web branch.
