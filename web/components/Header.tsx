@@ -10,11 +10,11 @@ const Header = () => {
       <div>
         <Link href={"#"}>
           <div>
-            <Image className="w-32" src={A2SVImage} alt="This is an alt" objectFit="cover" />
+            <Image className="w-32" src={A2SVImage} alt="A2SV Logo" objectFit="cover" />
           </div>
         </Link>
       </div>
-      <div className="flex w-48 h- text-xl font-bold justify-between text-gray-500">
+      <div className="flex w-48 text-xl font-bold justify-between text-gray-500">
         <Link className="text-blue hidden md:block no-underline" href={"#"}>
           Blog
         </Link>
@@ -27,7 +27,7 @@ const Header = () => {
           <Image
             className="rounded-full"
             src={headerImage}
-            alt="This is an alt"
+            alt="Profile image"
             layout="fill"
             objectFit="cover"
           />
