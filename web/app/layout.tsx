@@ -15,9 +15,7 @@ export default function RootLayout({
       <head>
         <PublicEnvScript />
       </head>
-      <body className={inter.className}>
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

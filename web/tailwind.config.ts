@@ -24,7 +24,10 @@ const config = {
     },
     extend: {
       colors: {
-        
+        blue: "#264fad",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
