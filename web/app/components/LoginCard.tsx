@@ -8,7 +8,6 @@ export default function LoginCard() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add login logic here
     console.log("Email:", email);
     console.log("Password:", password);
   };

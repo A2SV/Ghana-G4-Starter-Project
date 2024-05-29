@@ -9,7 +9,6 @@ export default function SignupCard() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add signup logic here
     console.log("First Name:", firstName);
     console.log("Last Name:", lastName);
     console.log("Email:", email);
