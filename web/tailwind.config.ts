@@ -26,14 +26,14 @@ const config = {
     extend: {
       colors: {
         blue: "#264fad",
-      },
-      fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
         primary: "#264FAD",
         btn: "#264FAD",
         input: "#EFF3F9",
         text: "#434343",
         eye: "#B7B7B7",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
         pops: ["Poppins", "sans-serif", "Arial"],
       },
       backgroundImage: {

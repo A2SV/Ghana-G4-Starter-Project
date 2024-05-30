@@ -21,8 +21,8 @@ export default function LoginCard() {
   };
 
   return (
-    <div className="min-h-screen min-w-full flex items-center justify-center">
-      <div className="bg-white w-2/4 h-1/6 rounded-xl px-10 py-10">
+    <div className="h-[600px] w-full flex items-center justify-center">
+      <div className="w-full ml-[30px] mr-[30px]  bg-white md:w-2/4 h-[400px] rounded-xl px-10 py-10">
         <h2 className="text-2xl text-text font-bold mb-6 text-left font-pops">Login</h2>
         <p className="text-sm text-text font-pops font-light my-10">
           Hey, Enter your details to sign in to your account{" "}
@@ -32,7 +32,7 @@ export default function LoginCard() {
             <input
               type="email"
               id="email"
-              className="w-full px-3 py-2 border bg-input text-sm   rounded-md focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2  bg-input text-sm   rounded-md focus:outline-none focus:border-blue-500"
               value={email}
               onChange={handleEmailChange}
               placeholder="Email address"
@@ -43,7 +43,7 @@ export default function LoginCard() {
             <input
               type="password"
               id="password"
-              className="w-full px-3 py-2 border bg-input text-sm  rounded-md focus:outline-none focus:border-blue-500 mb-7"
+              className="w-full px-3 py-2  bg-input text-sm  rounded-md focus:outline-none focus:border-blue-500 mb-7"
               value={password}
               onChange={handlePasswordChange}
               placeholder="Password"

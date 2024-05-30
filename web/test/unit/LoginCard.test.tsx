@@ -1,8 +1,7 @@
-import LoginCard from "../../app/components/LoginCard";
-
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import LoginCard from "@/components/LoginCard";
 
 describe("LoginCard", () => {
   test("renders LoginCard component", () => {
