@@ -10,7 +10,7 @@ namespace backend.Domain.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string bio { get; set; }
+        public string Bio { get; set; }
         public string Username { get; set; }
         public string Email { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; } = new byte[32];
