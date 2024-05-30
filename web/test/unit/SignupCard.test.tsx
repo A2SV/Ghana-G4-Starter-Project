@@ -1,8 +1,7 @@
-import SignupCard from "../../app/components/SignupCard";
-
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import SignupCard from "@/components/SignupCard";
 
 describe("SignupCard", () => {
   test("renders SignupCard component", () => {

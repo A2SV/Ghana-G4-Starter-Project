@@ -32,8 +32,8 @@ export default function SignupCard() {
   };
 
   return (
-    <div className="min-h-screen min-w-full flex items-center justify-center">
-      <div className=" min-w-1/2 bg-white w-2/4 h-1/6 rounded-xl px-10 py-10">
+    <div className="h-[600px] w-full flex items-center justify-center ">
+      <div className="w-full ml-[30px] mr-[30px]   md:w-2/4 h-[440px] rounded-xl px-10 py-10 bg-white">
         <h2 className="text-2xl text-text font-bold mb-3 text-left font-pops">Sign up</h2>
         <p className="text-sm text-text font-pops mb-2 font-light">
           Hey, Enter your details to sign up{" "}
@@ -65,7 +65,7 @@ export default function SignupCard() {
             <input
               type="email"
               id="email"
-              className="w-full px-3 py-2 border bg-input text-sm mb-4 rounded-md focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 bg-input text-sm mb-4 rounded-md focus:outline-none focus:border-blue-500"
               value={email}
               onChange={handleEmailChange}
               placeholder="Email address"
@@ -85,7 +85,7 @@ export default function SignupCard() {
           </div>
           <button
             type="submit"
-            className="w-full bg-btn text-white font-semibold text-sm py-2 font-pops rounded-md hover:bg-blue-600 transition duration-300"
+            className="w-full bg-primary text-white font-semibold text-sm py-2 font-pops rounded-md hover:bg-blue-600 transition duration-300"
           >
             Sign up
           </button>
