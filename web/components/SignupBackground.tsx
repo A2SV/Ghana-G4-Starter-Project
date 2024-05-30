@@ -45,7 +45,7 @@ const SignUpBackground: React.FC = () => {
           </h1>
         </div>
 
-        <div className="">
+        <div>
           <SignupCard />
         </div>
       </div>

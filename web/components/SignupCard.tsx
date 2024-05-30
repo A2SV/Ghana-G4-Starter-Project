@@ -43,7 +43,7 @@ export default function SignupCard() {
             <input
               type="text"
               id="first-name"
-              className="w-full px-3 py-2 border bg-input text-sm mb-4 rounded-md focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2  bg-input text-sm mb-4 rounded-md focus:outline-none focus:border-blue-500"
               value={firstName}
               onChange={handleFirstNameChange}
               placeholder="First Name"
@@ -54,7 +54,7 @@ export default function SignupCard() {
             <input
               type="text"
               id="last-name"
-              className="w-full px-3 py-2 border bg-input text-sm mb-4 rounded-md focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2  bg-input text-sm mb-4 rounded-md focus:outline-none focus:border-blue-500"
               value={lastName}
               onChange={handleLastNameChange}
               placeholder="Last Name"
@@ -76,7 +76,7 @@ export default function SignupCard() {
             <input
               type="password"
               id="password"
-              className="w-full px-3 py-2 border bg-input text-sm rounded-md focus:outline-none focus:border-blue-500 mb-7"
+              className="w-full px-3 py-2  bg-input text-sm rounded-md focus:outline-none focus:border-blue-500 mb-7"
               value={password}
               onChange={handlePasswordChange}
               placeholder="Password"
