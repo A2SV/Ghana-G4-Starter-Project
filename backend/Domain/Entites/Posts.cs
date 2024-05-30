@@ -6,7 +6,7 @@ using backend.Domain.Common;
 
 namespace backend.Domain.Entities
 {
-    public class Users : BaseEntity
+    public class Posts : BaseEntity
     {
         public string Content { get; set; }
         public string Tag {get; set;}
