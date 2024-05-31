@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
+import 'package:starter_project/src/core/theme/theme_config.dart';
 import '../error/error.dart';
-import '../theme/light_theme.dart';
 
 class AppRouter extends StatelessWidget {
   static final GoRouter router = createRoute();
@@ -40,7 +40,7 @@ class AppRouter extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Starter Project mobile',
-        theme: lightTheme,
+        theme: ThemeConfig.lightTheme,
         routerConfig: router,
       ),
     );
