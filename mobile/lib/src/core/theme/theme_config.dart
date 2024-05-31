@@ -19,13 +19,4 @@ class ThemeConfig {
       ),
     );
   }
-
-  // ColorScheme get _lightColorScheme => const ColorScheme.light().copyWith(
-  //     primary: AppLightThemeColors.kLightPrimaryColor,
-  //     onPrimary: AppLightThemeColors.kLightOnPrimaryColor,
-  //     secondary: AppLightThemeColors.kLightSecondaryColor,
-  //     onSecondary: AppLightThemeColors.kLightOnSecondaryColor,
-  //     tertiary: AppLightThemeColors.kLightTertiaryColor,
-  //     onTertiary: AppLightThemeColors.kLightOnTertiaryColor,
-  //   );
 }
