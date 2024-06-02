@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using backend.Domain.Common;
+using Domain.Common;
 
-namespace backend.Domain.Entities
+namespace Domain.Entities
 {
     public class Users : BaseEntity
     {
@@ -17,6 +17,5 @@ namespace backend.Domain.Entities
         public byte[] PasswordSalt { get; set; } = new byte[32];
         public string? VerificationToken { get; set; }
         public string? PasswordResetToken { get; set; }
-
     }
 }
