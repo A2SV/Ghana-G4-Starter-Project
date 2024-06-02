@@ -15,7 +15,7 @@
     "coverage": "jest --coverage",
     "test-all": "npm run check-prettier && npm run check-lint && npm run test && npm run build",
     "prepare": "cd .. && husky web/.husky",
-    "fix-all": "prettier --write '**/*.{ts,tsx}' && eslint . --ext ts --ext tsx --fix && npm run build" 
+    "fix-all": "prettier --write '**/*.{ts,tsx}' && eslint . --ext ts --ext tsx --fix && npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
