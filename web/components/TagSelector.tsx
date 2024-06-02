@@ -22,7 +22,7 @@ const TagSelector: React.FC = () => {
   };
 
   return (
-    <div className="w-3/4 ml-10">
+    <div className="w-3/4">
       <p className="font-montserrat font-semibold mb-7">Select Tag</p>
       <div className="flex flex-wrap w-full gap-2 mb-4">
         {tags.map((tag) => (

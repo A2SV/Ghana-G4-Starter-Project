@@ -12,7 +12,7 @@ const MarkdownEditor: React.FC<{ onChange: (value: string) => void }> = ({ onCha
   };
 
   return (
-    <div className="markdown-editor ml-5 break-before-all">
+    <div className="markdown-editor break-before-all">
       <SimpleMDE value={value} onChange={handleChange} />
     </div>
   );

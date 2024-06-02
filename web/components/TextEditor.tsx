@@ -11,7 +11,7 @@ const BlogCreatorPage: React.FC = () => {
   }, [markdownContent]);
 
   return (
-    <div className="w-3/4 ml-5 font-pops break-before-all">
+    <div className="w-3/4 font-pops break-before-all xl:w-full">
       <MarkdownEditor onChange={setMarkdownContent} />
     </div>
   );

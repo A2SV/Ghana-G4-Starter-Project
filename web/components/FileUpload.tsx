@@ -3,11 +3,11 @@ import Image from "next/image";
 import UploadImage from "../public/upload_file.png";
 const FileUpload: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-3/4  bg-fileUpload  border-2  border-gray-300 rounded-md ml-10 mb-4">
+    <div className="flex flex-col items-center justify-center h-3/5 w-3/4  bg-fileUpload  border-2  border-gray-300 rounded-md mb-4 xl:w-full">
       <Image
         src={UploadImage}
         alt="Upload Image"
-        className=" h-auto w-3/4 mb-2"
+        className=" h-3/5 w-3/4 mb-2"
         objectFit="cover"
       />
       <div className="flex flex-row h-9 justify-center items-center">
