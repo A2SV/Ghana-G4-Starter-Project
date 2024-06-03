@@ -5,6 +5,7 @@ using Persistence.Repositories;
 using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(RegisterUserCommand).Assembly));
+builder.Services.AddMediatR(typeof(LoginUserCommandHandler).Assembly);
 
 // Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
