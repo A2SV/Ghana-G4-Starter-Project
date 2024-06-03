@@ -24,6 +24,8 @@ namespace Persistence
                 .WithOne(p=>p.User)
                 .HasForeignKey(e=>e.UserId);
 
+            Seed.UsersSeed.AddSeed(modelBuilder);
+            Seed.PostsSeed.AddSeed(modelBuilder);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken=default)
