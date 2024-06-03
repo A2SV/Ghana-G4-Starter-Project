@@ -12,15 +12,15 @@ const NewBlogMain: React.FC = () => {
     <div>
       <Header />
       <div className="flex flex-col xl:flex-row">
-            <div className=" order-1 ml-14 lg:ml-20 xl:ml-32 xl:order-2 xl:w-4/12">
-                <TagSelector />
-            </div>
-            <div className=" order-2 flex flex-col mb-40 ml-14 lg:ml-20 xl:ml-32 xl:order-1 xl:w-8/12">
-                <BlogHeader />
-                <FileUpload />
-                <TextEditor />
-                <ActionButtons />
-            </div>
+        <div className=" order-1 ml-14 lg:ml-20 xl:ml-32 xl:order-2 xl:w-4/12">
+          <TagSelector />
+        </div>
+        <div className=" order-2 flex flex-col mb-40 ml-14 lg:ml-20 xl:ml-32 xl:order-1 xl:w-8/12">
+          <BlogHeader />
+          <FileUpload />
+          <TextEditor />
+          <ActionButtons />
+        </div>
       </div>
 
       <Footer />
