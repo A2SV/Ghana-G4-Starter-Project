@@ -8,7 +8,7 @@ const ProfileInfo = () => {
     <div>
       <div className="flex flex-col sm:flex-row border-b border-gray-200 mx-[64px] font-montserrat justify-between items-center">
         <div className="flex flex-col">
-          <div className="font-semibold text-lg sm:text-xl pt-4 sm:pt-0 text-gray-600">Manage Personal Information</div>
+          <div className="font-semibold text-xl text-gray-600">Manage Personal Information</div>
           <div className="font-semibold text-sm text-gray-400">
             Add all the required information about yourself
           </div>
@@ -61,7 +61,7 @@ const ProfileInfo = () => {
           Your photo
         </label>
         <Image src={ProfileImage} alt="user profile picture" width={64} />
-        <label className="text-gray-400 font-semibold text-base rounded w-80 max-w-md h-40 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 font-pops">
+        <div className="text-gray-400 font-semibold text-base rounded w-80 max-w-md h-40 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 font-pops">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-11 mb-2 fill-[#5956E9]"
@@ -86,7 +86,7 @@ const ProfileInfo = () => {
           <p className="text-sm font-medium text-gray-400 mt-2 font-pops">
             SVG, PNG, JPG or GIF(max 800x400px)
           </p>
-        </label>
+        </div>
       </div>
     </div>
   );
