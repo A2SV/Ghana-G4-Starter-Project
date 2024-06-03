@@ -1,36 +1,33 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import MarkdownEditor from '@/components/MarkdownEditor';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import MarkdownEditor from "@/components/MarkdownEditor";
 
 // Mock SimpleMDE editor
-jest.mock('react-simplemde-editor', () => {
+jest.mock("react-simplemde-editor", () => {
   const MockSimpleMDE = (props: any) => (
-    <textarea
-      data-testid="markdown-editor"
-      onChange={(e) => props.onChange(e.target.value)}
-    />
+    <textarea data-testid="markdown-editor" onChange={(e) => props.onChange(e.target.value)} />
   );
-  MockSimpleMDE.displayName = 'SimpleMDE';
+  MockSimpleMDE.displayName = "SimpleMDE";
   return MockSimpleMDE;
 });
 
-describe('MarkdownEditor', () => {
-  test('renders the editor', () => {
+describe("MarkdownEditor", () => {
+  test("renders the editor", () => {
     const handleChange = jest.fn();
     render(<MarkdownEditor onChange={handleChange} />);
 
-    const textarea = screen.getByTestId('markdown-editor');
+    const textarea = screen.getByTestId("markdown-editor");
     expect(textarea).toBeInTheDocument();
   });
 
-  test('calls onChange when content changes', () => {
+  test("calls onChange when content changes", () => {
     const handleChange = jest.fn();
     render(<MarkdownEditor onChange={handleChange} />);
 
-    const textarea = screen.getByTestId('markdown-editor');
-    fireEvent.change(textarea, { target: { value: 'Hello, world!' } });
+    const textarea = screen.getByTestId("markdown-editor");
+    fireEvent.change(textarea, { target: { value: "Hello, world!" } });
 
-    expect(handleChange).toHaveBeenCalledWith('Hello, world!');
+    expect(handleChange).toHaveBeenCalledWith("Hello, world!");
   });
 });
