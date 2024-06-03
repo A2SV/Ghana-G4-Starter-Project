@@ -73,47 +73,47 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: assets/fonts/Poppins-Black.ttf
+        - asset: assets/fonts/Poppins/Poppins-Black.ttf
           weight: 900
-        - asset: assets/fonts/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/Poppins/Poppins-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
           weight: 300
-        - asset: assets/fonts/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/Poppins/Poppins-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/Poppins-Thin.ttf
+        - asset: assets/fonts/Poppins/Poppins-Thin.ttf
           weight: 100
     - family: Urbanist
       fonts:
-        - asset: assets/fonts/Urbanist-Black.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Black.ttf
           weight: 900
-        - asset: assets/fonts/Urbanist-ExtraBold.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/Urbanist-Bold.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Urbanist-SemiBold.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Urbanist-Medium.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Urbanist-Regular.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Urbanist-Light.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Light.ttf
           weight: 300
-        - asset: assets/fonts/Urbanist-ExtraLight.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/Urbanist-Thin.ttf
+        - asset: assets/fonts/Urbanist/Urbanist-Thin.ttf
           weight: 100
     - family: Pacifico
       fonts:
-        - asset: assets/fonts/Pacifico-Regular.ttf
+        - asset: assets/fonts/Pacifico/Pacifico-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

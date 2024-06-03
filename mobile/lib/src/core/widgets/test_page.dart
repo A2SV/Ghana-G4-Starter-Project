@@ -20,6 +20,7 @@ class _TestScreenState extends State<TestScreen> {
             Center(
               child: Text(
                 "Test page",
+                style: TextStyle(color: Colors.red),
               ),
             ),
           ],
