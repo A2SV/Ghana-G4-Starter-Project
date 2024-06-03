@@ -136,3 +136,14 @@ extension CustomWidgetExtensions on Widget {
         child: this,
       );
 }
+
+extension CustomExtensions on BuildContext {
+  ColorScheme get colorScheme => theme.colorScheme;
+  DefaultTextStyle get defaultTextStyle => DefaultTextStyle.of(this);
+  FocusScopeNode get focusScope => FocusScope.of(this);
+  double get height => size.height;
+  Size get size => MediaQuery.sizeOf(this);
+  TextTheme get textTheme => theme.textTheme;
+  ThemeData get theme => Theme.of(this);
+  double get width => size.width;
+}
