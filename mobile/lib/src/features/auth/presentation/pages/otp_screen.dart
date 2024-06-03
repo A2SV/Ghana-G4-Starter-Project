@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
@@ -15,16 +17,16 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final TextEditingController _otpController = TextEditingController();
-
-  @override
-  void dispose() {
-    _otpController.dispose();
-    super.dispose();
-  }
+  late Timer _timer;
+  int _countDown = 180;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: Container(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -34,19 +36,43 @@ class _OtpScreenState extends State<OtpScreen> {
                   width: 300,
                 )
                 .centered(),
+                const SizedBox(
+              height: 40.0,
+            ),
             Text(
               'Enter OTP',
               style: context.textTheme.labelLarge!.copyWith(
-                fontSize: 34.sp,
+                fontSize: 23.sp,
               ),
-            ),
+            ).align(Alignment.centerLeft),
             Text(
               'An OTP has been send to user.name@a2sv.org',
               style: context.textTheme.labelMedium,
             ).rightPadding(100.0),
+            const SizedBox(
+              height: 35.0,
+            ),
             CustomPinPutFormField(
               controller: _otpController,
               length: 6,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'resend code in',
+              style: context.textTheme.labelMedium!.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ).align(Alignment.centerLeft),
+            Text(
+              _formatTime(_countDown),
+              style: context.textTheme.displayLarge!.copyWith(
+                fontSize: 23.sp,
+              ),
+            ).align(Alignment.centerLeft),
+            const SizedBox(
+              height: 180.0,
             ),
             CustomButton(
               horizontalPadding: 0.0,
@@ -57,5 +83,37 @@ class _OtpScreenState extends State<OtpScreen> {
         ).horizontalPadding(30.0),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _otpController.dispose();
+    super.dispose();
+  }
+
+  void resetTimer() {
+    setState(() {
+      _countDown = 180;
+    });
+    startTimer();
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_countDown == 0) {
+        _timer.cancel();
+      } else {
+        setState(() {
+          _countDown--;
+        });
+      }
+    });
+  }
+
+  String _formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}s';
   }
 }
