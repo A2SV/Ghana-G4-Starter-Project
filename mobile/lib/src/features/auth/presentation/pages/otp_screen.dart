@@ -12,12 +12,12 @@ class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
 
   @override
-  State<OtpScreen> createState() => _OtpScreenState();
+  State<OtpScreen> createState() => OtpScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
+class OtpScreenState extends State<OtpScreen> {
   final TextEditingController _otpController = TextEditingController();
-  late Timer _timer;
+  late Timer _timer = Timer(const Duration(seconds: 0), () {});
   int _countDown = 180;
 
   @override
@@ -36,7 +36,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   width: 300,
                 )
                 .centered(),
-                const SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             Text(
