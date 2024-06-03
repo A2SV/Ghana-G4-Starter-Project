@@ -19,36 +19,18 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Center(
           child: Container(
             alignment: Alignment.center,
-
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  key: Key('login-page-image'),
                   child: Center(
-                    child: Image.network(
-                      'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS-v7mV0cWa8gxS5ZiOCErG6s9W2dJDdAdbNceLtcTO87bnzpsp', // Replace with your image URL
-                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
-                                  : null,
-                            ),
-                          );
-                        }
-                      },
-                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                        return Text('Failed to load image');
-                      },
-                    ),
+                    child: Image.asset('assets/login_page_image-1.jpg'),
                   ),
                 ),
                 Container(
+                  key: Key('login-page-text'),
                   alignment: Alignment.centerLeft,
-
                   child: Text(
                     'Log in',
                     style: TextStyle(
@@ -59,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 Container(
+                  key: Key('email-field'),
                   child:  Column(
                     children: <Widget>[
                       Container(
@@ -79,8 +62,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 Container(
+                  key: Key('password-field'),
                   child: Card(
                     child: Container(
+
                       margin: EdgeInsets.all(20),
                       child: TextField(
                         obscureText: true,
@@ -106,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
 
                       Container(
+                        key: Key('login-button'),
                         child: ElevatedButton(
                           child:Text(
                             'Login',
@@ -127,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       Container(
+                        key: Key('footer-text'),
                         child:Row(
                           children: [
                             Text(
@@ -136,6 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             TextButton(
+                              key: Key('register-button'),
                               child: Text(
                                 'Register',
                                 style: TextStyle(
