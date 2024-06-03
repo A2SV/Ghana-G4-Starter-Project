@@ -6,9 +6,12 @@ using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
+using Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
