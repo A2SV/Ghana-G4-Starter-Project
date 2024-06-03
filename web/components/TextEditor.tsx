@@ -6,7 +6,6 @@ const BlogCreatorPage: React.FC = () => {
   const [markdownContent, setMarkdownContent] = useState("");
 
   useEffect(() => {
-    // Log the content to the console whenever it changes
     console.log(markdownContent);
   }, [markdownContent]);
 

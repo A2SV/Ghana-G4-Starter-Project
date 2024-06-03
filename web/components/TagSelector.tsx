@@ -1,5 +1,4 @@
 "use client";
-// components/TagSelector.tsx
 import React, { useState } from "react";
 
 const tags = [
@@ -14,7 +13,6 @@ const tags = [
 ];
 
 const TagSelector: React.FC = () => {
-  // Initialize the activeTag state with the first tag by default
   const [activeTag, setActiveTag] = useState<string>(tags[0]);
 
   const handleClick = (tag: string) => {

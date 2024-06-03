@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import MarkdownEditor from "@/components/MarkdownEditor";
 
-// Mock SimpleMDE editor
 jest.mock("react-simplemde-editor", () => {
   const MockSimpleMDE = (props: any) => (
     <textarea data-testid="markdown-editor" onChange={(e) => props.onChange(e.target.value)} />
