@@ -9,16 +9,19 @@ class CustomTextStyles {
           fontSize: 32.sp,
           fontWeight: FontWeight.w600,
           fontFamily: FontFamily.poppins,
+          color: AppLightThemeColors.kDarkTextColor,
         ),
         displayMedium: TextStyle(
           fontSize: 18.sp,
           fontWeight: FontWeight.w500,
           fontFamily: FontFamily.poppins,
+          color: AppLightThemeColors.kLightTextColor,
         ),
         displaySmall: TextStyle(
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
           fontFamily: FontFamily.poppins,
+          color: AppLightThemeColors.kVeryLightTextColor,
         ),
         labelLarge: TextStyle(
           fontSize: 38.sp,

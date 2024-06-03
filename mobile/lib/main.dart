@@ -48,12 +48,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ResponsiveSizer(
-        builder: (context, orientation, screenType) {
-          return AppRouter();
-        },
-      ),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return AppRouter();
+      },
     );
   }
 }

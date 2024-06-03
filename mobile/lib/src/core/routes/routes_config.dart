@@ -36,13 +36,11 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Starter Project mobile',
-        theme: ThemeConfig.lightTheme,
-        routerConfig: router,
-      ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Starter Project mobile',
+      theme: ThemeConfig.lightTheme,
+      routerConfig: router,
     );
   }
 }

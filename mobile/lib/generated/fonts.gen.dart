@@ -10,6 +10,9 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: Pacifico
+  static const String pacifico = 'Pacifico';
+
   /// Font family: Poppins
   static const String poppins = 'Poppins';
 

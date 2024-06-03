@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 import '../widgets/test_page.dart';
 
 class AppRoutes {
   //* Test route
   static const String test = "test";
+  static const String otpScreen = 'otp-screen';
 }
 
 //* Custom transition page
@@ -39,5 +40,10 @@ final routes = <GoRoute>[
     name: AppRoutes.test,
     path: "/test",
     builder: (context, state) => const TestScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.otpScreen,
+    path: '/${OtpScreen.routeName}',
+    builder: (context, state) => const OtpScreen(),
   ),
 ];
