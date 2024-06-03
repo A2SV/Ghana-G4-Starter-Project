@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding1/on_boarding.dart';
+import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding2/get_started.dart';
+import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding3/login.dart';
 
 import 'src/core/dp_injection/dependency_injection.dart';
 import 'src/core/routes/routes_config.dart';
@@ -13,7 +16,8 @@ void main() {
       providers: [
         BlocProvider(create: (context) => dpLocator<AuthBloc>()),
       ],
-      child: const MyApp(),
+      child: MyApp(),
+      // MaterialApp(home: const OnBoardingScreen()),
     ),
   );
 }
