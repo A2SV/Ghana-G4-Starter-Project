@@ -8,29 +8,23 @@ const Header = () => {
   return (
     <div className="h-32 flex justify-between items-center px-4  font-sans">
       <div>
-        <Link href={"#"}>
+        <Link href={"/"}>
           <div>
-            <Image className="w-32" src={A2SVImage} alt="A2SV Logo" objectFit="cover" />
+            <Image className="w-32" src={A2SVImage} alt="A2SV Logo" />
           </div>
         </Link>
       </div>
       <div className="flex w-48 text-xl font-bold justify-between text-gray-500">
-        <Link className="text-blue hidden md:block no-underline" href={"#"}>
+        <Link className="text-blue hidden md:block no-underline" href={"/"}>
           Blog
         </Link>
-        <Link className="hidden md:block no-underline" href={"#"}>
+        <Link className="hidden md:block no-underline" href={"/profile/info"}>
           Profile
         </Link>
       </div>
       <Link href="#">
-        <div className="relative w-[48px] h-[48px]">
-          <Image
-            className="rounded-full"
-            src={headerImage}
-            alt="Profile image"
-            layout="fill"
-            objectFit="cover"
-          />
+        <div className="relative">
+          <Image width={40} className="rounded-full" src={headerImage} alt="Profile image" />
         </div>
       </Link>
     </div>
