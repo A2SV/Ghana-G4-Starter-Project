@@ -52,6 +52,17 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "My first Post",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tag = "Entertainment",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("backend.Domain.Entities.Users", b =>
@@ -105,6 +116,23 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "Computer Engineering Student",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "michaeladu@gmail.com",
+                            FirstName = "Michael",
+                            LastName = "Adu",
+                            PasswordHash = new byte[] { 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205 },
+                            PasswordResetToken = "None",
+                            PasswordSalt = new byte[] { 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205, 239, 171, 205 },
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Username = "mikkayadu",
+                            VerificationToken = "akdl8elslejdl"
+                        });
                 });
 
             modelBuilder.Entity("backend.Domain.Entities.Posts", b =>
