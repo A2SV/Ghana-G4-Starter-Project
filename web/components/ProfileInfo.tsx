@@ -61,7 +61,7 @@ const ProfileInfo = () => {
           Your photo
         </label>
         <Image src={ProfileImage} alt="user profile picture" width={64} />
-        <div className="text-gray-400 font-semibold text-base rounded w-80 max-w-md h-40 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 font-pops">
+        <label className="text-gray-400 font-semibold text-base rounded w-80 max-w-md h-40 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 font-pops">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-11 mb-2 fill-[#5956E9]"
@@ -86,7 +86,7 @@ const ProfileInfo = () => {
           <p className="text-sm font-medium text-gray-400 mt-2 font-pops">
             SVG, PNG, JPG or GIF(max 800x400px)
           </p>
-        </div>
+        </label>
       </div>
     </div>
   );
