@@ -8,7 +8,7 @@ const SignUpBackground: React.FC = () => {
     <div className="flex md:flex-row flex-col w-full">
       <div className="flex flex-col w-full md:h-[100vh] h-[90vh] p-7">
         <div className="h-[10vh] flex flex-row md:block justify-between">
-          <Link href='/'>
+          <Link href="/">
             <Image
               src="/logo.png"
               className="md:w-[90px] w-[68px] h-[44px] "

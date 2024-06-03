@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <div className="h-32 flex justify-between items-center px-4 font-sans">
+    <div className="h-32 flex justify-between items-center px-4  font-sans">
       <div>
         <Link href={"#"}>
           <div>

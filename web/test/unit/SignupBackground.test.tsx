@@ -3,7 +3,6 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import SignUpBackground from "@/components/SignupBackground";
 
-
 describe("SignUpBackground", () => {
   it("renders blog link", () => {
     render(<SignUpBackground />);
