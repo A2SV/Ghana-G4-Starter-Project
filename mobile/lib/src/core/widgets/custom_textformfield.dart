@@ -36,6 +36,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool autofocus;
   final Function(PointerDownEvent)? onTapOutside;
   final Function(String?)? onSaved;
+  final int? maxLines;
 
   const CustomTextFormField({
     super.key,
@@ -70,6 +71,7 @@ class CustomTextFormField extends StatefulWidget {
     this.autofocus = false,
     this.onTapOutside,
     this.onSaved,
+    this.maxLines,
   });
   @override
   State<CustomTextFormField> createState() => CustomTextFormFieldState();
@@ -159,7 +161,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           onFieldSubmitted: widget.onFieldSubmitted,
           onTapOutside: widget.onTapOutside,
           onSaved: widget.onSaved,
-          maxLines: 5,
+          maxLines: widget.maxLines??5,
         ),
       ],
     );
@@ -203,7 +205,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
             color: Colors.red,
           ),
       contentPadding: widget.contentPadding ??
-           EdgeInsets.symmetric(
+          EdgeInsets.symmetric(
             horizontal: 0,
             vertical: 2.5.h,
           ),
