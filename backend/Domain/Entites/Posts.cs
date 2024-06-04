@@ -11,8 +11,6 @@ namespace Domain.Entities
         public string Content { get; set; }
         public string Tag {get; set;}
         public Users User { get; set; }
-        
         public int UserId { get; set; }  
-
     }
 }

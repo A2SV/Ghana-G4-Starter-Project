@@ -18,6 +18,5 @@ namespace Domain.Entities
         public string? VerificationToken { get; set; }
         public string? PasswordResetToken { get; set; }
         public ICollection<Posts> Posts { get; set; }
-
     }
 }
