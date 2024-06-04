@@ -19,6 +19,7 @@ class CustomButton extends StatefulWidget {
   final String text;
   final TextStyle? textStyle;
   final Widget? suffixWidget;
+  final bool gradient;
 
   const CustomButton({
     super.key,
@@ -36,6 +37,7 @@ class CustomButton extends StatefulWidget {
     this.disabled,
     this.borderColor,
     this.textColor,
+    this.gradient = true,
   });
 
   @override
@@ -70,12 +72,14 @@ class _CustomButtonState extends State<CustomButton>
         },
         child: Container(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: widget.gradient 
+            ? const LinearGradient(
               colors: [
                 AppLightThemeColors.kPrimaryColor,
                 AppLightThemeColors.kPrimaryLightColor,
               ],
-            ),
+            )
+            : null,
             borderRadius: BorderRadius.circular(widget.borderRadius ?? 10.0),
           ),
           width: widget.width ?? context.width,

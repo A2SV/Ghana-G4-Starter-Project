@@ -206,7 +206,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
       contentPadding: widget.contentPadding ??
           EdgeInsets.symmetric(
-            horizontal: 0,
+            horizontal: 1.w,
             vertical: 2.5.h,
           ),
       fillColor: widget.fillColor ?? AppLightThemeColors.kFieldBackgroundColor,

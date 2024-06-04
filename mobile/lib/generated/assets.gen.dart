@@ -45,6 +45,9 @@ class $AssetsSvgGen {
   SvgGenImage get blogCloudUpload =>
       const SvgGenImage('assets/svg/blog_cloud_upload.svg');
 
+  /// File path: assets/svg/blog_edit.svg
+  SvgGenImage get blogEdit => const SvgGenImage('assets/svg/blog_edit.svg');
+
   /// File path: assets/svg/blog_fill_color.svg
   SvgGenImage get blogFillColor =>
       const SvgGenImage('assets/svg/blog_fill_color.svg');
@@ -105,6 +108,7 @@ class $AssetsSvgGen {
         blogBulletList,
         blogBulletNumbered,
         blogCloudUpload,
+        blogEdit,
         blogFillColor,
         blogFormatColor,
         blogHeader,

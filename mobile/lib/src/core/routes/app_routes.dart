@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
 import '../widgets/test_page.dart';
 
 class AppRoutes {
@@ -11,6 +12,7 @@ class AppRoutes {
   static const String otpScreen = 'otp-screen';
   static const String registerScreen = 'register-screen';
   static const String addblogScreen = 'add-blog-screen';
+  static const String editblogScreen = 'edit-blog-screen';
 }
 
 //* Custom transition page
@@ -59,5 +61,10 @@ final routes = <GoRoute>[
     name: AppRoutes.addblogScreen,
     path: '/${AddBlogScreen.routeName}',
     builder: (context, state) => const AddBlogScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.editblogScreen,
+    path: '/${EditBlogScreen.routeName}',
+    builder: (context, state) => const EditBlogScreen(),
   ),
 ];
