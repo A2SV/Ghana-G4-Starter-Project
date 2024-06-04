@@ -12,6 +12,59 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/blue_blob.png
+  AssetGenImage get blueBlob =>
+      const AssetGenImage('assets/images/blue_blob.png');
+
+  /// File path: assets/images/first_page.png
+  AssetGenImage get firstPage =>
+      const AssetGenImage('assets/images/first_page.png');
+
+  /// File path: assets/images/login_blob.png
+  AssetGenImage get loginBlob =>
+      const AssetGenImage('assets/images/login_blob.png');
+
+  /// File path: assets/images/login_blob2.png
+  AssetGenImage get loginBlob2 =>
+      const AssetGenImage('assets/images/login_blob2.png');
+
+  /// File path: assets/images/purple_blob.png
+  AssetGenImage get purpleBlob =>
+      const AssetGenImage('assets/images/purple_blob.png');
+
+  /// File path: assets/images/round_blob.png
+  AssetGenImage get roundBlob =>
+      const AssetGenImage('assets/images/round_blob.png');
+
+  /// File path: assets/images/second_page.png
+  AssetGenImage get secondPage =>
+      const AssetGenImage('assets/images/second_page.png');
+
+  /// File path: assets/images/superman.png
+  AssetGenImage get superman =>
+      const AssetGenImage('assets/images/superman.png');
+
+  /// File path: assets/images/yellow_blob.png
+  AssetGenImage get yellowBlob =>
+      const AssetGenImage('assets/images/yellow_blob.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        blueBlob,
+        firstPage,
+        loginBlob,
+        loginBlob2,
+        purpleBlob,
+        roundBlob,
+        secondPage,
+        superman,
+        yellowBlob
+      ];
+}
+
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
@@ -129,7 +182,84 @@ class $AssetsSvgGen {
 class Assets {
   Assets._();
 
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(this._assetName, {this.size = null});
+
+  final String _assetName;
+
+  final Size? size;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = false,
+    bool isAntiAlias = false,
+    String? package,
+    FilterQuality filterQuality = FilterQuality.low,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
 
 class SvgGenImage {
