@@ -23,6 +23,13 @@ namespace Persistence.Configurations
                 .HasMany(e=>e.Posts)
                 .WithOne(p=>p.User)
                 .HasForeignKey(e=>e.UserId);
+            
+            modelBuilder.Entity<Domain.Entities.Users>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                      .ValueGeneratedOnAdd();
+            });
 
             Seed.UsersSeed.AddSeed(modelBuilder);
             Seed.PostsSeed.AddSeed(modelBuilder);
