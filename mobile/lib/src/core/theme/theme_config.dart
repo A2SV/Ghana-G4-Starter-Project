@@ -7,6 +7,7 @@ import 'package:starter_project/src/core/theme/text_theme.dart';
 class ThemeConfig {
   static ThemeData get lightTheme {
     return ThemeData.light().copyWith(
+      colorScheme: const ColorScheme.light(primary: Colors.white),
       textTheme: CustomTextStyles.kDefaultTextTheme(),
       appBarTheme: AppBarTheme(
         elevation: 0,
