@@ -17,7 +17,7 @@ class ThemeConfig {
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
-      
+      scaffoldBackgroundColor: Colors.white,
     );
   }
 }

@@ -24,7 +24,7 @@ class CustomTextStyles {
           color: AppLightThemeColors.kVeryLightTextColor,
         ),
         labelLarge: TextStyle(
-          fontSize: 38.sp,
+          fontSize: 23.sp,
           fontWeight: FontWeight.w700,
           fontFamily: FontFamily.urbanist,
           color: AppLightThemeColors.kDarkTextColor,

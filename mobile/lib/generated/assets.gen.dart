@@ -18,8 +18,20 @@ class $AssetsSvgGen {
   /// File path: assets/svg/amico.svg
   SvgGenImage get amico => const SvgGenImage('assets/svg/amico.svg');
 
+  /// File path: assets/svg/cuate.svg
+  SvgGenImage get cuate => const SvgGenImage('assets/svg/cuate.svg');
+
+  /// File path: assets/svg/email_prefix_icon.svg
+  SvgGenImage get emailPrefixIcon =>
+      const SvgGenImage('assets/svg/email_prefix_icon.svg');
+
+  /// File path: assets/svg/password_prefix_icon.svg
+  SvgGenImage get passwordPrefixIcon =>
+      const SvgGenImage('assets/svg/password_prefix_icon.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [amico];
+  List<SvgGenImage> get values =>
+      [amico, cuate, emailPrefixIcon, passwordPrefixIcon];
 }
 
 class Assets {
