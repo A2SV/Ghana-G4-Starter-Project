@@ -18,6 +18,72 @@ class $AssetsSvgGen {
   /// File path: assets/svg/amico.svg
   SvgGenImage get amico => const SvgGenImage('assets/svg/amico.svg');
 
+  /// File path: assets/svg/blog_align_center.svg
+  SvgGenImage get blogAlignCenter =>
+      const SvgGenImage('assets/svg/blog_align_center.svg');
+
+  /// File path: assets/svg/blog_align_left.svg
+  SvgGenImage get blogAlignLeft =>
+      const SvgGenImage('assets/svg/blog_align_left.svg');
+
+  /// File path: assets/svg/blog_align_right.svg
+  SvgGenImage get blogAlignRight =>
+      const SvgGenImage('assets/svg/blog_align_right.svg');
+
+  /// File path: assets/svg/blog_bold.svg
+  SvgGenImage get blogBold => const SvgGenImage('assets/svg/blog_bold.svg');
+
+  /// File path: assets/svg/blog_bullet_list.svg
+  SvgGenImage get blogBulletList =>
+      const SvgGenImage('assets/svg/blog_bullet_list.svg');
+
+  /// File path: assets/svg/blog_bullet_numbered.svg
+  SvgGenImage get blogBulletNumbered =>
+      const SvgGenImage('assets/svg/blog_bullet_numbered.svg');
+
+  /// File path: assets/svg/blog_cloud_upload.svg
+  SvgGenImage get blogCloudUpload =>
+      const SvgGenImage('assets/svg/blog_cloud_upload.svg');
+
+  /// File path: assets/svg/blog_fill_color.svg
+  SvgGenImage get blogFillColor =>
+      const SvgGenImage('assets/svg/blog_fill_color.svg');
+
+  /// File path: assets/svg/blog_format_color.svg
+  SvgGenImage get blogFormatColor =>
+      const SvgGenImage('assets/svg/blog_format_color.svg');
+
+  /// File path: assets/svg/blog_header.svg
+  SvgGenImage get blogHeader => const SvgGenImage('assets/svg/blog_header.svg');
+
+  /// File path: assets/svg/blog_image.svg
+  SvgGenImage get blogImage => const SvgGenImage('assets/svg/blog_image.svg');
+
+  /// File path: assets/svg/blog_italic.svg
+  SvgGenImage get blogItalic => const SvgGenImage('assets/svg/blog_italic.svg');
+
+  /// File path: assets/svg/blog_link.svg
+  SvgGenImage get blogLink => const SvgGenImage('assets/svg/blog_link.svg');
+
+  /// File path: assets/svg/blog_strikethrough.svg
+  SvgGenImage get blogStrikethrough =>
+      const SvgGenImage('assets/svg/blog_strikethrough.svg');
+
+  /// File path: assets/svg/blog_subscript.svg
+  SvgGenImage get blogSubscript =>
+      const SvgGenImage('assets/svg/blog_subscript.svg');
+
+  /// File path: assets/svg/blog_superscript.svg
+  SvgGenImage get blogSuperscript =>
+      const SvgGenImage('assets/svg/blog_superscript.svg');
+
+  /// File path: assets/svg/blog_tag.svg
+  SvgGenImage get blogTag => const SvgGenImage('assets/svg/blog_tag.svg');
+
+  /// File path: assets/svg/blog_underline.svg
+  SvgGenImage get blogUnderline =>
+      const SvgGenImage('assets/svg/blog_underline.svg');
+
   /// File path: assets/svg/cuate.svg
   SvgGenImage get cuate => const SvgGenImage('assets/svg/cuate.svg');
 
@@ -30,8 +96,30 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/password_prefix_icon.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [amico, cuate, emailPrefixIcon, passwordPrefixIcon];
+  List<SvgGenImage> get values => [
+        amico,
+        blogAlignCenter,
+        blogAlignLeft,
+        blogAlignRight,
+        blogBold,
+        blogBulletList,
+        blogBulletNumbered,
+        blogCloudUpload,
+        blogFillColor,
+        blogFormatColor,
+        blogHeader,
+        blogImage,
+        blogItalic,
+        blogLink,
+        blogStrikethrough,
+        blogSubscript,
+        blogSuperscript,
+        blogTag,
+        blogUnderline,
+        cuate,
+        emailPrefixIcon,
+        passwordPrefixIcon
+      ];
 }
 
 class Assets {
