@@ -50,7 +50,7 @@ final routes = <GoRoute>[
   ),
   GoRoute(
     name: AppRoutes.registerScreen,
-    path: '/${RegisterPage.routeName}',
-    builder: (context, state) => const RegisterPage(),
+    path: '/${RegisterScreen.routeName}',
+    builder: (context, state) => const RegisterScreen(),
   ),
 ];

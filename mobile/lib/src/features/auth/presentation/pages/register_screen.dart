@@ -7,10 +7,17 @@ import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   static const String routeName = 'register-screen';
-  const RegisterPage({super.key});
+  const RegisterScreen({super.key});
 
+  @override
+  State<RegisterScreen> createState() => RegisterScreenState();
+}
+
+class RegisterScreenState extends State<RegisterScreen> {
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +47,7 @@ class RegisterPage extends StatelessWidget {
             CustomTextFormField(
               textFormFieldType: TextFormFieldType.regular,
               hintText: 'Email',
+              controller: emailController,
               prefixIcon: Assets.svg.emailPrefixIcon.path
                   .asSvgImage()
                   .onlyPadding(0, 0, 6.w, 3.w),
@@ -47,6 +55,7 @@ class RegisterPage extends StatelessWidget {
             CustomTextFormField(
               textFormFieldType: TextFormFieldType.password,
               hintText: 'Password',
+              controller: passwordController,
               prefixIcon: Assets.svg.passwordPrefixIcon.path
                   .asSvgImage()
                   .onlyPadding(0, 0, 6.w, 3.w),
@@ -63,6 +72,7 @@ class RegisterPage extends StatelessWidget {
               height: 7.h,
             ),
             RichText(
+              key: const Key('registerRichText'),
               text: TextSpan(
                 text: 'Already have an account',
                 children: [
@@ -87,5 +97,19 @@ class RegisterPage extends StatelessWidget {
         ).horizontalPadding(30.0),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    super.initState();
   }
 }
