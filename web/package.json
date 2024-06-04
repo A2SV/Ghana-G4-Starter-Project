@@ -15,7 +15,7 @@
     "coverage": "jest --coverage",
     "test-all": "npm run check-prettier && npm run check-lint && npm run test && npm run build",
     "prepare": "cd .. && husky web/.husky",
-    "fix-all": "prettier --write '**/*.{ts,tsx}' && eslint . --ext ts --ext tsx --fix && npm run build" 
+    "fix-all": "prettier --write '**/*.{ts,tsx}' && eslint . --ext ts --ext tsx --fix && npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^14.2.2",
+    "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.13",
@@ -86,6 +86,7 @@
     "postcss": "^8",
     "prettier": "3.2.5",
     "tailwindcss": "^3.4.3",
+    "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.4",
     "util": "^0.12.5",

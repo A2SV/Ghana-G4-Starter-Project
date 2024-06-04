@@ -31,10 +31,15 @@ const config = {
         input: "#EFF3F9",
         text: "#434343",
         eye: "#B7B7B7",
+        fileUpload: "#F2F3F4",
+        blog: "#746F6F",
+        tag: "#F5F5F5",
+        varietyBlue: "rgb(59 130 246)",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],
         pops: ["Poppins", "sans-serif", "Arial"],
+        imCanon: ['"IM Fell French Canon"', "serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -45,6 +50,7 @@ const config = {
       },
 
       fontSize: {
+        line: "2px",
         tiny: "0.625rem", // 10px
         huge: "3rem", // 48px
         giant: "5rem", // 80px
