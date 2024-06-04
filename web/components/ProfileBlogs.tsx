@@ -3,6 +3,7 @@ import Header from "./Header";
 import ProfileNavigation from "./ProfileNavigation";
 import ProfileBlogsCard from "./ProfileBlogsCard";
 import Footer from "./Footer";
+import Link from "next/link";
 
 const ProfileBlogs = () => {
   return (
@@ -18,9 +19,11 @@ const ProfileBlogs = () => {
         </div>
 
         <div className="flex flex-col">
-          <button className="bg-[#264FAD] py-2 px-12 rounded-md text-white font-bold text-[14px]">
-            New Blog
-          </button>
+          <Link href="/blog">
+            <button className="bg-[#264FAD] py-2 px-12 rounded-md text-white font-bold text-[14px]">
+              New Blog
+            </button>
+          </Link>
         </div>
       </div>
 
