@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:starter_project/src/features/on_boarding/presentation/pages/PageView/page_view.dart';
 import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding1/on_boarding.dart';
 import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding2/get_started.dart';
 import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding3/login.dart';
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
-        return AppRouter();
+        return PageViewScreen();
       },
     );
   }
