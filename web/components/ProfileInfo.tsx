@@ -8,7 +8,7 @@ const ProfileInfo = () => {
     <div>
       <div className="flex flex-col sm:flex-row border-b border-gray-200 mx-[64px] font-montserrat justify-between items-center">
         <div className="flex flex-col">
-          <div className="font-semibold text-xl text-gray-600">Manage Personal Information</div>
+          <div className="font-semibold text-lg sm:text-xl pt-4 sm:pt-0 text-gray-600">Manage Personal Information</div>
           <div className="font-semibold text-sm text-gray-400">
             Add all the required information about yourself
           </div>
