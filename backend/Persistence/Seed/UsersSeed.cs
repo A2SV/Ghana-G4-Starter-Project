@@ -1,4 +1,4 @@
-﻿using backend.Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -17,12 +17,12 @@ namespace Persistence.Seed
                     HasData(
                 new Users
                 {
-                    Id = 1,
+                    Id = 2,
                     FirstName = "Michael",
                     LastName = "Adu",
                     Bio = "Computer Engineering Student",
                     Username = "mikkayadu",
-                    Email = "michaeladu@gmail.com",
+                    Email = "michaeladugyamfi@gmail.com",
                     PasswordHash = new byte[]
             {
             0xAB, 0xCD, 0xEF, 0xAB, 0xCD, 0xEF, 0xAB, 0xCD,
