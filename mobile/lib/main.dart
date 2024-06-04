@@ -13,7 +13,7 @@ void main() {
       providers: [
         BlocProvider(create: (context) => dpLocator<AuthBloc>()),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -27,15 +27,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
+  Widget build(BuildContext context) {
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return AppRouter();
+      },
+    );
   }
 
   @override
@@ -47,11 +44,14 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return AppRouter();
-      },
-    );
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
   }
 }
