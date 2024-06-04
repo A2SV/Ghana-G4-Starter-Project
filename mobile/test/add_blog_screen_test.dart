@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:starter_project/src/core/widgets/custom_button.dart';
-import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 
 void main() {
   testWidgets('AddBlogScreen UI Test', (WidgetTester tester) async {
@@ -17,10 +16,12 @@ void main() {
       ),
     );
     expect(find.text('Add Blog'), findsOneWidget);
-    expect(find.byType(CustomTextFormField), findsNWidgets(3));
-    expect(find.byType(CustomButton), findsOneWidget);
-    expect(find.byType(Card), findsNWidgets(2));
-    expect(find.byType(Row), findsNWidgets(6));
-    expect(find.byType(SizedBox), findsNWidgets(47));
+    expect(find.byType(ImageFilePickerWidget), findsOneWidget);
+    expect(find.byType(BlogHeaderFormField), findsOneWidget);
+    expect(find.byType(BlogContentFormField), findsOneWidget);
+    expect(find.byType(FontFormattingToolbarWidget), findsOneWidget);
+    expect(find.byType(AlignmentFormattingToolbarWidget), findsOneWidget);
+    expect(find.byType(BlogTagFormField), findsOneWidget);
+    expect(find.text('Upload blog'), findsOneWidget);
   });
 }
