@@ -1,5 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom editor styles */
+.markdown-editor .editor-toolbar {
+  @apply w-full bg-white border-gray-200 border-x-0 border-b mb-5;
+}
+
+
+.markdown-editor .CodeMirror-scroll {
+  @apply max-h-80 pl-2 border border-blue border-y-0 border-x-2 rounded-none outline-none;
+}
+
+.EasyMDEContainer .CodeMirror-scroll{
+  min-height: 150px !important;
+}
+
+.EasyMDEContainer .CodeMirror {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
