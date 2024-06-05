@@ -1,4 +1,4 @@
-using Application.Contracts.Users;
+using Application.Contracts.UsersRequests;
 using Application.Features.Users.Commands;
 using Application.Features.UsersCommands;
 using MediatR;
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
