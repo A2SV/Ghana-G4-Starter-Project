@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
+import 'package:starter_project/src/features/profiles/presentation/pages/profile_edit_page.dart';
 import '../widgets/test_page.dart';
 
 class AppRoutes {
@@ -9,6 +10,7 @@ class AppRoutes {
   static const String test = "test";
   static const String otpScreen = 'otp-screen';
   static const String registerScreen = 'register-screen';
+  static const String profileEditScren = "profile-edit-screen";
 }
 
 //* Custom transition page
@@ -52,5 +54,10 @@ final routes = <GoRoute>[
     name: AppRoutes.registerScreen,
     path: '/${RegisterScreen.routeName}',
     builder: (context, state) => const RegisterScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.profileEditScren,
+    path: '/${ProfileEditPage.routeName}',
+    builder: (context, state) => const ProfileEditPage(),
   ),
 ];

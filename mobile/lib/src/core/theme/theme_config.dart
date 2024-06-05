@@ -8,6 +8,7 @@ class ThemeConfig {
       textTheme: CustomTextStyles.kDefaultTextTheme(),
       appBarTheme: const AppBarTheme(
         elevation: 0,
+        backgroundColor: Colors.white,
       ),
       inputDecorationTheme: const InputDecorationTheme(
         fillColor: AppLightThemeColors.kFieldBackgroundColor,
