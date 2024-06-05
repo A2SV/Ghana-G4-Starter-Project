@@ -8,9 +8,9 @@ namespace Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -23,10 +23,10 @@ namespace Persistence.Repositories
             return user;
         }
 
-        public async Task<Users> GetUserByUsernameOrEmailAsync(string username, string email)
+        public async Task<Users> GetUserByEmailAsync(string email)
         {
             return await _context.Users
-                .FirstOrDefaultAsync(x => x.Username == username || x.Email == email);
+                .FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }

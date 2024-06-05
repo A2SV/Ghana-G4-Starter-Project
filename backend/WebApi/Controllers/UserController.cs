@@ -1,8 +1,7 @@
-using Application.Features.Users.Commands;
 using Application.Contracts.Users;
+using Application.Features.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -24,7 +23,7 @@ namespace WebAPI.Controllers
             var result = await _mediator.Send(command);
             if (!result.IsSuccess)
             {
-                return BadRequest(result.ErrorMessage);
+                return BadRequest(result.Message);
             }
             return Ok("User registered successfully.");
         }
