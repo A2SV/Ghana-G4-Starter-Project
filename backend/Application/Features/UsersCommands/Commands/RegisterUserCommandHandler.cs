@@ -1,9 +1,10 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using MediatR;
-using Application.Common.Models;
+using Application.Features.UsersCommands;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Response;
 
 namespace Application.Features.Users.Commands
 {

@@ -5,6 +5,6 @@ namespace Domain.Interfaces
     public interface IUserRepository
     {
         Task<Users> AddAsync(Users user);
-        Task<Users> GetUserByUsernameOrEmailAsync(string username, string email);
+        Task<Users> GetUserByEmailAsync(string email);
     }
 }
