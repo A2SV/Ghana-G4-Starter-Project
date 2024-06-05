@@ -29,9 +29,7 @@ const ProfileBlogsCard = () => {
             A little personality goes a long way, especially on a business blog. So don’t be afraid
             to let loose.
           </p>
-          <div className="border-b border-[#EBE9F1] pt-[40px]">
-             
-          </div>
+          <div className="border-b border-[#EBE9F1] pt-[40px]"></div>
         </div>
       </div>
     </div>
