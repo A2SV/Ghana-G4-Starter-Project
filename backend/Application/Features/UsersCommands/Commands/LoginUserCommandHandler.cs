@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Application.Common.Models;
+using Application.Response;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.IdentityModel.Tokens;
@@ -9,8 +9,9 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Application.Features.UsersCommands;
 
-namespace Application.Features.Users.Commands
+namespace Application.Features.UsersCommands
 {
     public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, Result>
     {

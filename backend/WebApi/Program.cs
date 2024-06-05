@@ -5,11 +5,11 @@ using Persistence.Repositories;
 using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Application.Features.UsersCommands;
 
 var builder = WebApplication.CreateBuilder(args);
 

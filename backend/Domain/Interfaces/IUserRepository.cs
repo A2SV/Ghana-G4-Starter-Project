@@ -1,4 +1,3 @@
-using Application.Common.Models;
 using Domain.Entities;
 
 namespace Domain.Interfaces
