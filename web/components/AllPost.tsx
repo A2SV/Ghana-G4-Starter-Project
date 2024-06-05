@@ -1,8 +1,5 @@
 import React from "react";
 import PostCard from "./PostCard";
-interface AllPostProps {
-  PostCardComponent: React.ComponentType<any>;
-}
 
 const AllPost: React.FC = () => {
   return (

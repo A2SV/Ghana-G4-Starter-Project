@@ -1,13 +1,13 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AllPost from '@/components/AllPost'
+import AllPost from "@/components/AllPost";
 import React from "react";
 
 const DefaultPage = () => {
   return (
     <div>
       <Header />
-      <AllPost/>
+      <AllPost />
       <Footer />
     </div>
   );
