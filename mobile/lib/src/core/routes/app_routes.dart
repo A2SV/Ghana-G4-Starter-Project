@@ -4,6 +4,7 @@ import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
+import 'package:starter_project/src/features/profiles/presentation/pages/profile_edit_page.dart';
 import '../widgets/test_page.dart';
 
 class AppRoutes {
@@ -13,6 +14,7 @@ class AppRoutes {
   static const String registerScreen = 'register-screen';
   static const String addblogScreen = 'add-blog-screen';
   static const String editblogScreen = 'edit-blog-screen';
+  static const String profileEditScren = "profile-edit-screen";
 }
 
 //* Custom transition page
@@ -66,5 +68,10 @@ final routes = <GoRoute>[
     name: AppRoutes.editblogScreen,
     path: '/${EditBlogScreen.routeName}',
     builder: (context, state) => const EditBlogScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.profileEditScren,
+    path: '/${ProfileEditPage.routeName}',
+    builder: (context, state) => const ProfileEditPage(),
   ),
 ];

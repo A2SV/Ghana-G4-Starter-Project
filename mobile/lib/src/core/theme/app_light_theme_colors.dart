@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class AppLightThemeColors {
   static const kPrimaryColor = Color.fromRGBO(67, 108, 201, 1);
@@ -8,4 +8,6 @@ class AppLightThemeColors {
   static const kBlackTextColor = Color.fromRGBO(53, 53, 53, 1);
   static const kFieldBackgroundColor = Color.fromRGBO(241, 243, 252, 1);
   static const kPrimaryLightColor = Color.fromRGBO(77, 148, 173, 1);
+  static const kTextFieldColor = Color.fromRGBO(232, 242, 254, 1);
+  static const kVeryLightTextFieldBorder = Color.fromRGBO(231, 231, 231, 1);
 }
