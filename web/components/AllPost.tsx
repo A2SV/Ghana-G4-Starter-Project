@@ -12,7 +12,7 @@ const AllPost: React.FC = () => {
           <div className="w-full md:w-[40%]">
             <h1 className="text-xl font-bold mx-10">Blogs</h1>
           </div>
-          <div className="flex flex-col md:flex-row items-center w-full md:w-[50%] mt-4 md:mt-0">
+          <div className="flex sm:flex-row items-center w-full md:w-[50%] mt-4 md:mt-0">
             <input
               type="text"
               placeholder="Search..."
@@ -53,7 +53,7 @@ const AllPost: React.FC = () => {
           {[1, 2, 3, 4, 5].map((page) => (
             <button
               key={page}
-              className="mx-1 px-3 py-1 bg-gray-200 text-bold text-black rounded hover:bg-blue-500 hover:text-white"
+              className="mx-1 px-3 py-1 bg-gray-200 text-bold text-black rounded hover:bg-blue hover:text-white"
             >
               {page}
             </button>

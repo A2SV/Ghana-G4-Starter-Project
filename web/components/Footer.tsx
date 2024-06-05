@@ -24,7 +24,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="footer-main flex flex-col mt-[51px] mb-[56px] mx-4 sm:mx-[67px] ">
+    <div className="footer-main flex flex-col mt-[51px] mx-4 sm:mx-[67px]">
       <div className="footer-upper w-full lg:flex justify-between">
         <div className="upper-left w-full lg:w-[45%] flex flex-col lg:flex-row lg:justify-between items-center">
           <div className="image-side shrink-0">

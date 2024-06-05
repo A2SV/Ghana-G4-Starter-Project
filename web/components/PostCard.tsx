@@ -36,16 +36,19 @@ const PostCard: React.FC<PostCardProps> = ({ author, role, date, title, content,
           <div><h3 className="text-xl font-bold mb-2">Tab System On React : 3 ways to do it.</h3></div>
           <p className="text-gray-400 mr-10 mb-5">{content}</p>
         </div>
-        <div className="flex md:w-1/3 justify-end mt-0">
+        <div className="flex h-1/3 md:w-1/3 justify-end mt-0">
           <Image src={blogImage} alt="content" className="w-full h-auto" />
         </div>
       </div>
       <div className="flex flex-wrap space-x-2 px-10">
         {tags.map((tag) => (
-          <span key={tag} className="px-3 mb-2 py-1 bg-gray-100 text-gray-400 rounded-full">
+          <span key={tag} className="mt-5 md:px-3 mb-2 py-1 bg-gray-100 text-gray-400 rounded-full">
             {tag}
           </span>
         ))}
+      </div>
+      <div className="border-b border-gray-300 mr-20">
+        
       </div>
     </div>
   );
