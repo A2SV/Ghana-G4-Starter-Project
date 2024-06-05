@@ -7,5 +7,7 @@ class AppLightThemeColors {
   static const kLightTextColor = Color.fromRGBO(125, 125, 125, 1);
   static const kBlackTextColor = Color.fromRGBO(53, 53, 53, 1);
   static const kFieldBackgroundColor = Color.fromRGBO(241, 243, 252, 1);
+  static const kContainerBackgroundColor=Color.fromRGBO(107, 176, 215, 1);
+  static const kSmallerContainerBackgroundColor=Color.fromRGBO(198, 230, 255, 1);
   static const kPrimaryLightColor = Color.fromRGBO(77, 148, 173, 1);
 }
