@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/svg/
   #   - images/a_dot_ham.jpeg
+    - assets/images/
     - assets/images/blue_blob.png
     - assets/images/first_page.png
     - assets/images/purple_blob.png
