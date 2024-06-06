@@ -63,15 +63,7 @@ flutter:
   assets:
     - assets/svg/
   #   - images/a_dot_ham.jpeg
-    - assets/images/blue_blob.png
-    - assets/images/first_page.png
-    - assets/images/purple_blob.png
-    - assets/images/round_blob.png
-    - assets/images/second_page.png
-    - assets/images/yellow_blob.png
-    - assets/images/login_blob.png
-    - assets/images/login_blob2.png
-    - assets/images/superman.png
+    - assets/images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
