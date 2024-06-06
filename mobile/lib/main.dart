@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:starter_project/src/features/auth/presentation/pages/dashboard.dart';
+import 'package:starter_project/src/features/auth/presentation/pages/thank_you.dart';
+import 'package:starter_project/src/features/auth/presentation/widgets/folder.dart';
 
 import 'src/core/dp_injection/dependency_injection.dart';
 import 'src/core/routes/routes_config.dart';
@@ -51,7 +54,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return SafeArea(
       child: ResponsiveSizer(
         builder: (context, orientation, screenType) {
-          return AppRouter();
+          // return AppRouter();
+          return MaterialApp(
+            
+          debugShowCheckedModeBanner: false,
+          home: Dashboard(),
+          
+          );
         },
       ),
     );
