@@ -16,7 +16,7 @@ const Header = () => {
       </div>
       <div className="flex w-48 text-xl font-bold justify-between text-gray-500">
         <Link className="text-blue hidden md:block no-underline" href={"/"}>
-          Blog
+          Blogs
         </Link>
         <Link className="hidden md:block no-underline" href={"/profile/info"}>
           Profile

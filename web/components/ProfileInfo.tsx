@@ -58,12 +58,12 @@ const ProfileInfo = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row mx-[64px] gap-4 sm:gap-32 h-64 text-sm items-start sm:items-center border-b border-gray-200">
-        <label htmlFor="uploadFile1" className="text-sm font-medium text-gray-900">
+      <div className="flex flex-col sm:flex-row mx-[64px] h-64 text-sm items-start sm:items-center border-b border-gray-200">
+        <label htmlFor="phto" className="text-sm mr-32 font-medium text-gray-900">
           Your photo
         </label>
-        <Image src={ProfileImage} alt="user profile picture" width={64} />
-        <label className="text-gray-400 font-semibold text-base rounded w-80 max-w-md h-40 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 font-pops">
+        <Image src={ProfileImage} alt="user profile picture" width={64} className=" my-3" />
+        <label className="text-gray-400 font-pops font-semibold text-base rounded-md ml-0 sm:ml-10 mt-5 w-80 sm:w-6/12 max-w-md h-40 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-11 mb-2 fill-[#5956E9]"
