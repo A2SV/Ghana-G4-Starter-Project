@@ -41,9 +41,7 @@ class OtpScreenState extends State<OtpScreen> {
             ),
             Text(
               'Enter OTP',
-              style: context.textTheme.labelLarge!.copyWith(
-                fontSize: 23.sp,
-              ),
+              style: context.textTheme.labelLarge,
             ).align(Alignment.centerLeft),
             Text(
               'An OTP has been send to user.name@a2sv.org',
@@ -67,9 +65,7 @@ class OtpScreenState extends State<OtpScreen> {
             ).align(Alignment.centerLeft),
             Text(
               _formatTime(_countDown),
-              style: context.textTheme.displayLarge!.copyWith(
-                fontSize: 23.sp,
-              ),
+              style: context.textTheme.labelLarge,
             ).align(Alignment.centerLeft),
             const SizedBox(
               height: 180.0,
