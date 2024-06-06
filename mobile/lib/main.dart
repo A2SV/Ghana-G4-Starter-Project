@@ -7,8 +7,7 @@ import 'src/core/routes/routes_config.dart';
 import 'src/features/auth/presentation/bloc/auth/auth_bloc.dart';
 
 // await initializeBackgroundService();
-void main(){
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
   runApp(
     MultiBlocProvider(
       providers: [
