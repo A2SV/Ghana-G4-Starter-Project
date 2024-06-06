@@ -5,7 +5,7 @@ import Header from "../../components/Header";
 describe("Header", () => {
   it("renders blog link", () => {
     render(<Header />);
-    const blogLink = screen.getByText(/blog/i);
+    const blogLink = screen.getByText(/blogs/i);
     expect(blogLink).toBeInTheDocument();
   });
 
