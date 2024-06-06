@@ -21,6 +21,7 @@ class ThemeConfig {
           fontSize: 18.sp,
         ),
       ),
+      cardColor: Colors.white,
       inputDecorationTheme: const InputDecorationTheme(
         fillColor: AppLightThemeColors.kFieldBackgroundColor,
       ),
