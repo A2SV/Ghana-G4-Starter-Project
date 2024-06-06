@@ -1,14 +1,12 @@
-import React from 'react'
+import React from "react";
 import ProfileBlogs from "../../../components/ProfileBlogs";
-
 
 const ProfileMyBlogs = () => {
   return (
     <div>
-        <ProfileBlogs/>
-      
+      <ProfileBlogs />
     </div>
-  )
-}
+  );
+};
 
-export default ProfileMyBlogs
+export default ProfileMyBlogs;
