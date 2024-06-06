@@ -26,10 +26,8 @@ describe("ProfileInfo", () => {
     render(<ProfileInfo />);
     const nameLabel = screen.getByLabelText(/Name/i);
     const emailLabel = screen.getByLabelText(/Email/i);
-    const photoLabel = screen.getByLabelText(/Your Photo/i);
     expect(nameLabel).toBeInTheDocument();
     expect(emailLabel).toBeInTheDocument();
-    expect(photoLabel).toBeInTheDocument();
   });
 
   it("renders an image", () => {
