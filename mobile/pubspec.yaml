@@ -114,6 +114,19 @@ flutter:
           weight: 200
         - asset: assets/fonts/Urbanist/Urbanist-Thin.ttf
           weight: 100
+
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito/Nunito-Black.ttf
+        - asset: assets/fonts/Nunito/Nunito-BlackItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraLight.ttf
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
+        - asset: assets/fonts/Nunito/Nunito-Medium.ttf
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
+
     - family: Pacifico
       fonts:
         - asset: assets/fonts/Pacifico/Pacifico-Regular.ttf
