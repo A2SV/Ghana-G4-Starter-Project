@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.Contracts.Users
+namespace Application.Contracts.UsersRequests
 {
     public class LoginUserRequest
     {
