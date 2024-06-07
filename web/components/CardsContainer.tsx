@@ -1,5 +1,5 @@
 import React from "react";
-import RelatedBlog from "./RelatedBlog";
+import RelatedBlog from "@/components/RelatedBlog";
 
 const CardsContainer = () => {
   return (

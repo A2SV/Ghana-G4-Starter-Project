@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import cardImage from "../public/digi.jpeg";
-import proImage from "../public/profile.jpg";
+import CardImage from "@/public/digi.jpeg";
+import ProImage from "@/public/profile.jpg";
 import { FiMessageSquare } from "react-icons/fi";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ const RelatedBlog = () => {
   return (
     <div className="flex justify-center">
       <div className="w-[380px] h-[580px] bg-white rounded-lg shadow-xl mx-2">
-        <Image src={cardImage} alt="post" className="rounded-t-lg" />
+        <Image src={CardImage} alt="post" className="rounded-t-lg" />
 
         <div className="p-6 text-sm h-20 mb-2 pr-4">
           <h2 className="font-montserrat">Design Liberalized Exchanged Rate Management</h2>
@@ -19,7 +19,7 @@ const RelatedBlog = () => {
           <div className="p-2 w-12 h-12 rounded-full overflow-hidden">
             <Link href="/">
               <Image
-                src={proImage}
+                src={ProImage}
                 alt="proImage"
                 className="object-cover rounded-full w-full h-full hover:shadow-md transition-transform duration-300"
               />
@@ -67,8 +67,8 @@ const RelatedBlog = () => {
 
         <div className="pl-4 pr-4 p-2">
           <p className="font-montserrat text-sm text-gray-500">
-            A little personality goes a long way, especially on a business blog. So don’t be afraid
-            to let loose.
+            A little personality goes a long way, especially on a business blog. So don&apos;t be
+            afraid to let loose.
           </p>
         </div>
 

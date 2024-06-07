@@ -37,7 +37,7 @@ describe("RelatedBlog", () => {
   it("renders the blog personality text", () => {
     render(<RelatedBlog />);
     const personalityText = screen.getByText(
-      "A little personality goes a long way, especially on a business blog. So don’t be afraid to let loose."
+      "A little personality goes a long way, especially on a business blog. So don't be afraid to let loose."
     );
     expect(personalityText).toBeInTheDocument();
   });
