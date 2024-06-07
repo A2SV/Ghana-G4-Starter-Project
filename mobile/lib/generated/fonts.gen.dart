@@ -18,4 +18,6 @@ class FontFamily {
 
   /// Font family: Urbanist
   static const String urbanist = 'Urbanist';
+
+  static const String nunito = "Nunito";
 }

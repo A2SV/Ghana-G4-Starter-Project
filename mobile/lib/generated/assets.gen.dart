@@ -15,6 +15,10 @@ import 'package:vector_graphics/vector_graphics.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/blog_placeholder.png
+  AssetGenImage get blogPlaceholder =>
+      const AssetGenImage('assets/images/blog_placeholder.png');
+
   /// File path: assets/images/blue_blob.png
   AssetGenImage get blueBlob =>
       const AssetGenImage('assets/images/blue_blob.png');
@@ -53,6 +57,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        blogPlaceholder,
         blueBlob,
         firstPage,
         loginBlob,
@@ -121,6 +126,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/blog_link.svg
   SvgGenImage get blogLink => const SvgGenImage('assets/svg/blog_link.svg');
 
+  /// File path: assets/svg/blog_search.svg
+  SvgGenImage get blogSearch => const SvgGenImage('assets/svg/blog_search.svg');
+
   /// File path: assets/svg/blog_strikethrough.svg
   SvgGenImage get blogStrikethrough =>
       const SvgGenImage('assets/svg/blog_strikethrough.svg');
@@ -168,6 +176,7 @@ class $AssetsSvgGen {
         blogImage,
         blogItalic,
         blogLink,
+        blogSearch,
         blogStrikethrough,
         blogSubscript,
         blogSuperscript,

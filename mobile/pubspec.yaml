@@ -64,7 +64,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/svg/
-  #   - images/a_dot_ham.jpeg
     - assets/images/
     - assets/images/blue_blob.png
     - assets/images/first_page.png
@@ -75,6 +74,8 @@ flutter:
     - assets/images/login_blob.png
     - assets/images/login_blob2.png
     - assets/images/superman.png
+    - assets/images/
+    - assets/images/pic1.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
@@ -125,6 +126,19 @@ flutter:
           weight: 200
         - asset: assets/fonts/Urbanist/Urbanist-Thin.ttf
           weight: 100
+
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito/Nunito-Black.ttf
+        - asset: assets/fonts/Nunito/Nunito-BlackItalic.ttf
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
+        - asset: assets/fonts/Nunito/Nunito-ExtraLight.ttf
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
+        - asset: assets/fonts/Nunito/Nunito-Medium.ttf
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
+
     - family: Pacifico
       fonts:
         - asset: assets/fonts/Pacifico/Pacifico-Regular.ttf
