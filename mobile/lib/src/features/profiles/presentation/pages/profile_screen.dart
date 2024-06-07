@@ -6,7 +6,7 @@ import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import '../../../../../generated/assets.gen.dart';
 import '../../../../../generated/fonts.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
-import '../../../auth/presentation/widgets/profile_info_circle.dart';
+import '../widgets/profile_info_circle.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String routeName = 'profile-screen';
