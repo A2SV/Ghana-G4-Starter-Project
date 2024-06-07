@@ -5,6 +5,7 @@ import 'package:starter_project/src/features/auth/presentation/pages/register_sc
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
+import '../../features/blog/presentation/pages/blog_details.dart';
 import '../../features/profiles/presentation/pages/profile_edit_page.dart';
 import '../widgets/test_page.dart';
 
@@ -17,6 +18,7 @@ class AppRoutes {
   static const String editblogScreen = 'edit-blog-screen';
   static const String allblogsScreen = 'all-blogs-screen';
   static const String profileEditScreen = "profile-edit-screen";
+  static const String blogDetails = "blog-details-screen";
 }
 
 //* Custom transition page
@@ -80,5 +82,10 @@ final routes = <GoRoute>[
     name: AppRoutes.profileEditScreen,
     path: '/${ProfileEditPage.routeName}',
     builder: (context, state) => const ProfileEditPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.blogDetails,
+    path: '/${BlogDetails.routeName}',
+    builder: (context, state) => BlogDetails(),
   ),
 ];
