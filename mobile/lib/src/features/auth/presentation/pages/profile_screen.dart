@@ -33,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: 70,
           height: 70,
           child: FloatingActionButton(
+            key: Key('floating-button'),
             backgroundColor:AppLightThemeColors.kPrimaryColor,
             foregroundColor: Colors.white,
             onPressed: (){},
@@ -80,6 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                               Container(
                                   child:Text('Biniyam Odu',
+                                    key: Key('user-name'),
                                     style: TextStyle(
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.bold,
@@ -94,6 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Text('biniyam@a2sv.org',
+                                        key: Key('user-email'),
                                         style: TextStyle(
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.w500,
@@ -148,12 +151,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
 
                               Container(
+
                                 margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.02),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Container(
                                       child: Icon(
+                                        key: Key('instagram-icon'),
                                         FontAwesomeIcons.instagram,
                                         size:MediaQuery.of(context).size.width*0.1 ,
                                       ),
@@ -161,6 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     Container(
                                       child: Icon(
+                                        key: Key('x-icon'),
                                         FontAwesomeIcons.x,
                                         size: MediaQuery.of(context).size.width*0.1 ,
                                       ),
@@ -168,6 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     Container(
                                       child: Icon(
+                                        key: Key('facebook-icon'),
                                         FontAwesomeIcons.facebook,
                                         size: MediaQuery.of(context).size.width*0.1 ,
                                       ),
@@ -175,6 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     Container(
                                       child: Icon(
+                                        key: Key('threads-icon'),
                                         FontAwesomeIcons.threads,
                                         size: MediaQuery.of(context).size.width*0.1 ,
                                       ),
@@ -205,6 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             child: Container(
                                               margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.06),
                                               child: Text('26',
+                                                key: Key('number-of-blogs'),
                                                 style: TextStyle(
                                                   fontSize: 22.sp,
                                                   fontWeight: FontWeight.bold,
@@ -225,6 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           Container(
                                             child:Text(
                                               'Blogs',
+                                              key: Key('blogs-text'),
                                               style: TextStyle(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w500,
@@ -245,6 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             child: Container(
                                               margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.06),
                                               child: Text('14k',
+                                                key: Key('number-of-followers'),
                                                 style: TextStyle(
                                                   fontSize: 22.sp,
                                                   fontWeight: FontWeight.bold,
@@ -265,6 +276,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           Container(
                                             child:Text(
                                               'Followers',
+                                              key: Key('followers-text'),
                                               style: TextStyle(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w500,
@@ -284,6 +296,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             child: Container(
                                               margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.06),
                                               child: Text('2k',
+                                                key: Key('number-of-following'),
                                                 style: TextStyle(
                                                   fontSize: 22.sp,
                                                   fontWeight: FontWeight.bold,
@@ -304,6 +317,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           Container(
                                             child:Text(
                                               'Following',
+                                              key: Key('following-text'),
                                               style: TextStyle(
                                                 fontSize: 18.sp,
                                                 fontWeight: FontWeight.w500,
@@ -334,8 +348,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               top:MediaQuery.of(context).size.width*0.15,
               left: 110,
               child:Container(
+                key: Key('profile-picture'),
                 margin: EdgeInsets.all(MediaQuery.of(context).size.width*0.06),
-                child:Image.asset('assets/images/happy_user.png',
+                child: Image.asset('assets/images/happy_user.png',
                   width: 120,
                   height: 120,
                 ),
