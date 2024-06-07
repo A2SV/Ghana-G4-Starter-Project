@@ -16,13 +16,10 @@ class AppRouter extends StatelessWidget {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
       initialLocation: "/profile-screen",
-
       routes: routes,
       observers: [],
     );
   }
-
-
 
   AppRouter({
     super.key,
