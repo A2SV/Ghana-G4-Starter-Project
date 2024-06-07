@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import singleImage from "../public/single_blog.jpg";
-import profileImg from "../public/profile_picture.png";
+import SingleImage from "@/public/single_blog.jpg"
+import ProfileImage from "@/public/profile_picture.png";
 
 const SingleBlog = () => {
   return (
@@ -10,12 +10,12 @@ const SingleBlog = () => {
         <h1 className="top-270 font-imfell text-4xl left-565 pb-5">
           The essential guide to Competitive Programming
         </h1>
-        <p className="flex justify-center items-center font-montserrat text-sm pt-4 text-#264FAD">
+        <p className="flex justify-center items-center font-montserrat text-sm pt-4">
           Programming, tech | 6 min Read
         </p>
       </div>
-      <Image className="p-10 w-1586 h-792" src={singleImage} alt="single blog" />
-      <Image className="pt-200 pb-200 w-20 h-20" src={profileImg} alt="profile picture" />
+      <Image className="p-10 w-1586px h-792px" src={SingleImage} alt="single blog" />
+      <Image className="pt-200 pb-200 w-20 h-20" src={ProfileImage} alt="profile picture" />
       <p className="font-imfell pt-3 pb-3 text-gray-600">chaltu kebede | software engineer</p>
       <p className="text-blue mb-7">@chaltu_kebede</p>
       <div className="flex flex-col justify-center items-center font-montserrat text-sm text-gray-500">
