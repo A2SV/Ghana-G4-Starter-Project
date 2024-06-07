@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
+import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
+import '../../features/profiles/presentation/pages/profile_edit_page.dart';
 import '../widgets/test_page.dart';
 
 class AppRoutes {
   //* Test route
   static const String test = "test";
+  static const String otpScreen = 'otp-screen';
+  static const String registerScreen = 'register-screen';
+  static const String addblogScreen = 'add-blog-screen';
+  static const String editblogScreen = 'edit-blog-screen';
+  static const String allblogsScreen = 'all-blogs-screen';
+  static const String profileEditScreen = "profile-edit-screen";
 }
 
 //* Custom transition page
@@ -39,5 +50,35 @@ final routes = <GoRoute>[
     name: AppRoutes.test,
     path: "/test",
     builder: (context, state) => const TestScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.otpScreen,
+    path: '/${OtpScreen.routeName}',
+    builder: (context, state) => const OtpScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.registerScreen,
+    path: '/${RegisterScreen.routeName}',
+    builder: (context, state) => const RegisterScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.addblogScreen,
+    path: '/${AddBlogScreen.routeName}',
+    builder: (context, state) => const AddBlogScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.editblogScreen,
+    path: '/${EditBlogScreen.routeName}',
+    builder: (context, state) => const EditBlogScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.allblogsScreen,
+    path: '/${AllBlogsScreen.routeName}',
+    builder: (context, state) => const AllBlogsScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.profileEditScreen,
+    path: '/${ProfileEditPage.routeName}',
+    builder: (context, state) => const ProfileEditPage(),
   ),
 ];

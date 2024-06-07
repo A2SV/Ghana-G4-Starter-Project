@@ -15,7 +15,7 @@ class AppRouter extends StatelessWidget {
   static GoRouter createRoute() {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
-      initialLocation: "/test",
+      initialLocation: "/profile-edit-screen",
       routes: routes,
       observers: [],
     );
@@ -36,13 +36,11 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Starter Project mobile',
-        theme: ThemeConfig.lightTheme,
-        routerConfig: router,
-      ),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Starter Project mobile',
+      theme: ThemeConfig.lightTheme,
+      routerConfig: router,
     );
   }
 }
