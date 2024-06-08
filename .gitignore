@@ -691,3 +691,6 @@ Temporary Items
 
 **/.next
 **/coverage
+
+backend/Persistence/Migrations
+backend/WebApi/appsettings.json

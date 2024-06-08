@@ -19,8 +19,6 @@ namespace Persistence.Seed
                     Content = "My first Post",
                     Tag = "Entertainment",
                     UserId = 1,
-
-
                 });
         }
     }

@@ -1,5 +1,9 @@
+<<<<<<< GGPP-15-Implement-forgot-password-functionality
 using Application.Contracts.UserRequests;
 using Application.Contracts.Users;
+=======
+using Application.Contracts.UsersRequests;
+>>>>>>> backend
 using Application.Features.Users.Commands;
 using Application.Features.UsersCommands;
 using Application.Features.UsersCommands.Commands;
@@ -39,7 +43,7 @@ namespace WebAPI.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
