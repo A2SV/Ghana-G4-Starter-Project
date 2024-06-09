@@ -1,12 +1,9 @@
-<<<<<<< GGPP-15-Implement-forgot-password-functionality
 using Application.Contracts.UserRequests;
-using Application.Contracts.Users;
-=======
 using Application.Contracts.UsersRequests;
->>>>>>> backend
 using Application.Features.Users.Commands;
 using Application.Features.UsersCommands;
 using Application.Features.UsersCommands.Commands;
+using Application.Features.UsersQueries.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,6 +67,17 @@ namespace WebAPI.Controllers
                 return Ok(result.Message);
             return BadRequest(result.Message);
         }
+        
 
+        [HttpGet("{userId}/posts")]
+        public async Task<IActionResult> GetPostsByUserId(int userId)
+        {
+            var result = await _mediator.Send(new GetPostsByUserIdQuery(userId));
+            if (result == null)
+            {
+                return NotFound(new { Message = "The user does not exist or this user has made no posts yet" });
+            }
+            return Ok(result);
+        }
     }
 }

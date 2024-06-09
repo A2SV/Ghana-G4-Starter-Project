@@ -6,5 +6,6 @@ namespace Domain.Interfaces
     {
         Task<Users> AddAsync(Users user);
         Task<Users> GetUserByEmailAsync(string email);
+        Task<List<Posts>> GetPostsByUserIdAsync(int userId);
     }
 }

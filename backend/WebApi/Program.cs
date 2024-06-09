@@ -11,8 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Application.Features.UsersCommands;
 using Infrastructure.Settings;
-
-
+using MediatR;
+using System.Reflection;
+using Application.Features.UsersQueries.Queries;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,8 +29,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(RegisterUserCommand).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(LoginUserCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    typeof(GetPostsByUserIdQuery).Assembly,
+    typeof(Program).Assembly
+));
 
 // Email Service
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
