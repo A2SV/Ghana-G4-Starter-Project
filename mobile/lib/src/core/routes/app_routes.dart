@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
+import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
+
+//import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding3/login.dart';
+
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
+
+import '../../features/blog/presentation/pages/blog_details.dart';
 import '../../features/profiles/presentation/pages/profile_edit_page.dart';
+
 import '../widgets/test_page.dart';
+
+import 'package:starter_project/src/features/auth/presentation/pages/login_screen.dart';
 
 class AppRoutes {
   //* Test route
   static const String test = "test";
   static const String otpScreen = 'otp-screen';
   static const String registerScreen = 'register-screen';
+
+  static const String loginScreen = 'login-screen';
+  static const String profileScreen = 'profile-screen';
+
   static const String addblogScreen = 'add-blog-screen';
   static const String editblogScreen = 'edit-blog-screen';
+
   static const String allblogsScreen = 'all-blogs-screen';
   static const String profileEditScreen = "profile-edit-screen";
+  static const String blogDetails = "blog-details-screen";
 }
 
 //* Custom transition page
@@ -62,6 +77,16 @@ final routes = <GoRoute>[
     builder: (context, state) => const RegisterScreen(),
   ),
   GoRoute(
+    name: AppRoutes.loginScreen,
+    path: '/${LoginScreen.routeName}',
+    builder: (context, state) => const LoginScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.profileScreen,
+    path: '/${ProfileScreen.routeName}',
+    builder: (context, state) => const ProfileScreen(),
+  ),
+  GoRoute(
     name: AppRoutes.addblogScreen,
     path: '/${AddBlogScreen.routeName}',
     builder: (context, state) => const AddBlogScreen(),
@@ -80,5 +105,10 @@ final routes = <GoRoute>[
     name: AppRoutes.profileEditScreen,
     path: '/${ProfileEditPage.routeName}',
     builder: (context, state) => const ProfileEditPage(),
+  ),
+  GoRoute(
+    name: AppRoutes.blogDetails,
+    path: '/${BlogDetails.routeName}',
+    builder: (context, state) => BlogDetails(),
   ),
 ];
