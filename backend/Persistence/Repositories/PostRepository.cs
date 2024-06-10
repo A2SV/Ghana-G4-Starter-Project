@@ -2,6 +2,7 @@ using Domain.Interfaces;
 using Domain.Entities;
 using Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Application.Response;
 
 namespace Persistence.Repositories
 {
@@ -27,6 +28,13 @@ namespace Persistence.Repositories
         {
             return await _context.Posts.Include(x => x.User)
                             .FirstOrDefaultAsync(x => x.Id == postId);
+        }
+
+        public async Task Delete(Posts post)
+        {
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+
         }
     }
 }
