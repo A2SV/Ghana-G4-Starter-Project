@@ -2,6 +2,7 @@ using Application.Features.PostCommands.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Contracts.PostRequests;
+using Application.Response;
 
 
 namespace WebApi.Controllers
@@ -41,5 +42,20 @@ namespace WebApi.Controllers
             }
             return BadRequest(result.Message);
         }
+
+        [HttpPatch("posts/{id:int}")]
+        public async Task<IActionResult> EditPost(int id, [FromBody] EditPostRequest request)
+        {
+            var command = new EditPostCommand(id, request.Content, request.Tag);
+            var result = await _mediator.Send(command);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+
+            return BadRequest(result.Message);
+        }
+        
     }
 }

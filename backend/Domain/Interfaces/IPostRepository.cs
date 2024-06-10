@@ -6,5 +6,7 @@ namespace Domain.Interfaces
     {
         Task<Posts> AddAsync(Posts post);
         Task<Posts> GetPostByIdAsync(int postId);
+        
+        Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

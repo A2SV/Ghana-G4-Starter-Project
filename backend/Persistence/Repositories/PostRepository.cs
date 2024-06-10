@@ -28,5 +28,11 @@ namespace Persistence.Repositories
             return await _context.Posts.Include(x => x.User)
                             .FirstOrDefaultAsync(x => x.Id == postId);
         }
+        
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+        
     }
 }

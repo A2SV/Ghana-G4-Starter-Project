@@ -15,6 +15,11 @@ namespace Application.Response
         {
             return new Result { IsSuccess = true, Message = message, Token = token };
         }
+        
+        public static Result Success(string message)
+        {
+            return new Result { IsSuccess = true, Message = message};
+        }
 
         public static Result Failure(string message)
         {
