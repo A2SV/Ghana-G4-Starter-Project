@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Common;
@@ -8,8 +9,8 @@ namespace Domain.Entities
 {
     public class Posts : BaseEntity
     {
-        public string Content { get; set; }
-        public string Tag {get; set;}
+        public string Content { get; set; } = string.Empty;
+        public string? Tag {get; set;}
         public Users User { get; set; }
         public int UserId { get; set; }  
     }
