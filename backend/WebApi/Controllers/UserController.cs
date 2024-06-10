@@ -6,6 +6,8 @@ using Application.Features.UsersCommands.Commands;
 using Application.Features.UsersQueries.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Application.Features.PostCommands.Commands;
+using Application.Contracts.PostRequests;
 
 namespace WebAPI.Controllers
 {
@@ -78,6 +80,18 @@ namespace WebAPI.Controllers
                 return NotFound(new { Message = "The user does not exist or this user has made no posts yet" });
             }
             return Ok(result);
+        }
+
+        [HttpPost("posts")]
+        public async Task<IActionResult> CreatePost(CreatePostRequest request)
+        {
+            var command = new CreatePostCommand(request.Tag, request.Content, request.UserId);
+            var result = await _mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
         }
     }
 }

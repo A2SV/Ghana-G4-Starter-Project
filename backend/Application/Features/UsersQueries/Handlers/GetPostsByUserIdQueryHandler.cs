@@ -7,16 +7,16 @@ namespace Application.Features.UsersQueries.Handlers
 {
     public class GetPostsByUserIdQueryHandler : IRequestHandler<GetPostsByUserIdQuery, List<PostDto>>
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IPostRepository _postRepository;
 
-        public GetPostsByUserIdQueryHandler(IUserRepository userRepository)
+        public GetPostsByUserIdQueryHandler(IPostRepository postRepository)
         {
-            _userRepository = userRepository;
+            _postRepository = postRepository;
         }
 
         public async Task<List<PostDto>> Handle(GetPostsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var posts = await _userRepository.GetPostsByUserIdAsync(request.UserId);
+            var posts = await _postRepository.GetPostsByUserIdAsync(request.UserId);
             if (posts == null)
             {
                 return null;

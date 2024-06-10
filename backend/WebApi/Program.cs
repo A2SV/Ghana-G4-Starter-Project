@@ -14,6 +14,7 @@ using Infrastructure.Settings;
 using MediatR;
 using System.Reflection;
 using Application.Features.UsersQueries.Queries;
+using Application.Features.PostCommands.Commands;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,9 +25,10 @@ builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AppConnectionString")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
@@ -36,6 +38,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(GetPostsByUserIdQuery).Assembly,
     typeof(Program).Assembly
 ));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePostCommand).Assembly));
 
 // Email Service
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
