@@ -1,4 +1,4 @@
-using Application.DTOs;
+using Application.Contracts.PostRequests;
 using MediatR;
 
 namespace Application.Features.UsersQueries.Queries

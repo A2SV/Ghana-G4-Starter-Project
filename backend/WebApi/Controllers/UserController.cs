@@ -1,12 +1,12 @@
 using Application.Contracts.UserRequests;
-using Application.Contracts.UsersRequests;
 using Application.Features.Users.Commands;
-using Application.Features.UsersCommands;
 using Application.Features.UsersCommands.Commands;
 using Application.Features.UsersQueries.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Features.PostCommands.Commands;
+using Application.Contracts.UsersRequests;
+using Application.Features.UsersCommands;
 using Application.Contracts.PostRequests;
 
 namespace WebAPI.Controllers
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         [HttpPost("posts")]
         public async Task<IActionResult> CreatePost(CreatePostRequest request)
         {
-            var command = new CreatePostCommand(request.Tag, request.Content, request.UserId);
+            var command = new CreatePostCommand(request.Content, request.Tag, request.UserId);
             var result = await _mediator.Send(command);
             if (result.IsSuccess)
             {

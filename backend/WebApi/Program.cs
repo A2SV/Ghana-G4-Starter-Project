@@ -38,6 +38,12 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(GetPostsByUserIdQuery).Assembly,
     typeof(Program).Assembly
 ));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    typeof(GetPostByIdQueryCommand).Assembly,
+    typeof(Program).Assembly
+));
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePostCommand).Assembly));
 
 // Email Service
@@ -80,6 +86,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthentication();
 app.UseAuthorization();
 

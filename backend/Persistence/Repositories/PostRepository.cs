@@ -28,5 +28,11 @@ namespace Persistence.Repositories
                 .Where(p => p.UserId == userId)
                 .ToListAsync();
         }
+
+        public async Task<Posts> GetPostByIdAsync(int postId)
+        {
+            return await _context.Posts.Include(x => x.User)
+                            .FirstOrDefaultAsync(x => x.Id == postId);
+        }
     }
 }
