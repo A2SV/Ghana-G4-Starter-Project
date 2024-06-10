@@ -1,6 +1,8 @@
 using Application.Features.PostCommands.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Application.Contracts.PostRequests;
+
 
 namespace WebApi.Controllers
 {
@@ -26,6 +28,18 @@ namespace WebApi.Controllers
                 return NotFound("Post not found");
 
             return Ok(result);
+        }
+
+        [HttpPost("posts")]
+        public async Task<IActionResult> CreatePost(CreatePostRequest request)
+        {
+            var command = new CreatePostCommand(request.Content, request.Tag, request.UserId);
+            var result = await _mediator.Send(command);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
         }
     }
 }

@@ -11,7 +11,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Application.Features.UsersCommands;
 using Infrastructure.Settings;
-using MediatR;
 using System.Reflection;
 using Application.Features.UsersQueries.Queries;
 using Application.Features.PostCommands.Commands;
@@ -44,7 +43,10 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     typeof(Program).Assembly
 ));
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePostCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    typeof(CreatePostCommand).Assembly,
+    typeof(Program).Assembly
+));
 
 // Email Service
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
@@ -86,7 +88,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 app.UseAuthentication();
 app.UseAuthorization();
 
