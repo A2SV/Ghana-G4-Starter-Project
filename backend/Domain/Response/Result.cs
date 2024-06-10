@@ -13,7 +13,7 @@ namespace Application.Response
 
         public static Result Success(string message, string token)
         {
-            return new Result { IsSuccess = true, Message = "Login successful", Token = token };
+            return new Result { IsSuccess = true, Message = message, Token = token };
         }
 
         public static Result Failure(string message)
