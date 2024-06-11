@@ -12,14 +12,9 @@ services:
     environment:
       ASPNETCORE_URLS: "https://+;http://+"
       ASPNETCORE_HTTPS_PORT: "8081"
-      ASPNETCORE_ENVIRONMENT: "Development"
-      ConnectionStrings__AppConnectionString: "Host=${HOST};User ID=${USER_ID};Password=${PASSWORD};Server=${SERVER};Port=${PORT};Database=${DATABASE};Pooling=${POOLING}"
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__AppConnectionString: "Host=${HOST};User ID=${USER_ID};Password=${PASSWORD};Port=${PORT};Database=${DATABASE};Pooling=${POOLING};SSL Mode=Require;Trust Server Certificate=true"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets/:/root/.microsoft/usersecrets
       - ${USERPROFILE}/.aspnet/https:/root/.aspnet/https/
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - .:/app
