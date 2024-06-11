@@ -14,6 +14,7 @@ using Infrastructure.Settings;
 using System.Reflection;
 using Application.Features.UsersQueries.Queries;
 using Application.Features.PostCommands.Commands;
+using Application.Features.PostQueries.Queries;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +40,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
 ));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
-    typeof(GetPostByIdQueryCommand).Assembly,
+    typeof(GetPostByIdQuery).Assembly,
     typeof(Program).Assembly
 ));
 

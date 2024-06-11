@@ -1,3 +1,4 @@
+using Application.Response;
 using Domain.Entities;
 
 namespace Domain.Interfaces
@@ -6,5 +7,8 @@ namespace Domain.Interfaces
     {
         Task<Posts> AddAsync(Posts post);
         Task<Posts> GetPostByIdAsync(int postId);
+
+        Task Delete(Posts post);
+        
     }
 }

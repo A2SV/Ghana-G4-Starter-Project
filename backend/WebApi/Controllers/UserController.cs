@@ -4,7 +4,6 @@ using Application.Features.UsersCommands.Commands;
 using Application.Features.UsersQueries.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Application.Features.PostCommands.Commands;
 using Application.Contracts.UsersRequests;
 using Application.Features.UsersCommands;
 
