@@ -1,7 +1,8 @@
-using Application.Features.PostCommands.Commands;
+using Application.Features.PostQueries.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Contracts.PostRequests;
+using Application.Features.PostCommands.Commands;
 
 
 namespace WebApi.Controllers
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> GetPostById([FromRoute] int id)
         {
-            var command = new GetPostByIdQueryCommand(id);
+            var command = new GetPostByIdQuery(id);
             var result = await _mediator.Send(command);
 
             if (result == null)
@@ -43,15 +44,14 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeletePostCommand { Id = id };
-           var result =  await _mediator.Send(command);
+            var result =  await _mediator.Send(command);
             if (result.IsSuccess)
             {
-                return Ok("Deleted successfully");
-                    }
+                return Ok(result.Message);
+            }
             return BadRequest(result.Message);
             
         }

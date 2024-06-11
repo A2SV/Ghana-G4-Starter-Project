@@ -1,20 +1,20 @@
 using Application.Contracts.PostRequests;
-using Application.Features.PostCommands.Commands;
+using Application.Features.PostQueries.Queries;
 using Domain.Interfaces;
 using MediatR;
 
-namespace Application.Features.PostCommands.Handlers
+namespace Application.Features.PostQueries.Handlers
 {
-    public class GetPostByIdQueryCommandHandler : IRequestHandler<GetPostByIdQueryCommand, PostDto>
+    public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, PostDto>
     {
         private readonly IPostRepository _postRepository;
 
-        public GetPostByIdQueryCommandHandler(IPostRepository postRepository)
+        public GetPostByIdQueryHandler(IPostRepository postRepository)
         {
             _postRepository = postRepository;
         }
 
-        public async Task<PostDto> Handle(GetPostByIdQueryCommand request, CancellationToken cancellationToken)
+        public async Task<PostDto> Handle(GetPostByIdQuery request, CancellationToken cancellationToken)
         {
             var post = await _postRepository.GetPostByIdAsync(request.PostId);
             if (post == null)
