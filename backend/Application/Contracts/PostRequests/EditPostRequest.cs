@@ -9,7 +9,7 @@ namespace Application.Contracts.PostRequests
     public class EditPostRequest
     {
         [Required]
-        public string PostId {get; set;}
+        public int PostId {get; set;}
         public string Content {get; set;} = string.Empty;
         public string Tag {get; set;} = string.Empty;
     }

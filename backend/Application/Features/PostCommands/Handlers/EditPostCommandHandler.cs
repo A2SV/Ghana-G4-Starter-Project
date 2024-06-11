@@ -31,7 +31,6 @@ namespace Application.Features.PostCommands.Handlers
 
             post.Content = request.Content;
             post.Tag = request.Tag;
-            post.CreatedAt = DateTime.Now;
 
             await _postRepository.SaveChangesAsync(cancellationToken);
 

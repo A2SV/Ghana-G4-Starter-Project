@@ -34,5 +34,12 @@ namespace Persistence.Repositories
             await _context.SaveChangesAsync(cancellationToken);
         }
         
+<<<<<<< Updated upstream
+=======
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+>>>>>>> Stashed changes
     }
 }

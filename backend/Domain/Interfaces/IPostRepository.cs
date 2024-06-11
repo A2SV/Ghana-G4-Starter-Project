@@ -8,5 +8,9 @@ namespace Domain.Interfaces
         Task<Posts> GetPostByIdAsync(int postId);
         
         Task SaveChangesAsync(CancellationToken cancellationToken);
+<<<<<<< Updated upstream
+=======
+        
+>>>>>>> Stashed changes
     }
 }
