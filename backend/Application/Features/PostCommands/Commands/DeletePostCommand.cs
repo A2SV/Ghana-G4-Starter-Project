@@ -1,7 +1,6 @@
 ﻿using Application.Response;
 using Domain.Interfaces;
 using MediatR;
-using Persistence.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

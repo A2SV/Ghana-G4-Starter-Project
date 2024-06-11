@@ -46,12 +46,13 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-           var response =  await _mediator.Send(new DeletePostCommand { Id = id });
-            if (response.IsSuccess)
+            var command = new DeletePostCommand { Id = id };
+           var result =  await _mediator.Send(command);
+            if (result.IsSuccess)
             {
                 return Ok("Deleted successfully");
                     }
-            return BadRequest(response.Message);
+            return BadRequest(result.Message);
             
         }
     }
