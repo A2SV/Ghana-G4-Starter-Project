@@ -26,8 +26,6 @@ namespace Persistence.Configurations
             });
             
 
-            // Seed.UsersSeed.AddSeed(modelBuilder);
-            // Seed.PostsSeed.AddSeed(modelBuilder);
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken=default)
