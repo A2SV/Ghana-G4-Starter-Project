@@ -9,6 +9,8 @@ namespace Domain.Interfaces
         Task<Posts> GetPostByIdAsync(int postId);
 
         Task Delete(Posts post);
+
+        Task SaveChangesAsync(CancellationToken cancellationToken);
         
     }
 }

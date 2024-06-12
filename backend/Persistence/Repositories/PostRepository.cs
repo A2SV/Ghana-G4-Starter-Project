@@ -36,5 +36,10 @@ namespace Persistence.Repositories
             await _context.SaveChangesAsync();
 
         }
+
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

@@ -55,5 +55,26 @@ namespace WebApi.Controllers
             return BadRequest(result.Message);
             
         }
+
+        [HttpPatch("posts/{id:int}")]
+        public async Task<IActionResult> EditPost(int id, [FromBody] EditPostRequest request)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            var command = new EditPostCommand(id, request.Content, request.Tag);
+            var result = await _mediator.Send(command);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+
     }
 }
