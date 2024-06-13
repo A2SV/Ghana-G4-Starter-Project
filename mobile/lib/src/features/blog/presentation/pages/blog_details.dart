@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:dartz/dartz.dart';
+import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
+import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
+
+import '../../domain/domain.dart';
+
 
 class BlogDetails extends StatelessWidget {
   static const String routeName = 'blog-details-screen';
 
+
+
   @override
   Widget build(BuildContext context) {
+    print('blog details');
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -20,81 +31,101 @@ class BlogDetails extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body:FutureBuilder<Either<String,Blog>>(
+        future: BlogRepositoryImpl().viewBlog(1), // Change the ID as needed
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: Text('connecting...'));
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (snapshot.hasData) {
+            print('loading..');
+            Either<String,Blog>? result=snapshot.data;
+            Blog blog=Blog(0, '', '', '', '', UserAccount(0,'','','',''), Tag(0,'',''));
+            result!.fold(
+                (error)=>error,
+                    (res)=>blog=res
+            );
+            return  SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black54,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 6), // Adjust padding
-                      minimumSize: const Size(0, 0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(8), // Adjust border radius
-                      ),
-                    ),
-                    child: const Text(
-                      'Education',
-                      style: TextStyle(fontSize: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black54,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 14, vertical: 6), // Adjust padding
+                            minimumSize: const Size(0, 0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(8), // Adjust border radius
+                            ),
+                          ),
+                          child: const Text(
+                            'Education',
+                            style: TextStyle(fontSize: 10),
+                          ),
+                        ),
+                        const Text(
+                          '50 minutes ago',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Text(
-                    '50 minutes ago',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      blog.title!,
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      blog.userAccount!.email!,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 17, 12, 12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Image.asset(
+                    'assets/images/pic1.png',
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 23),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 40),
+                    child: Text(
+                      blog.body!,
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w300),
                     ),
                   ),
                 ],
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'STUDENTS SHOULD WORK ON IMPROVING THEIR WRITING SKILL',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'by admin.user@a2sv.org',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 17, 12, 12),
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            Image.asset(
-              'assets/images/pic1.png',
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(height: 23),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 40),
-              child: Text(
-                '    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum...',
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w300),
-              ),
-            ),
-          ],
-        ),
+            );
+          } else {
+            return Center(child: Text('No data found'));
+          }
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

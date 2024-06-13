@@ -4,11 +4,11 @@ import 'package:starter_project/src/core/use_case/use_cases.dart';
 
 import '../repositories/repository.dart';
 
-class LoginUseCase extends UseCase {
-  final BlogRepository authRepository;
+class ViewBlogUseCase extends UseCase {
+  final BlogRepository blogRepository;
 
-  LoginUseCase({
-    required this.authRepository,
+  ViewBlogUseCase({
+    required this.blogRepository,
   });
   @override
   Future<Either<Failure, dynamic>> call(params) {

@@ -15,8 +15,7 @@ class AppRouter extends StatelessWidget {
   static GoRouter createRoute() {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
-      initialLocation: "/profile-screen",
-
+      initialLocation: "/blog-details-screen",
       routes: routes,
       observers: [],
     );

@@ -15,4 +15,5 @@ class AppLightThemeColors {
   static const kTertiaryTextColor = Color.fromRGBO(77, 74, 73, 1);
   static const kTextFieldColor = Color.fromRGBO(232, 242, 254, 1);
   static const kVeryLightTextFieldBorder = Color.fromRGBO(231, 231, 231, 1);
+  static const kProfileBackgroundColor = Color.fromRGBO(234, 242, 254, 1);
 }
