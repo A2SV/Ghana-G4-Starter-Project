@@ -10,6 +10,9 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: Nunito
+  static const String nunito = 'Nunito';
+
   /// Font family: Pacifico
   static const String pacifico = 'Pacifico';
 
@@ -18,6 +21,4 @@ class FontFamily {
 
   /// Font family: Urbanist
   static const String urbanist = 'Urbanist';
-
-  static const String nunito = "Nunito";
 }
