@@ -23,9 +23,33 @@ class $AssetsImagesGen {
   AssetGenImage get blueBlob =>
       const AssetGenImage('assets/images/blue_blob.png');
 
+  /// File path: assets/images/cat_image1.jpg
+  AssetGenImage get catImage1 =>
+      const AssetGenImage('assets/images/cat_image1.jpg');
+
+  /// File path: assets/images/cat_image2.jpg
+  AssetGenImage get catImage2 =>
+      const AssetGenImage('assets/images/cat_image2.jpg');
+
+  /// File path: assets/images/cat_image3.jpg
+  AssetGenImage get catImage3 =>
+      const AssetGenImage('assets/images/cat_image3.jpg');
+
+  /// File path: assets/images/controller.jpg
+  AssetGenImage get controller =>
+      const AssetGenImage('assets/images/controller.jpg');
+
   /// File path: assets/images/first_page.png
   AssetGenImage get firstPage =>
       const AssetGenImage('assets/images/first_page.png');
+
+  /// File path: assets/images/girl_holding_phone.png
+  AssetGenImage get girlHoldingPhone =>
+      const AssetGenImage('assets/images/girl_holding_phone.png');
+
+  /// File path: assets/images/happy_user.png
+  AssetGenImage get happyUser =>
+      const AssetGenImage('assets/images/happy_user.png');
 
   /// File path: assets/images/login_blob.png
   AssetGenImage get loginBlob =>
@@ -34,6 +58,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/login_blob2.png
   AssetGenImage get loginBlob2 =>
       const AssetGenImage('assets/images/login_blob2.png');
+
+  /// File path: assets/images/pic1.png
+  AssetGenImage get pic1 => const AssetGenImage('assets/images/pic1.png');
 
   /// File path: assets/images/purple_blob.png
   AssetGenImage get purpleBlob =>
@@ -59,9 +86,16 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         blogPlaceholder,
         blueBlob,
+        catImage1,
+        catImage2,
+        catImage3,
+        controller,
         firstPage,
+        girlHoldingPhone,
+        happyUser,
         loginBlob,
         loginBlob2,
+        pic1,
         purpleBlob,
         roundBlob,
         secondPage,
@@ -75,6 +109,10 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/amico.svg
   SvgGenImage get amico => const SvgGenImage('assets/svg/amico.svg');
+
+  /// File path: assets/svg/ask_question.svg
+  SvgGenImage get askQuestion =>
+      const SvgGenImage('assets/svg/ask_question.svg');
 
   /// File path: assets/svg/blog_align_center.svg
   SvgGenImage get blogAlignCenter =>
@@ -155,13 +193,32 @@ class $AssetsSvgGen {
   SvgGenImage get emailPrefixIcon =>
       const SvgGenImage('assets/svg/email_prefix_icon.svg');
 
+  /// File path: assets/svg/happy_user.svg
+  SvgGenImage get happyUser => const SvgGenImage('assets/svg/happy_user.svg');
+
+  /// File path: assets/svg/my_blog.svg
+  SvgGenImage get myBlog => const SvgGenImage('assets/svg/my_blog.svg');
+
   /// File path: assets/svg/password_prefix_icon.svg
   SvgGenImage get passwordPrefixIcon =>
       const SvgGenImage('assets/svg/password_prefix_icon.svg');
 
+  /// File path: assets/svg/profile_plus.svg
+  SvgGenImage get profilePlus =>
+      const SvgGenImage('assets/svg/profile_plus.svg');
+
+  /// File path: assets/svg/profile_user.svg
+  SvgGenImage get profileUser =>
+      const SvgGenImage('assets/svg/profile_user.svg');
+
+  /// File path: assets/svg/windows_icon.svg
+  SvgGenImage get windowsIcon =>
+      const SvgGenImage('assets/svg/windows_icon.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         amico,
+        askQuestion,
         blogAlignCenter,
         blogAlignLeft,
         blogAlignRight,
@@ -184,7 +241,12 @@ class $AssetsSvgGen {
         blogUnderline,
         cuate,
         emailPrefixIcon,
-        passwordPrefixIcon
+        happyUser,
+        myBlog,
+        passwordPrefixIcon,
+        profilePlus,
+        profileUser,
+        windowsIcon
       ];
 }
 
