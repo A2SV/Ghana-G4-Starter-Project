@@ -3,6 +3,29 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import SignUpBackground from "@/components/SignupBackground";
 
+// Mock the next/navigation module
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    route: "/",
+    pathname: "",
+    query: "",
+    asPath: "",
+    push: jest.fn(),
+    replace: jest.fn(),
+    reload: jest.fn(),
+    back: jest.fn(),
+    prefetch: jest.fn().mockResolvedValue(undefined),
+    beforePopState: jest.fn(),
+    events: {
+      on: jest.fn(),
+      off: jest.fn(),
+      emit: jest.fn(),
+    },
+    isFallback: false,
+  }),
+  useSearchParams: () => ({}),
+}));
+
 describe("SignUpBackground", () => {
   it("renders blog link", () => {
     render(<SignUpBackground />);

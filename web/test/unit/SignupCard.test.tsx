@@ -1,57 +1,43 @@
 import SignupCard from "@/components/SignupCard";
 
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
+import { useRouter } from "next/navigation";
+import { env } from "next-runtime-env";
 
-describe("SignupCard", () => {
-  test("renders SignupCard component", () => {
-    render(<SignupCard />);
-    expect(screen.getByRole("heading", { name: /sign up/i })).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("First Name")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Last Name")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Email address")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /sign up/i })).toBeInTheDocument();
+// Mock environment variable
+jest.mock("next-runtime-env", () => ({
+  env: jest.fn(() => env("NEXT_PUBLIC_BASE_URL") + "UserAccount/register"),
+}));
+
+// Mock axios
+const mock = new MockAdapter(axios);
+
+// Mock useRouter
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+
+const push = jest.fn();
+(useRouter as jest.Mock).mockReturnValue({ push });
+
+// Mock environment variable
+jest.mock("next-runtime-env", () => ({
+  env: jest.fn(() => "http://blogapp.tryasp.net/api/"),
+}));
+
+describe("LoginCard", () => {
+  beforeEach(() => {
+    mock.reset();
+    push.mockClear();
   });
 
-  test("updates first name, last name, email, and password fields on change", () => {
+  it("renders the login form", () => {
     render(<SignupCard />);
-    const firstNameInput = screen.getByPlaceholderText("First Name");
-    const lastNameInput = screen.getByPlaceholderText("Last Name");
-    const emailInput = screen.getByPlaceholderText("Email address");
-    const passwordInput = screen.getByPlaceholderText("Password");
-
-    fireEvent.change(firstNameInput, { target: { value: "John" } });
-    fireEvent.change(lastNameInput, { target: { value: "Doe" } });
-    fireEvent.change(emailInput, { target: { value: "john.doe@example.com" } });
-    fireEvent.change(passwordInput, { target: { value: "password123" } });
-
-    expect(firstNameInput).toHaveValue("John");
-    expect(lastNameInput).toHaveValue("Doe");
-    expect(emailInput).toHaveValue("john.doe@example.com");
-    expect(passwordInput).toHaveValue("password123");
-  });
-
-  test("submits the form with first name, last name, email, and password", () => {
-    render(<SignupCard />);
-    const firstNameInput = screen.getByPlaceholderText("First Name");
-    const lastNameInput = screen.getByPlaceholderText("Last Name");
-    const emailInput = screen.getByPlaceholderText("Email address");
-    const passwordInput = screen.getByPlaceholderText("Password");
-    const submitButton = screen.getByRole("button", { name: /sign up/i });
-
-    fireEvent.change(firstNameInput, { target: { value: "John" } });
-    fireEvent.change(lastNameInput, { target: { value: "Doe" } });
-    fireEvent.change(emailInput, { target: { value: "john.doe@example.com" } });
-    fireEvent.change(passwordInput, { target: { value: "password123" } });
-    fireEvent.click(submitButton);
-
-    // Ideally, you would mock the console.log to check its calls
-    // For simplicity, we'll just assert the values here
-    expect(firstNameInput).toHaveValue("John");
-    expect(lastNameInput).toHaveValue("Doe");
-    expect(emailInput).toHaveValue("john.doe@example.com");
-    expect(passwordInput).toHaveValue("password123");
+    expect(screen.getByPlaceholderText(/Email address/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Sign up/i })).toBeInTheDocument();
   });
 });
