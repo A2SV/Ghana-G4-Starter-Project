@@ -5,7 +5,6 @@ import { render, screen } from "@testing-library/react";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { useRouter } from "next/navigation";
-import SignupCard from "@/components/SignupCard";
 import { env } from "next-runtime-env";
 
 // Mock environment variable
