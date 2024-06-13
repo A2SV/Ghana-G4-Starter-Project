@@ -1,9 +1,9 @@
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AllPost from "@/components/AllPost";
-import React from "react";
 
-const DefaultPage = () => {
+const App = () => {
   return (
     <div>
       <Header />
@@ -13,4 +13,4 @@ const DefaultPage = () => {
   );
 };
 
-export default DefaultPage;
+export default App;
