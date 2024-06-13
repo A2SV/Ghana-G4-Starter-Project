@@ -5,11 +5,6 @@ import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
 
 export default function SignupCard() {
-  // const [firstName, setFirstName] = useState<string>("");
-  // const [lastName, setLastName] = useState<string>("");
-  // const [email, setEmail] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
-
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -54,9 +49,9 @@ export default function SignupCard() {
     try {
       console.log("User:", user);
       const baseUrl = env("NEXT_PUBLIC_BASE_URL") + "UserAccount/register";
-      const response = await axios.post(baseUrl, user);
+      await axios.post(baseUrl, user);
       setMessage("User created successfully!");
-      console.log(response.data);
+
       router.push("/");
     } catch (error) {
       console.error(error);
