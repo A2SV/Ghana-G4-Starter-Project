@@ -29,7 +29,6 @@ export default function LoginCard() {
       localStorage.setItem("token", token);
       router.push("/profile/myblogs");
     } catch (error) {
-      console.error(error);
       if (axios.isAxiosError(error)) {
         setError(error.response?.data);
       } else {
