@@ -3,6 +3,7 @@ import React, { useState, FormEvent, ChangeEvent } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { env } from "next-runtime-env";
+import Image from "next/image";
 
 export default function SignupCard() {
   const [user, setUser] = useState({
@@ -15,6 +16,7 @@ export default function SignupCard() {
   const router = useRouter();
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prevUser) => ({
@@ -46,8 +48,8 @@ export default function SignupCard() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      console.log("User:", user);
       const baseUrl = env("NEXT_PUBLIC_BASE_URL") + "UserAccount/register";
       await axios.post(baseUrl, user);
       setMessage("User created successfully!");
@@ -64,6 +66,7 @@ export default function SignupCard() {
         setMessage("An error occurred. Please try again later.");
       }
     }
+    setLoading(false);
   };
 
   return (
@@ -76,13 +79,13 @@ export default function SignupCard() {
             className="flex items-center bg-red-100  text-red-700 px-4 py-3 rounded relative"
             role="alert"
           >
-            <svg
-              className="fill-current h-6 w-6 text-red-500 mr-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 11H9v-2h2v2zm0-4H9V5h2v4z" />
-            </svg>
+            <Image
+              src="/ErrorIcon.svg"
+              width={20}
+              height={20}
+              className="rounded-lg"
+              alt="avatar"
+            />
             <span className="block sm:inline">{message}</span>
           </div>
         )}
@@ -139,7 +142,7 @@ export default function SignupCard() {
             type="submit"
             className="w-full bg-primary text-white font-semibold text-sm py-2 font-pops rounded-md hover:bg-blue-600 transition duration-300"
           >
-            Sign up
+            {loading ? "Loading..." : "Sign up"}
           </button>
         </form>
       </div>
