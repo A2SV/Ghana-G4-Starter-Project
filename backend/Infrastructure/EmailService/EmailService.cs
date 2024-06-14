@@ -1,41 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
 using Domain.Interfaces;
-using Infrastructure.Settings;
+using Microsoft.Extensions.Configuration;
 
-public class EmailService : IEmailService
+namespace Infrastructure.EmailService
 {
-    private readonly EmailSettings _emailSettings;
-
-    public EmailService(IOptions<EmailSettings> emailSettings)
+    public class EmailService : IEmailService
     {
-        _emailSettings = emailSettings.Value;
-    }
+        private readonly IConfiguration _configuration;
 
-    public async Task SendEmailAsync(string to, string subject, string body)
-    {
-        var fromAddress = new MailAddress(_emailSettings.FromEmail, "Your App Name");
-        var toAddress = new MailAddress(to);
-
-        using (var smtpClient = new SmtpClient
-               {
-                   Host = "smtp.gmail.com",
-                   Port = 587,
-                   EnableSsl = true,
-                   DeliveryMethod = SmtpDeliveryMethod.Network,
-                   UseDefaultCredentials = false,
-                   Credentials = new NetworkCredential(fromAddress.Address, _emailSettings.EmailPassword)
-               })
-        using (var message = new MailMessage(fromAddress, toAddress)
-               {
-                   Subject = subject,
-                   Body = body,
-                   IsBodyHtml = true
-               })
+        public EmailService(IConfiguration configuration)
         {
-            await smtpClient.SendMailAsync(message);
+            _configuration = configuration;
+        }
+
+        public async Task SendEmailAsync(string to, string subject, string body)
+        {
+            var emailSettings = _configuration.GetSection("EmailSettings");
+            var smtpClient = new SmtpClient
+            {
+                Host = emailSettings["SmtpServer"],
+                Port = int.Parse(emailSettings["SmtpPort"]),
+                EnableSsl = true,
+                Credentials = new NetworkCredential(emailSettings["SmtpUsername"], emailSettings["SmtpPassword"])
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(emailSettings["SenderEmail"]),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            };
+
+            mailMessage.To.Add(to);
+
+            try{
+                await smtpClient.SendMailAsync(mailMessage);
+            }
+            catch(Exception ex){
+                throw new InvalidOperationException($"Error sending email: {ex.Message}");
+            }
         }
     }
 }

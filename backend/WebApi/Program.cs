@@ -15,6 +15,7 @@ using System.Reflection;
 using Application.Features.UsersQueries.Queries;
 using Application.Features.PostCommands.Commands;
 using Application.Features.PostQueries.Queries;
+using Infrastructure.EmailService;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,8 +51,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
 ));
 
 // Email Service
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
+builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddAuthentication(options =>
     {

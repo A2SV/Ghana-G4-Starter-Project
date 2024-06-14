@@ -1,11 +1,12 @@
-using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Application.Contracts.UserRequests
 {
     public class ForgotPasswordRequest
     {
-        // [Required(ErrorMessage = "Email is required.")]
-        // [EmailAddress(ErrorMessage = "A valid email is required.")]
-        public string Email { get; set; }
+        public string Email {get; set;}
     }
 }

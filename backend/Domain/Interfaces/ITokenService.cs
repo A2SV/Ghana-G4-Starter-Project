@@ -6,5 +6,6 @@ namespace Domain.Interfaces
     {
         string GeneratePasswordResetToken(string email);
         ClaimsPrincipal GetPrincipalFromToken(string token);
+        
     }
 }
