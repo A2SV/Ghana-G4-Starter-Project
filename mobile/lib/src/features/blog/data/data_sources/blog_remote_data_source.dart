@@ -11,7 +11,6 @@ String token='eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobW
 abstract class BlogRemoteDataSource {
 
 //methods
-Future<Either<String,BlogModel>> viewBlog(int id);
 Future<Either<String,List<BlogModel>>> viewAllBlogs();
 }
 
@@ -21,7 +20,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
 
     final response = await http.get(Uri.parse(
 
-        'http://blogapp.tryasp.net/api/Blog/${id}'),
+        'http://blogapp.tryasp.net/api/Blog/'),
 
       headers: {
         'Content-Type': 'application/json',

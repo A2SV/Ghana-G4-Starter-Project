@@ -6,7 +6,6 @@ import 'package:starter_project/src/features/blog/domain/entities/user_account.d
 
 import '../../domain/domain.dart';
 
-
 class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
 
@@ -34,7 +33,7 @@ class _BlogDetailsState extends State<BlogDetails> {
           ),
         ],
       ),
-      body:FutureBuilder<Either<String,Blog>>(
+      body: FutureBuilder<Either<String, Blog>>(
         future: BlogRepositoryImpl().viewBlog(26), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -43,14 +42,12 @@ class _BlogDetailsState extends State<BlogDetails> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             print('loading..');
-            Either<String,Blog>? result=snapshot.data;
-            Blog blog=Blog(0, 'none', '', '', UserAccount(0,'','','',''), []);
-            result!.fold(
-                (error)=>error,
-                    (res)=>blog=res
-            );
+            Either<String, Blog>? result = snapshot.data;
+            Blog blog =
+                Blog(0, 'none', '', '', UserAccount(0, '', '', '', ''), []);
+            result!.fold((error) => error, (res) => blog = res);
             print(blog.title);
-            return  SingleChildScrollView(
+            return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -68,8 +65,8 @@ class _BlogDetailsState extends State<BlogDetails> {
                                 horizontal: 14, vertical: 6), // Adjust padding
                             minimumSize: const Size(0, 0),
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(8), // Adjust border radius
+                              borderRadius: BorderRadius.circular(
+                                  8), // Adjust border radius
                             ),
                           ),
                           child: const Text(

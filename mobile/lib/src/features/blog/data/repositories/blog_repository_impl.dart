@@ -9,25 +9,6 @@ import '../data_sources/blog_remote_data_source.dart';
 import '../models/blog_model.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
-  Future<Either<String,Blog>> viewBlog(int id) async{
-    Either<String,BlogModel> result= await BlogRemoteDataSourceImpl().viewBlog(id);
-    var output;
-    bool iserror=false;
-
-    print('extracting from repo....');
-    result.fold(
-        (error)=>iserror=true,
-        (data)=>output=Blog(data.id, data.title, data.body, data.createdDateTime,
-            UserAccount(data.userAccount.id,data.userAccount.firstName,data.userAccount.lastName,data.userAccount.email,data.userAccount.createdDateTime),
-            [])
-    );
-
-    if(iserror){
-      return Left('Extraction failed');
-    }else{
-      return Right(output);
-    }
-  }
 
   Future<Either<String,List<Blog>>> viewAllBlogs() async{
     Either<String,List<BlogModel>> result= await BlogRemoteDataSourceImpl().viewAllBlogs();
