@@ -52,7 +52,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
-                return const BlogCard().onlyPadding(0, 10.0, 20.0, 20.0);
+                return const BlogCard(topic: 'student do not read',email: 'teteku@a2sv.com',tag:'none',date: 'Jan 12,2022',).onlyPadding(0, 10.0, 20.0, 20.0);
               },
             ),
           ),

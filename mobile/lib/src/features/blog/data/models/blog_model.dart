@@ -6,14 +6,13 @@ class BlogModel{
   final String title;
   final String body;
   final String createdDateTime;
-  final String lastUpdatedDateTime;
   final UserAccountModel userAccount;
-  final TagModel tag;
+  final List<TagModel> tag;
 
 
 
   BlogModel(
-      this.id,this.title, this.body, this.createdDateTime, this.lastUpdatedDateTime, this.userAccount, this.tag
+      this.id,this.title, this.body, this.createdDateTime, this.userAccount, this.tag
       );
 
 
@@ -22,9 +21,8 @@ class BlogModel{
     'title':title,
     'body':body,
     'createdDateTime':createdDateTime,
-    'lastUpdatedDateTime':lastUpdatedDateTime,
     'userAccount':userAccount.toJson(),
-    'tags':tag.toJson()
+    'tags': []
 
   };
 
@@ -33,9 +31,9 @@ class BlogModel{
         title=json['title'] as String,
         body=json['body'] as String,
         createdDateTime=json['createdDateTime'] as String,
-        lastUpdatedDateTime=json['lastUpdatedDateTime'] as String,
         userAccount=UserAccountModel.fromJson(json['userAccount']) as UserAccountModel,
-        tag=TagModel.fromJson(json['tags']) as TagModel
+        //tag=TagModel.fromJson(json['tags']) as List<TagModel>
+        tag=[]
 
   ;
 }
