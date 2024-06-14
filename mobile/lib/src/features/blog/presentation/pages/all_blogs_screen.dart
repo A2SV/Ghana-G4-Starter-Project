@@ -31,7 +31,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
           preferredSize: Size.fromHeight(10.h),
           child: CustomTextFormField(
             borderRadiusValue: 30.0,
-            contentPadding: EdgeInsets.symmetric( vertical: 2.h),
+            contentPadding: EdgeInsets.symmetric(vertical: 2.h),
             textFormFieldType: TextFormFieldType.regular,
             hintText: 'Search for blogs',
             controller: _searchController,

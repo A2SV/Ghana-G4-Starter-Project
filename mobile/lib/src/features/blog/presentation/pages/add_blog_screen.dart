@@ -17,6 +17,7 @@ class AddBlogScreenState extends State<AddBlogScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 25,
         title: const Text('Add Blog'),
         automaticallyImplyLeading: true,
       ),

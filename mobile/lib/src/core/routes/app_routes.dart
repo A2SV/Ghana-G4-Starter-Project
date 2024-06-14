@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
@@ -114,6 +115,11 @@ final routes = <GoRoute>[
     name: AppRoutes.blogDetails,
     path: '/${BlogDetails.routeName}',
     builder: (context, state) => BlogDetails(),
+  ),
+  GoRoute(
+    name: AppRoutes.blogsDashboard,
+    path: '/${BlogsDashboard.routeName}',
+    builder: (context, state) => const BlogsDashboard(),
   ),
 ];
 
