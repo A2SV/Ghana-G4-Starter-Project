@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Application.Contracts.UsersRequests;
 using Application.Features.UsersCommands;
+using Application.Contracts.UsersRequests;
 
 namespace WebAPI.Controllers
 {
@@ -44,30 +45,6 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
-        
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
-        {
-            // Ensure that this matches the constructor that takes a single string argument.
-            var command = new PasswordResetCommand(request.Email); 
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-                return Ok(result.Message);
-            return BadRequest(result.Message);
-        }
-
-
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
-        {
-            // Ensure this uses the constructor that takes three string arguments.
-            var command = new PasswordResetCommand(request.Email, request.Token, request.NewPassword);
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-                return Ok(result.Message);
-            return BadRequest(result.Message);
-        }
-        
 
         [HttpGet("{userId}/posts")]
         public async Task<IActionResult> GetPostsByUserId(int userId)
@@ -79,5 +56,52 @@ namespace WebAPI.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] PasswordResetRequest request)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid request.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Email) ||
+                string.IsNullOrWhiteSpace(request.Token) ||
+                string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                return BadRequest("Missing email, token, or new password.");
+            }
+
+            var command = new PasswordResetCommand(request.Email, request.Token, request.NewPassword);
+            var result = await _mediator.Send(command);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
+        {
+            if (request == null || string.IsNullOrWhiteSpace(request.Email))
+            {
+                return BadRequest("Email address is required.");
+            }
+
+            var command = new ForgotPasswordCommand(request.Email);
+            var result = await _mediator.Send(command);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+
+
     }
 }

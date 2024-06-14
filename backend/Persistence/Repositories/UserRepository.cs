@@ -35,5 +35,15 @@ namespace Persistence.Repositories
                 .Where(p => p.UserId == userId)
                 .ToListAsync();
         }
+
+        public async Task<bool> UpdateUserAsync(Users user)
+        {
+            _context.Users.Update(user);
+            var updated = await _context.SaveChangesAsync();
+
+            return updated > 0;
+        } 
+
+        
     }
 }
