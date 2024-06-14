@@ -35,7 +35,7 @@ class AppRoutes {
   static const String allblogsScreen = 'all-blogs-screen';
   static const String profileEditScreen = "profile-edit-screen";
   static const String blogDetails = "blog-details-screen";
-
+  static const String blogsDashboard = "blogs-dashboard";
 }
 
 //* Custom transition page
@@ -99,7 +99,6 @@ final routes = <GoRoute>[
     name: AppRoutes.editblogScreen,
     path: '/${EditBlogScreen.routeName}',
     builder: (context, state) => const EditBlogScreen(),
-
   ),
   GoRoute(
     name: AppRoutes.allblogsScreen,
@@ -122,4 +121,3 @@ final routes = <GoRoute>[
     builder: (context, state) => const BlogsDashboard(),
   ),
 ];
-
