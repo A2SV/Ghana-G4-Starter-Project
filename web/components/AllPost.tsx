@@ -1,7 +1,22 @@
-import React from "react";
+"use client";
+
+// import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
+// import { useGetAllBlogsQuery } from "../redux/blogApi";
 
 const AllPost: React.FC = () => {
+  // const { data, error, isLoading } = useGetAllBlogsQuery();
+
+  // const [allBlogs, setAllBlogs] = useState<any>([]);
+
+  // useEffect(() => {
+  //   // console.log(data)
+  //   if (data) {
+  //     console.log(data);
+  //     setAllBlogs(data);
+  //   }
+  // }, [data]);
+
   return (
     <div className="bg-white min-h-screen p-6 w-full max-w-7xl mx-auto">
       <div>
@@ -21,6 +36,17 @@ const AllPost: React.FC = () => {
           </div>
         </div>
         <div>
+          {/* <div>
+            {isLoading ? (
+              <p>Loading posts...</p>
+            ) : (
+              <>
+                {allBlogs.map((post: any) => {
+                  return <p>{post.title}</p>;
+                })}
+              </>
+            )}
+          </div> */}
           <PostCard
             author="Yididiya Kebede"
             date="Apr 16, 2022"
