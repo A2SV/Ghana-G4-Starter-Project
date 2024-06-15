@@ -34,7 +34,7 @@ const ProfileBlogsCard = () => {
           </p>
           <Link href="/profile/myblogs/edit">
             <div className="flex">
-              <div className="flex flex-row-reverse w-8 h-6 bg-gray-300 text-gray-700 items-center justify-center mt-3 rounded-[4px] hover:bg-gray-400  transition duration-300">
+              <div className="flex flex-row-reverse w-8 h-6 bg-gray-200 text-gray-500 items-center justify-center mt-3 rounded-[3px] hover:bg-gray-300 hover:text-gray-500 transition duration-300">
                 <FaEdit className="w-4 h-4" />
               </div>
             </div>
