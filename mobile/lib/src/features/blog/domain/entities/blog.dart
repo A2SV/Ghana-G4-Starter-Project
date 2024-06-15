@@ -19,7 +19,7 @@ class Blog{
     this.body=body;
     this.createdDateTime=createdDateTime;
     this.userAccount=userAccount;
-    this.tags=tags;
+    this.tags=[];
   }
 
   String convertDateToString(date){
