@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
-import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz.dart' hide State;
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
 import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
 
 import '../../domain/domain.dart';
 
 
-class BlogDetails extends StatelessWidget {
+class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
 
+  @override
+  State<BlogDetails> createState() => _BlogDetailsState();
+}
 
-
+class _BlogDetailsState extends State<BlogDetails> {
   @override
   Widget build(BuildContext context) {
     print('blog details');
@@ -32,7 +35,7 @@ class BlogDetails extends StatelessWidget {
         ],
       ),
       body:FutureBuilder<Either<String,Blog>>(
-        future: BlogRepositoryImpl().viewBlog(1), // Change the ID as needed
+        future: BlogRepositoryImpl().viewBlog(26), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: Text('connecting...'));
@@ -41,11 +44,12 @@ class BlogDetails extends StatelessWidget {
           } else if (snapshot.hasData) {
             print('loading..');
             Either<String,Blog>? result=snapshot.data;
-            Blog blog=Blog(0, '', '', '', '', UserAccount(0,'','','',''), Tag(0,'',''));
+            Blog blog=Blog(0, 'none', '', '', UserAccount(0,'','','',''), []);
             result!.fold(
                 (error)=>error,
                     (res)=>blog=res
             );
+            print(blog.title);
             return  SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +132,9 @@ class BlogDetails extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          BlogRepositoryImpl().viewBlog(26);
+        },
         backgroundColor: const Color(0xFF436CC9),
         child: const Icon(Icons.edit, color: Colors.white),
       ),

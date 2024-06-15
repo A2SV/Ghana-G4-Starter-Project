@@ -7,19 +7,17 @@ class Blog{
   String? title;
   String? body;
   String? createdDateTime;
-  String? lastUpdatedDateTime;
   UserAccount? userAccount;
-  Tag? tags;
+  List<Tag>? tags;
 
 
 
 
-  Blog(int id, String title,String body, String createdDateTime,String lastUpdatedDateTime,UserAccount userAccount,Tag tags){
+  Blog(int id, String title,String body, String createdDateTime,UserAccount userAccount,List<Tag> tags){
     this.id=id;
     this.title=title;
     this.body=body;
     this.createdDateTime=createdDateTime;
-    this.lastUpdatedDateTime=lastUpdatedDateTime;
     this.userAccount=userAccount;
     this.tags=tags;
   }

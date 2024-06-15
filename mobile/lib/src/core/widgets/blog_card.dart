@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 
+import '../../features/blog/domain/entities/tags.dart';
+
 class BlogCard extends StatelessWidget {
+  final String? topic;
+  final List<Widget>? tag;
+  final String? email;
+  final String? date;
   const BlogCard({
     super.key,
+    this.topic,
+    this.tag,
+    this.email,
+    this.date
   });
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +72,7 @@ class BlogCard extends StatelessWidget {
                       height: 11.h,
                       width: 40.w,
                       child: Text(
-                        'STUDENTS SHOULD WORK ON IMPROVING THEIR WRITING SKILL',
+                        this.topic!,
                         softWrap: true,
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
@@ -70,23 +83,11 @@ class BlogCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: AppLightThemeColors.kSecondaryBackgroundColor,
-                        borderRadius: BorderRadius.circular(3.0),
-                      ),
-                      child: Text(
-                        'Education',
-                        maxLines: 1,
-                        style: context.textTheme.displayLarge!.copyWith(
-                          fontSize: 13.sp,
-                          color: AppLightThemeColors
-                              .kOnSecondaryBackgroundLightColor,
-                        ),
-                      ).symmetricPadding(10.0, 5.0),
-                    ).verticalPadding(10.0),
+                    Wrap(
+                      children: this.tag!
+                    ),
                     Text(
-                      'by adminuser@a2sv.org',
+                      this.email!,
                       maxLines: 1,
                       style: context.textTheme.displaySmall!.copyWith(
                         color: AppLightThemeColors.kDarkTextColor,
@@ -101,7 +102,7 @@ class BlogCard extends StatelessWidget {
             height: 2.h,
           ),
           Text(
-            'Jan 12,2022',
+            DateFormat.yMMMd().format(DateFormat('yyyy-MM-dd').parse(this.date!.substring(0,10))),
             style: context.textTheme.displaySmall!.copyWith(
               fontWeight: FontWeight.w300,
               fontSize: 14.sp,
@@ -112,3 +113,4 @@ class BlogCard extends StatelessWidget {
     );
   }
 }
+
