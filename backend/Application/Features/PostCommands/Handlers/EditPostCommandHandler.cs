@@ -29,6 +29,12 @@ namespace Application.Features.PostCommands.Handlers
                 return Result.Failure("Post not found.");
             }
 
+            if (request.Content == "")
+            {
+                
+                return Result.Failure("Content cannot be empty.");
+            }
+            
             post.Content = request.Content;
             post.Tag = request.Tag;
 
