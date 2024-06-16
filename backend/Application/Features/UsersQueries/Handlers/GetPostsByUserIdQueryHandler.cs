@@ -25,6 +25,7 @@ namespace Application.Features.UsersQueries.Handlers
             {
                 Id = p.Id,
                 Content = p.Content,
+                UserId = p.UserId,
                 CreatedAt = p.CreatedAt
             }).ToList();
         }
