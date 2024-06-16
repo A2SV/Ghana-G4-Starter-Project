@@ -22,6 +22,7 @@ namespace Persistence.Repositories
 
             return post;
         }
+        
 
 
         public async Task<Posts> GetPostByIdAsync(int postId)
