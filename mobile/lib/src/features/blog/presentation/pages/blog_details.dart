@@ -9,9 +9,13 @@ import '../../domain/domain.dart';
 
 class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
+  final String id;
+
+  const BlogDetails({Key? key,required String this.id}):super(key:key);
+
 
   @override
-  State<BlogDetails> createState() => _BlogDetailsState();
+  _BlogDetailsState createState() => _BlogDetailsState();
 }
 
 class _BlogDetailsState extends State<BlogDetails> {
@@ -35,7 +39,7 @@ class _BlogDetailsState extends State<BlogDetails> {
         ],
       ),
       body:FutureBuilder<Either<String,Blog>>(
-        future: BlogRepositoryImpl().viewBlog(26), // Change the ID as needed
+        future: BlogRepositoryImpl().viewBlog(int.parse(widget.id)), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: Text('connecting...'));

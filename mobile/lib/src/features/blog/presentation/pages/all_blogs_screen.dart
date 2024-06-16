@@ -37,7 +37,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
           preferredSize: Size.fromHeight(10.h),
           child: CustomTextFormField(
             borderRadiusValue: 30.0,
-            contentPadding: EdgeInsets.symmetric( vertical: 2.h),
+            contentPadding: EdgeInsets.symmetric(vertical: 2.h),
             textFormFieldType: TextFormFieldType.regular,
             hintText: 'Search for blogs',
             controller: _searchController,
@@ -59,12 +59,17 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
           } else if (snapshot.hasData) {
             print('loading..');
             Either<String,List<Blog>>? result=snapshot.data;
-            List<Blog> blogs=[Blog(0, 'none', '', '', UserAccount(0,'','','',''), [])];
+            List<Blog> blogs=[];
             result!.fold(
                     (error)=>error,
                     (res)=>blogs=res
             );
-            print(blogs[1].tags);
+            
+            print('blogs:${blogs.length}');
+
+
+            int blogCount=blogs.length;
+
             return Column(
               children: [
                 SizedBox(
@@ -72,10 +77,10 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: blogs.length,
+                    itemCount: blogCount,
                     itemBuilder: (context,index) {
                       return GestureDetector(
-                        child:BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,).onlyPadding(0, 10.0, 20.0, 20.0)
+                        child:BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,id: blogs[index].id,).onlyPadding(0, 10.0, 20.0, 20.0)
                       );
                     },
                   ),
@@ -127,6 +132,24 @@ List<Widget> tagWidget(List<Tag> tags,BuildContext context){
         ).verticalPadding(10.0)
     );
   }
-  print('tagWidget:${tags}');
+
+  output.add(Container(
+      margin: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: AppLightThemeColors.kSecondaryBackgroundColor,
+        borderRadius: BorderRadius.circular(3.0),
+      ),
+      child: Text(
+        'tag.label!',
+        maxLines: 1,
+        style: context.textTheme.displayLarge!.copyWith(
+          fontSize: 13.sp,
+          color: AppLightThemeColors
+              .kOnSecondaryBackgroundLightColor,
+        ),
+      ).symmetricPadding(10.0, 5.0),
+    ).verticalPadding(10.0));
+
+  print('tagWidget:${output}');
   return output;
 }

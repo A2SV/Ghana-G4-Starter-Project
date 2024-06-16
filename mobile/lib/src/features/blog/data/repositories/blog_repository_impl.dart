@@ -47,7 +47,6 @@ class BlogRepositoryImpl implements BlogRepository {
       return Left('Extraction failed');
     }else{
       for (BlogModel data in dataList){
-        print('adding....${data.tag[0].label}');
         output.add(
             Blog(data.id, data.title, data.body, data.createdDateTime,
             UserAccount(data.userAccount.id,data.userAccount.firstName,

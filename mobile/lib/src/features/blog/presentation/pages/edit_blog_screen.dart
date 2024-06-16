@@ -18,6 +18,7 @@ class EditBlogScreenState extends State<EditBlogScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 25,
         title: const Text('Edit Blog'),
         automaticallyImplyLeading: true,
       ),
