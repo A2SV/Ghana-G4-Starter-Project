@@ -9,9 +9,9 @@ namespace Application.Features.UsersQueries.Handlers
     {
         private readonly IUserRepository _userRepository;
 
-        public GetPostsByUserIdQueryHandler(IPostRepository postRepository)
+        public GetPostsByUserIdQueryHandler(IUserRepository userRepository)
         {
-            _userRepository = _userRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<List<PostDto>> Handle(GetPostsByUserIdQuery request, CancellationToken cancellationToken)
