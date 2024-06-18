@@ -201,6 +201,10 @@ class $AssetsSvgGen {
   SvgGenImage get emailPrefixIcon =>
       const SvgGenImage('assets/svg/email_prefix_icon.svg');
 
+  /// File path: assets/svg/full_name_prefix_icon.svg
+  SvgGenImage get fullNamePrefixIcon =>
+      const SvgGenImage('assets/svg/full_name_prefix_icon.svg');
+
   /// File path: assets/svg/happy_user.svg
   SvgGenImage get happyUser => const SvgGenImage('assets/svg/happy_user.svg');
 
