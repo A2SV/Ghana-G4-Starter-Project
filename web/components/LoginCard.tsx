@@ -5,6 +5,8 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { env } from "next-runtime-env";
+import Image from "next/image";
+import ErrorIcon from "@/public/ErrorIcon.svg";
 
 export default function LoginCard() {
   const [email, setEmail] = useState<string>("");
@@ -26,7 +28,7 @@ export default function LoginCard() {
       const response = await axios.post(loginUrl, user);
 
       const token = response.data.token;
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
       router.push("/profile/myblogs");
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -65,13 +67,7 @@ export default function LoginCard() {
             className="flex items-center bg-red-100 borde text-sm text-text font-pops font-medium px-4 py-3 rounded relative"
             role="alert"
           >
-            <svg
-              className="fill-current h-6 w-6 text-red-400 mr-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 11H9v-2h2v2zm0-4H9V5h2v4z" />
-            </svg>
+            <Image className="mr-4" src={ErrorIcon} alt="single blog" />
             <span className="block sm:inline">{error}</span>
           </div>
         )}

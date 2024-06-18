@@ -1,5 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { FaEdit } from "react-icons/fa";
 
 const ProfileBlogsCard = () => {
   return (
@@ -29,6 +32,13 @@ const ProfileBlogsCard = () => {
             A little personality goes a long way, especially on a business blog. So don’t be afraid
             to let loose.
           </p>
+          <Link href="/profile/myblogs/edit">
+            <div className="flex">
+              <div className="flex flex-row-reverse w-8 h-6 bg-gray-200 text-gray-500 items-center justify-center mt-3 rounded-[3px] hover:bg-gray-300 hover:text-gray-500 transition duration-300">
+                <FaEdit className="w-4 h-4" />
+              </div>
+            </div>
+          </Link>
           <div className="border-b border-[#EBE9F1] pt-[40px]"></div>
         </div>
       </div>

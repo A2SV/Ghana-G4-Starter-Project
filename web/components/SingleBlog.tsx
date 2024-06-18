@@ -18,51 +18,47 @@ const SingleBlog = () => {
       <Image className="pt-200 pb-200 w-20 h-20" src={ProfileImage} alt="profile picture" />
       <p className="font-imfell pt-3 pb-3 text-gray-600">chaltu kebede | software engineer</p>
       <p className="text-blue mb-7">@chaltu_kebede</p>
-      <div className="flex flex-col justify-center items-center font-montserrat text-sm text-gray-500">
-        <p className="m-7 font-imfell text-black text-2xl">
-          We know that data structure and algorithm can seem hard at first glance. And <br /> you
-          may not be familiar with advanced algorithms, but there are simple steps you <br /> can
-          follow to see outstanding results in a short period of time.
+      <div className="w-9/12 ml-40 flex flex-col font-montserrat text-sm text-gray-500">
+        <p className=" w-4/5 my-4 font-imfell text-black text-2xl">
+          We know that data structure and algorithm can seem hard at first glance. And you may not
+          be familiar with advanced algorithms, but there are simple steps you can follow to see
+          outstanding results in a short period of time.
         </p>
 
-        <p className="m-4">
+        <p className="w-4/5 my-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore <br />
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo <br /> consequat. Duis aute irure dolor in reprehenderit in{" "}
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br /> Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum. <br />
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur
+          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </p>
 
-        <p className="m-4">
+        <p className="w-4/5 my-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore <br />
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo <br /> consequat. Duis aute irure dolor in reprehenderit in{" "}
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br /> Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum. <br />
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </p>
 
-        <p className="m-4">
+        <p className="w-4/5 my-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore <br />
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo <br /> consequat. Duis aute irure dolor in reprehenderit in{" "}
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br /> Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum. <br />
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </p>
 
-        <p className="m-4">
+        <p className="w-4/5 my-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore <br />
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo <br /> consequat. Duis aute irure dolor in reprehenderit in{" "}
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur. <br /> Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum. <br />
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+          est laborum.
         </p>
       </div>
     </div>

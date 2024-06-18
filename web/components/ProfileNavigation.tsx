@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const ProfileNavigation = () => {
   return (
-    <div className="px-[30px]">
+    <div className="px-[50px]">
       <div>
         <h1 className="text-[18px] pb-4 pt-0 font-bold">Profile</h1>
         <div className="flex flex-row space-x-14">
