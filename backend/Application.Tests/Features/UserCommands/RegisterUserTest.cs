@@ -1,12 +1,7 @@
 using Application.Features.Users.Commands;
-using Application.Response;
-using Domain.Entities;
 using Domain.Interfaces;
 using Moq;
-using Xunit;
 using FluentAssertions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Application.Tests.Features.UsersTest;
 
