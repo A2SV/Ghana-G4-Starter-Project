@@ -2,20 +2,26 @@ PODS:
   - Flutter (1.0.0)
   - smart_auth (0.0.1):
     - Flutter
+  - validation_pro (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
+  - validation_pro (from `.symlinks/plugins/validation_pro/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
   smart_auth:
     :path: ".symlinks/plugins/smart_auth/ios"
+  validation_pro:
+    :path: ".symlinks/plugins/validation_pro/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
+  validation_pro: 1a7be6751fb62d196fe16ba0690e4f9fac4ca65b
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

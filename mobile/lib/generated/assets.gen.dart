@@ -27,6 +27,14 @@ class $AssetsImagesGen {
   AssetGenImage get firstPage =>
       const AssetGenImage('assets/images/first_page.png');
 
+  /// File path: assets/images/girl_holding_phone.png
+  AssetGenImage get girlHoldingPhone =>
+      const AssetGenImage('assets/images/girl_holding_phone.png');
+
+  /// File path: assets/images/happy_user.png
+  AssetGenImage get happyUser =>
+      const AssetGenImage('assets/images/happy_user.png');
+
   /// File path: assets/images/login_blob.png
   AssetGenImage get loginBlob =>
       const AssetGenImage('assets/images/login_blob.png');
@@ -34,6 +42,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/login_blob2.png
   AssetGenImage get loginBlob2 =>
       const AssetGenImage('assets/images/login_blob2.png');
+
+  /// File path: assets/images/pic1.png
+  AssetGenImage get pic1 => const AssetGenImage('assets/images/pic1.png');
 
   /// File path: assets/images/purple_blob.png
   AssetGenImage get purpleBlob =>
@@ -60,8 +71,11 @@ class $AssetsImagesGen {
         blogPlaceholder,
         blueBlob,
         firstPage,
+        girlHoldingPhone,
+        happyUser,
         loginBlob,
         loginBlob2,
+        pic1,
         purpleBlob,
         roundBlob,
         secondPage,
@@ -155,6 +169,13 @@ class $AssetsSvgGen {
   SvgGenImage get emailPrefixIcon =>
       const SvgGenImage('assets/svg/email_prefix_icon.svg');
 
+  /// File path: assets/svg/full_name_prefix_icon.svg
+  SvgGenImage get fullNamePrefixIcon =>
+      const SvgGenImage('assets/svg/full_name_prefix_icon.svg');
+
+  /// File path: assets/svg/happy_user.svg
+  SvgGenImage get happyUser => const SvgGenImage('assets/svg/happy_user.svg');
+
   /// File path: assets/svg/password_prefix_icon.svg
   SvgGenImage get passwordPrefixIcon =>
       const SvgGenImage('assets/svg/password_prefix_icon.svg');
@@ -184,6 +205,8 @@ class $AssetsSvgGen {
         blogUnderline,
         cuate,
         emailPrefixIcon,
+        fullNamePrefixIcon,
+        happyUser,
         passwordPrefixIcon
       ];
 }

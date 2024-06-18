@@ -15,7 +15,7 @@ class AppRouter extends StatelessWidget {
   static GoRouter createRoute() {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
-      initialLocation: "/profile-screen",
+      initialLocation: "/register-screen",
       routes: routes,
       observers: [],
     );
@@ -25,7 +25,7 @@ class AppRouter extends StatelessWidget {
     super.key,
   }) {
     (context, state) => const MaterialPage(
-          key: ValueKey('errorPage'),
+          key: ValueKey('errorPage'), 
           child: Scaffold(
             body: Center(
               child: Text("Error Page."),
@@ -43,4 +43,37 @@ class AppRouter extends StatelessWidget {
       routerConfig: router,
     );
   }
+}
+
+
+popScreen(BuildContext context, {Object? result}) {
+  if (canPopScreen(context)) {
+    context.pop(result);
+  }
+}
+canPopScreen(BuildContext context) {
+  return context.canPop();
+}
+switchScreen({
+  required BuildContext context,
+  required String routeName,
+  Map<String, String>? pathParameters,
+  Map<String, dynamic>? queryParameters,
+  Object? extra,
+  bool popAndPush = false,
+}) {
+  /// Use this when to navigate the user but pop any other screen before
+  popAndPush
+      ? context.goNamed(
+          routeName,
+          pathParameters: pathParameters ?? <String, String>{},
+          queryParameters: queryParameters ?? <String, dynamic>{},
+          extra: extra,
+        )
+      : context.pushNamed(
+          routeName,
+          pathParameters: pathParameters ?? <String, String>{},
+          queryParameters: queryParameters ?? <String, dynamic>{},
+          extra: extra,
+        );
 }
