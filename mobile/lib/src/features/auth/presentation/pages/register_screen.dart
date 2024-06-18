@@ -102,55 +102,61 @@ class RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: 5.h,
                   ),
-                  CustomButton(
-                    text: 'Register',
-                    onPressed: () {
-                      final isValid =
-                          CustomValidator.validateForm(_registerFormKey);
-                      if (isValid) {
-                        // BlocProvider.of<AuthBloc>(context).(
-                        //   RegisterUseCase(
-                        //     email: emailController.text,
-                        //     password: passwordController.text,
-                        //   ),
-                        // );
-                        // emit register event
-                        BlocProvider.of<AuthBloc>(context).add(
-                          AuthRegister(
-                            email: emailController.text,
-                            password: passwordController.text,
-                            firstName: nameController.text.split(' ')[0],
-                            lastName: nameController.text.split(' ')[1],
-                          ),
-                        );
-                      }
-                    },
-                    horizontalPadding: 0.0,
-                  ),
+                  state is AuthLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : CustomButton(
+                          text: 'Register',
+                          onPressed: () {
+                            final isValid =
+                                CustomValidator.validateForm(_registerFormKey);
+                            if (isValid) {
+                              BlocProvider.of<AuthBloc>(context).add(
+                                AuthRegister(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  firstName: nameController.text.split(' ')[0],
+                                  lastName: nameController.text.split(' ')[1],
+                                ),
+                              );
+                            }
+                          },
+                          horizontalPadding: 0.0,
+                        ),
                   SizedBox(
                     height: 2.h,
                   ),
-                  RichText(
-                    key: const Key('registerRichText'),
-                    text: TextSpan(
-                      text: 'Already have an account',
-                      children: [
-                        TextSpan(
-                          text: '?',
-                          style: context.textTheme.labelSmall!.copyWith(
-                            fontFamily: FontFamily.pacifico,
-                          ),
+                  Row(
+                    children: [
+                      RichText(
+                        key: const Key('registerRichText'),
+                        text: TextSpan(
+                          text: 'Already have an account',
+                          children: [
+                            TextSpan(
+                              text: '?',
+                              style: context.textTheme.labelSmall!.copyWith(
+                                fontFamily: FontFamily.pacifico,
+                              ),
+                            ),
+                          ],
+                          style: context.textTheme.labelSmall,
                         ),
-                        TextSpan(
-                          text: ' Login',
-                          style: context.textTheme.labelSmall!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppLightThemeColors.kPrimaryColor,
-                          ),
+                      ),
+                      Text(
+                        ' Login',
+                        style: context.textTheme.labelSmall!.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: AppLightThemeColors.kPrimaryColor,
                         ),
-                      ],
-                      style: context.textTheme.labelSmall,
-                    ),
+                      ).onPressed(
+                        onTap: () => switchScreen(
+                          context: context,
+                          routeName: LoginScreen.routeName,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ).horizontalPadding(30.0),
