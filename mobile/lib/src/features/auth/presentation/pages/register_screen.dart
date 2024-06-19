@@ -8,6 +8,7 @@ import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
+import 'package:starter_project/src/core/widgets/animated_column.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 import 'package:starter_project/src/features/auth/authentication.dart';
@@ -52,7 +53,7 @@ class RegisterScreenState extends State<RegisterScreen> {
           builder: (context, state) {
             return Form(
               key: _registerFormKey,
-              child: Column(
+              child: AnimatedColumnWidget(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Assets.svg.cuate.path.asSvgImage(
