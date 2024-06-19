@@ -16,17 +16,26 @@ using Application.Features.UsersQueries.Queries;
 using Application.Features.PostCommands.Commands;
 using Application.Features.PostQueries.Queries;
 using Infrastructure.EmailService;
+using DotNetEnv;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 builder.Services.AddControllers();
+DotNetEnv.Env.TraversePath().Load("../dev.env");
+var host = System.Environment.GetEnvironmentVariable("HOST");
+var user_id = System.Environment.GetEnvironmentVariable("USER_ID");
+var password = System.Environment.GetEnvironmentVariable("PASSWORD");
+var database = System.Environment.GetEnvironmentVariable("DATABASE");
+var port = System.Environment.GetEnvironmentVariable("PORT");
+var pooling = System.Environment.GetEnvironmentVariable("POOLING");
 
+var connectionString = $"Host={host}; Database={user_id};Username={user_id};Password={password};"; ;
+Console.WriteLine(connectionString);
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("AppConnectionString")));
+    options.UseNpgsql($"Host=postgres; Database=GhanaStarterProject;Username=postgres;Password={password};Port=5432"));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
@@ -88,7 +97,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
