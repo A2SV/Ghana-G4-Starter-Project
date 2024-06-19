@@ -24,6 +24,7 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 45,
         actions: [
           IconButton(
             onPressed: () {},
@@ -111,7 +112,12 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
             ).horizontalPadding(20.0),
             SizedBox(height: 2.h),
             for (int i = 0; i < 10; i++)
-              const BlogCard().onlyPadding(0, 10.0, 20.0, 20.0),
+              const BlogCard(
+                tag: "Education",
+                email: "kudusbanna@a2sv.org",
+                topic: "STUDENTS SHOULD FOCUS MORE ON READING",
+                date: "12/12/2024",
+              ).onlyPadding(0, 10.0, 20.0, 20.0),
             SizedBox(height: 3.h),
           ],
         ),
