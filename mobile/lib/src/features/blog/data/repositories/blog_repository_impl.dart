@@ -48,7 +48,7 @@ class BlogRepositoryImpl implements BlogRepository {
     }else{
       for (BlogModel data in dataList){
         var tags=convertTagModels(data.tag);
-        print('object tags: ${tags[0].label}');
+
         output.add(
             Blog(data.id, data.title, data.body, data.createdDateTime,
             UserAccount(data.userAccount.id,data.userAccount.firstName,

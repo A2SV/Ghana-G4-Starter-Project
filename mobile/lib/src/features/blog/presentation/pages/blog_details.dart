@@ -46,7 +46,7 @@ class _BlogDetailsState extends State<BlogDetails> {
         future: BlogRepositoryImpl().viewBlog(int.parse(widget.id)), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Text('connecting...'));
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {

@@ -53,9 +53,14 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
         future: BlogRepositoryImpl().viewAllBlogs(), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Text('connecting...'));
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return
+              Center(
+                  child: Text(
+                    'Error: ${snapshot.error}',
+                    style: TextStyle(color: Colors.black),
+            ));
           } else if (snapshot.hasData) {
             print('loading..');
             Either<String,List<Blog>>? result=snapshot.data;
@@ -71,22 +76,27 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
             int blogCount=blogs.length;
 
             return Column(
-              children: [
-                SizedBox(
-                  height: 3.h,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: blogCount,
-                    itemBuilder: (context,index) {
-                      return GestureDetector(
-                        child:BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,id: blogs[index].id,).onlyPadding(0, 10.0, 20.0, 20.0)
-                      );
-                    },
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: blogCount,
+                      itemBuilder: (context,index) {
+                        if (index == 0) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                         BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,id: blogs[index].id,).onlyPadding(0, 10.0, 20.0, 20.0)
+                        ]
+                          );
+                        }
+                        return BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,id: blogs[index].id,).onlyPadding(0, 10.0, 20.0, 20.0);
+                      },
+                    ),
                   ),
-                ),
-              ],
-            );
+                ],
+              );
           } else {
             return Center(child: Text('No data found'));
           }
