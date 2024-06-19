@@ -8,7 +8,6 @@ import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/widgets/blog_card.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
 import '../widgets/category_info.dart';
-import '../widgets/main_drawer.dart';
 
 class BlogsDashboard extends StatefulWidget {
   const BlogsDashboard({super.key});
