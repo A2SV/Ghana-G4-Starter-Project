@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:dartz/dartz.dart' hide State;
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
@@ -29,7 +30,10 @@ class _BlogDetailsState extends State<BlogDetails> {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {},
+          onPressed: () {
+            context.go('/all-blogs-screen');
+
+          },
         ),
         actions: [
           IconButton(
