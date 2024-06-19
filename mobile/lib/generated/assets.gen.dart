@@ -208,6 +208,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/happy_user.svg
   SvgGenImage get happyUser => const SvgGenImage('assets/svg/happy_user.svg');
 
+  /// File path: assets/svg/login_cuate.svg
+  SvgGenImage get loginCuate => const SvgGenImage('assets/svg/login_cuate.svg');
+
   /// File path: assets/svg/my_blog.svg
   SvgGenImage get myBlog => const SvgGenImage('assets/svg/my_blog.svg');
 

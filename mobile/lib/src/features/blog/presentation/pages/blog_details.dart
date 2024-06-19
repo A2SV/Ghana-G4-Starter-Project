@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class BlogDetails extends StatelessWidget {
   static const String routeName = 'blog-details-screen';
 
+  const BlogDetails({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +17,7 @@ class BlogDetails extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () {},
           ),
         ],
