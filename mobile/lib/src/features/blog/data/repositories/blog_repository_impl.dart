@@ -20,7 +20,7 @@ class BlogRepositoryImpl implements BlogRepository {
         (error)=>iserror=true,
         (data)=>output=Blog(data.id, data.title, data.body, data.createdDateTime,
             UserAccount(data.userAccount.id,data.userAccount.firstName,data.userAccount.lastName,data.userAccount.email,data.userAccount.createdDateTime),
-            [])
+            convertTagModels(data.tag))
     );
 
     if(iserror){
@@ -47,11 +47,13 @@ class BlogRepositoryImpl implements BlogRepository {
       return Left('Extraction failed');
     }else{
       for (BlogModel data in dataList){
+        var tags=convertTagModels(data.tag);
+        print('object tags: ${tags[0].label}');
         output.add(
             Blog(data.id, data.title, data.body, data.createdDateTime,
             UserAccount(data.userAccount.id,data.userAccount.firstName,
             data.userAccount.lastName,data.userAccount.email,
-            data.userAccount.createdDateTime), convertTagModels(data.tag))
+            data.userAccount.createdDateTime), tags)
         );
 
       }

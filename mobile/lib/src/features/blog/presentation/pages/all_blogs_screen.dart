@@ -65,7 +65,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
                     (res)=>blogs=res
             );
             
-            print('blogs:${blogs.length}');
+            print('blogs:${blogs[0].tags}');
 
 
             int blogCount=blogs.length;
@@ -111,11 +111,13 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
 List<Widget> tagWidget(List<Tag> tags,BuildContext context){
   List<Widget> output=[];
 
+  print('tags ${tags}');
+
   for (Tag tag in tags){
     print('new tag');
     output.add(
         Container(
-          margin: EdgeInsets.all(5),
+          margin: EdgeInsets.all(2),
           decoration: BoxDecoration(
             color: AppLightThemeColors.kSecondaryBackgroundColor,
             borderRadius: BorderRadius.circular(3.0),
@@ -133,22 +135,7 @@ List<Widget> tagWidget(List<Tag> tags,BuildContext context){
     );
   }
 
-  output.add(Container(
-      margin: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: AppLightThemeColors.kSecondaryBackgroundColor,
-        borderRadius: BorderRadius.circular(3.0),
-      ),
-      child: Text(
-        'tag.label!',
-        maxLines: 1,
-        style: context.textTheme.displayLarge!.copyWith(
-          fontSize: 13.sp,
-          color: AppLightThemeColors
-              .kOnSecondaryBackgroundLightColor,
-        ),
-      ).symmetricPadding(10.0, 5.0),
-    ).verticalPadding(10.0));
+
 
   print('tagWidget:${output}');
   return output;

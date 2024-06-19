@@ -57,7 +57,7 @@ class _BlogDetailsState extends State<BlogDetails> {
                 (error)=>error,
                     (res)=>blog=res
             );
-            print(blog.title);
+            print(blog.createdDateTime);
             return  SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,24 +67,10 @@ class _BlogDetailsState extends State<BlogDetails> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black54,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 14, vertical: 6), // Adjust padding
-                            minimumSize: const Size(0, 0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(8), // Adjust border radius
-                            ),
-                          ),
-                          child: const Text(
-                            'Education',
-                            style: TextStyle(fontSize: 10),
-                          ),
+                        Row(
+                          children: tagListWidget(blog),
                         ),
+
                         const Text(
                           '50 minutes ago',
                           style: TextStyle(
@@ -148,4 +134,40 @@ class _BlogDetailsState extends State<BlogDetails> {
       ),
     );
   }
+}
+
+List<Widget> tagListWidget(Blog blog){
+    List<Widget> output=[];
+    print('tags: ${blog.tags}');
+    for (Tag tag in blog.tags!){
+      print('tag: ${tag.label}');
+      output.add(
+        Container(
+          margin: EdgeInsets.all(2),
+          child:ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black54,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 14, vertical: 6), // Adjust padding
+              minimumSize: const Size(0, 0),
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.circular(8), // Adjust border radius
+              ),
+            ),
+            child: Text(
+              tag.label!,
+              style: const TextStyle(fontSize: 10),
+            ),
+          ),
+        )
+
+      );
+    }
+
+
+    return output;
+
 }
