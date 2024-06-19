@@ -51,14 +51,6 @@ class $AssetsImagesGen {
   AssetGenImage get happyUser =>
       const AssetGenImage('assets/images/happy_user.png');
 
-  /// File path: assets/images/girl_holding_phone.png
-  AssetGenImage get girlHoldingPhone =>
-      const AssetGenImage('assets/images/girl_holding_phone.png');
-
-  /// File path: assets/images/happy_user.png
-  AssetGenImage get happyUser =>
-      const AssetGenImage('assets/images/happy_user.png');
-
   /// File path: assets/images/login_blob.png
   AssetGenImage get loginBlob =>
       const AssetGenImage('assets/images/login_blob.png');
@@ -214,16 +206,6 @@ class $AssetsSvgGen {
   /// File path: assets/svg/my_blog.svg
   SvgGenImage get myBlog => const SvgGenImage('assets/svg/my_blog.svg');
 
-  /// File path: assets/svg/full_name_prefix_icon.svg
-  SvgGenImage get fullNamePrefixIcon =>
-      const SvgGenImage('assets/svg/full_name_prefix_icon.svg');
-
-  /// File path: assets/svg/happy_user.svg
-  SvgGenImage get happyUser => const SvgGenImage('assets/svg/happy_user.svg');
-
-  /// File path: assets/svg/login_cuate.svg
-  SvgGenImage get loginCuate => const SvgGenImage('assets/svg/login_cuate.svg');
-
   /// File path: assets/svg/password_prefix_icon.svg
   SvgGenImage get passwordPrefixIcon =>
       const SvgGenImage('assets/svg/password_prefix_icon.svg');
@@ -269,7 +251,6 @@ class $AssetsSvgGen {
         fullNamePrefixIcon,
         happyUser,
         loginCuate,
-        happyUser,
         myBlog,
         passwordPrefixIcon,
         profilePlus,
