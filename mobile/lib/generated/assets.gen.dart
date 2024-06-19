@@ -176,6 +176,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/happy_user.svg
   SvgGenImage get happyUser => const SvgGenImage('assets/svg/happy_user.svg');
 
+  /// File path: assets/svg/login_cuate.svg
+  SvgGenImage get loginCuate => const SvgGenImage('assets/svg/login_cuate.svg');
+
   /// File path: assets/svg/password_prefix_icon.svg
   SvgGenImage get passwordPrefixIcon =>
       const SvgGenImage('assets/svg/password_prefix_icon.svg');
@@ -207,6 +210,7 @@ class $AssetsSvgGen {
         emailPrefixIcon,
         fullNamePrefixIcon,
         happyUser,
+        loginCuate,
         passwordPrefixIcon
       ];
 }

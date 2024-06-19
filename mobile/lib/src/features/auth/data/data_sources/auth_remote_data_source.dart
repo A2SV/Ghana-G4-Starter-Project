@@ -28,18 +28,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String email,
     required String password,
   }) async {
-    final response =
-        await client.post(Uri.https(Constants.loginAPIEndpoint), headers: {
-      'Content-Type': 'application/json',
-    }, body: {
-      'email': email,
-      'password': password
-    });
+    final response = await client.post(
+      Uri.parse(Constants.loginAPIEndpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(
+        {'email': email, 'password': password},
+      ),
+    );
 
     if (response.statusCode == 200) {
       return LoginReturnModel.fromJson(json.decode(response.body));
     } else {
-      throw ServerException();
+      throw ServerException(errorMessage: response.body);
     }
   }
 

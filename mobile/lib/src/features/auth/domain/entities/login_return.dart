@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:starter_project/src/core/core.dart';
-import 'package:starter_project/src/features/auth/domain/domain.dart';
 
 class LoginReturn extends Equatable {
   final String token;

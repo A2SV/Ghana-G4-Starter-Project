@@ -22,8 +22,9 @@ class AuthRepositoryImpl implements AuthRepository {
         final loginReturn =
             await remoteDataSource.login(email: email, password: password);
         return Right(loginReturn);
-      } on ServerException {
-        return Left(ServerFailure());
+      } on ServerException catch (e) {
+        return Left(
+            ServerFailure(errorMessage: e.errorMessage ?? "Server Error"));
       }
     } else {
       return Left(NetworkFailure());
@@ -47,8 +48,7 @@ class AuthRepositoryImpl implements AuthRepository {
         return Right(userAccount);
       } on ServerException catch (e) {
         return Left(
-          ServerFailure(errorMessage: e.errorMessage ?? "Server Error"),
-        );
+            ServerFailure(errorMessage: e.errorMessage ?? "Server Error"));
       }
     } else {
       return Left(NetworkFailure());
