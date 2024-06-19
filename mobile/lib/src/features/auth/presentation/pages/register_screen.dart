@@ -102,28 +102,33 @@ class RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: 5.h,
                   ),
-                  state is AuthLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : CustomButton(
-                          text: 'Register',
-                          onPressed: () {
-                            final isValid =
-                                CustomValidator.validateForm(_registerFormKey);
-                            if (isValid) {
-                              BlocProvider.of<AuthBloc>(context).add(
-                                AuthRegister(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  firstName: nameController.text.split(' ')[0],
-                                  lastName: nameController.text.split(' ')[1],
-                                ),
-                              );
-                            }
-                          },
-                          horizontalPadding: 0.0,
-                        ),
+                  CustomButton(
+                    horizontalPadding: 0.0,
+                    showSuffixWidget: true,
+                    suffixWidget: state is AuthLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : Container(),
+                    disabled: state is AuthLoading,
+                    text: 'Register',
+                    onPressed: () {
+                      final isValid =
+                          CustomValidator.validateForm(_registerFormKey);
+                      if (isValid) {
+                        BlocProvider.of<AuthBloc>(context).add(
+                          AuthRegister(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            firstName: nameController.text.split(' ')[0],
+                            lastName: nameController.text.split(' ')[1],
+                          ),
+                        );
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 2.h,
                   ),

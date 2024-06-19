@@ -45,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
               switchScreen(
                 context: context,
                 routeName: BlogDetails.routeName,
+                popAndPush: true,
               );
             }
           },
@@ -91,26 +92,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 5.h,
                   ),
-                  state is AuthLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : CustomButton(
-                          text: 'Login',
-                          onPressed: () {
-                            final isValid =
-                                CustomValidator.validateForm(_loginFormKey);
-                            if (isValid) {
-                              BlocProvider.of<AuthBloc>(context).add(
-                                AuthLogin(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                ),
-                              );
-                            }
-                          },
-                          horizontalPadding: 0.0,
-                        ),
+                  CustomButton(
+                    showSuffixWidget: true,
+                    suffixWidget: state is AuthLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : Container(),
+                    disabled: state is AuthLoading,
+                    text: 'Login',
+                    onPressed: () {
+                      final isValid =
+                          CustomValidator.validateForm(_loginFormKey);
+                      if (isValid) {
+                        BlocProvider.of<AuthBloc>(context).add(
+                          AuthLogin(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
+                        );
+                      }
+                    },
+                    horizontalPadding: 0.0,
+                  ),
                   SizedBox(
                     height: 2.h,
                   ),
@@ -141,6 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () => switchScreen(
                           context: context,
                           routeName: RegisterScreen.routeName,
+                          popAndPush: true,
                         ),
                       ),
                     ],
