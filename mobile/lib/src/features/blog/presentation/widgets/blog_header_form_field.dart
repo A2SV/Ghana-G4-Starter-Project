@@ -3,6 +3,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 
 class BlogHeaderFormField extends StatelessWidget {
@@ -23,6 +24,7 @@ class BlogHeaderFormField extends StatelessWidget {
       borderRadiusValue: 12.0,
       prefixIcon:
           Assets.svg.blogHeader.path.asSvgImage().horizontalPadding(3.w),
+          validate: (header) => CustomValidator.isNotEmpty(header??""),
     );
   }
 }

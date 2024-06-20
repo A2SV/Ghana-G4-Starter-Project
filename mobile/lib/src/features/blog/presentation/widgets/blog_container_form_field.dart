@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 
 class BlogContentFormField extends StatelessWidget {
@@ -23,6 +24,7 @@ class BlogContentFormField extends StatelessWidget {
         fontWeight: FontWeight.w300,
       ),
       borderRadiusValue: 12.0,
+      validate: (header) => CustomValidator.isNotEmpty(header ?? ""),
     );
   }
 }

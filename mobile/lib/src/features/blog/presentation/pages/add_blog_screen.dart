@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
+import 'package:starter_project/src/features/blog/domain/domain.dart';
+import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 
 class AddBlogScreen extends StatefulWidget {
@@ -16,6 +20,7 @@ class AddBlogScreenState extends State<AddBlogScreen> {
   late TextEditingController _blogHeaderController;
   late TextEditingController _blogContentController;
   late TextEditingController _blogTagController;
+  final _addBlogformKey = GlobalKey<FormState>();
   @override
   @override
   Widget build(BuildContext context) {
@@ -26,31 +31,47 @@ class AddBlogScreenState extends State<AddBlogScreen> {
         automaticallyImplyLeading: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 5.h,
-            ),
-            const ImageFilePickerWidget(),
-            BlogHeaderFormField(controller: _blogHeaderController)
-                .verticalPadding(2.h),
-            BlogContentFormField(controller: _blogContentController),
-            const FontFormattingToolbarWidget().topPadding(1.h),
-            const AlignmentFormattingToolbarWidget(),
-            BlogTagFormField(controller: _blogTagController)
-                .onlyPadding(1.h, 4.h, 0, 0),
-            CustomButton(
-              text: 'Upload blog',
-              horizontalPadding: 0.0,
-              onPressed: () {
-                
-              },
-            ),
-            SizedBox(
-              height: 6.h,
-            ),
-          ],
-        ).horizontalPadding(30.0),
+        child: Form(
+          key: _addBlogformKey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 5.h,
+              ),
+              const ImageFilePickerWidget(),
+              BlogHeaderFormField(controller: _blogHeaderController)
+                  .verticalPadding(2.h),
+              BlogContentFormField(controller: _blogContentController),
+              const FontFormattingToolbarWidget().topPadding(1.h),
+              const AlignmentFormattingToolbarWidget(),
+              BlogTagFormField(controller: _blogTagController)
+                  .onlyPadding(1.h, 4.h, 0, 0),
+              CustomButton(
+                text: 'Update blog',
+                horizontalPadding: 0.0,
+                onPressed: () {
+                  final isValid = CustomValidator.validateForm(_addBlogformKey);
+                  if (isValid) {
+                    BlocProvider.of<BlogBloc>(context).add(
+                      CreateBlogEvent(
+                        title: _blogHeaderController.text,
+                        body: _blogContentController.text,
+                        tags: _blogTagController.text
+                            .split(' ')
+                            .mapIndexed((tag, index) =>
+                                Tag(id: index, label: tag, description: tag))
+                            .toList(),
+                      ),
+                    );
+                  }
+                },
+              ),
+              SizedBox(
+                height: 6.h,
+              ),
+            ],
+          ).horizontalPadding(30.0),
+        ),
       ),
     );
   }
