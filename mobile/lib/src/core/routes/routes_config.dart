@@ -1,43 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
-import 'package:starter_project/src/core/theme/theme_config.dart';
-
 import '../error/error.dart';
-
-canPopScreen(BuildContext context) {
-  return context.canPop();
-}
-
-popScreen(BuildContext context, {Object? result}) {
-  if (canPopScreen(context)) {
-    context.pop(result);
-  }
-}
-
-switchScreen({
-  required BuildContext context,
-  required String routeName,
-  Map<String, String>? pathParameters,
-  Map<String, dynamic>? queryParameters,
-  Object? extra,
-  bool popAndPush = false,
-}) {
-  /// Use this when to navigate the user but pop any other screen before
-  popAndPush
-      ? context.goNamed(
-          routeName,
-          pathParameters: pathParameters ?? <String, String>{},
-          queryParameters: queryParameters ?? <String, dynamic>{},
-          extra: extra,
-        )
-      : context.pushNamed(
-          routeName,
-          pathParameters: pathParameters ?? <String, String>{},
-          queryParameters: queryParameters ?? <String, dynamic>{},
-          extra: extra,
-        );
-}
+import '../theme/light_theme.dart';
 
 class AppRouter extends StatelessWidget {
   static final GoRouter router = createRoute();
@@ -50,15 +15,11 @@ class AppRouter extends StatelessWidget {
   static GoRouter createRoute() {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
-
-      initialLocation: '/profile-edit-screen',
-
+      initialLocation: "/splash",
       routes: routes,
       observers: [],
     );
   }
-
-
 
   AppRouter({
     super.key,
@@ -75,13 +36,13 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Starter Project mobile',
-      theme: ThemeConfig.lightTheme,
-      routerConfig: router,
+    return SafeArea(
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'Starter Project mobile',
+        theme: lightTheme,
+        routerConfig: router,
+      ),
     );
   }
-
-
 }
