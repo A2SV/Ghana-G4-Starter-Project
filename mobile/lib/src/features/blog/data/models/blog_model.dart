@@ -10,7 +10,6 @@ class BlogModel{
   final List<TagModel> tag;
 
 
-
   BlogModel(
       this.id,this.title, this.body, this.createdDateTime, this.userAccount, this.tag
       );
