@@ -3,7 +3,11 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 
 class CategoryInfo extends StatelessWidget {
-  const CategoryInfo({super.key});
+  final String title;
+  final int updateCount;
+
+  const CategoryInfo(
+      {super.key, required this.title, required this.updateCount});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class CategoryInfo extends StatelessWidget {
           left: 3.w,
           top: 6.5.h,
           child: Text(
-            "Gaming",
+            title,
             style: context.textTheme.displaySmall!.copyWith(
               fontWeight: FontWeight.w500,
               color: Colors.black,
@@ -40,7 +44,7 @@ class CategoryInfo extends StatelessWidget {
           left: 3.w,
           top: 8.5.h,
           child: Text(
-            "+ 20 Updates",
+            "+ $updateCount Updates",
             style: context.textTheme.displaySmall!.copyWith(
               fontWeight: FontWeight.w500,
               color: Colors.black,
