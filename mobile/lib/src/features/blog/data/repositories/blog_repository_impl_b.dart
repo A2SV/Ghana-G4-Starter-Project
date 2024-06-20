@@ -4,7 +4,7 @@ import 'package:starter_project/src/core/error/failure.dart';
 import 'package:starter_project/src/core/network/network.dart';
 import 'package:starter_project/src/features/blog/data/data_sources/data_sources.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 import 'package:starter_project/src/features/blog/domain/repositories/repository.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
