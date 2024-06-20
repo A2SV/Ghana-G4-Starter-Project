@@ -113,10 +113,11 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
             SizedBox(height: 2.h),
             for (int i = 0; i < 10; i++)
               const BlogCard(
-                tag: "Education",
+                tag: [],
                 email: "kudusbanna@a2sv.org",
                 topic: "STUDENTS SHOULD FOCUS MORE ON READING",
-                date: "12/12/2024",
+                date: "2024-06-20T15:12:32.466Z",
+                id: 12,
               ).onlyPadding(0, 10.0, 20.0, 20.0),
             SizedBox(height: 3.h),
           ],

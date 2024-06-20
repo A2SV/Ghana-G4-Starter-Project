@@ -15,21 +15,13 @@ class BlogCard extends StatelessWidget {
   final String? email;
   final String? date;
   final int? id;
-  const BlogCard({
-    super.key,
-    this.topic,
-    this.tag,
-    this.email,
-    this.date,
-    this.id
-  });
-
-
+  const BlogCard(
+      {super.key, this.topic, this.tag, this.email, this.date, this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         context.go('/blog-details-screen/${id}');
       },
       child: Container(
@@ -58,14 +50,16 @@ class BlogCard extends StatelessWidget {
                         .rightPadding(10.0),
                     Container(
                       decoration: BoxDecoration(
-                        color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
+                        color: AppLightThemeColors
+                            .kOnSecondaryBackgroundLightColor,
                         borderRadius: BorderRadius.circular(7.0),
                       ),
                       child: Text(
                         '5 min read',
                         maxLines: 1,
                         style: context.textTheme.displayMedium!.copyWith(
-                          color: AppLightThemeColors.kDarkTextColor,fontSize: 13.sp,
+                          color: AppLightThemeColors.kDarkTextColor,
+                          fontSize: 13.sp,
                         ),
                       ).allPadding(5.0),
                     ).symmetricPadding(4.w, 2.h),
@@ -91,9 +85,7 @@ class BlogCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Wrap(
-                          children: this.tag!
-                      ),
+                      Wrap(children: this.tag!),
                       Text(
                         this.email!,
                         maxLines: 1,
@@ -110,7 +102,9 @@ class BlogCard extends StatelessWidget {
               height: 2.h,
             ),
             Text(
-              DateFormat.yMMMd().format(DateFormat('yyyy-MM-dd').parse(this.date!.substring(0,10))),
+              // this.date!,
+              DateFormat.yMMMd().format(
+                  DateFormat('yyyy-MM-dd').parse(this.date!.substring(0, 10))),
               style: context.textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,
@@ -122,4 +116,3 @@ class BlogCard extends StatelessWidget {
     );
   }
 }
-
