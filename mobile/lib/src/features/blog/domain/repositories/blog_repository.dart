@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 
-import '../domain.dart';
 
 
 abstract class BlogRepository {

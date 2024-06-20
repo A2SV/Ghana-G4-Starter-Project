@@ -14,6 +14,7 @@ import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 import 'package:starter_project/src/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/blog_details.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login-screen';
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
             } else if (state is AuthSuccess) {
               switchScreen(
                 context: context,
-                routeName: BlogDetails.routeName,
+                routeName: BlogsDashboard.routeName,
                 popAndPush: true,
               );
             }

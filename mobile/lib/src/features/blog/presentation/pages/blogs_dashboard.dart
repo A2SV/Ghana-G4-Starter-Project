@@ -9,6 +9,8 @@ import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/features/auth/authentication.dart';
 import 'package:starter_project/src/features/blog/data/repositories/tag_repository_impl.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
 import '../../../../../generated/assets.gen.dart';
@@ -16,7 +18,6 @@ import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/widgets/blog_card.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
 import '../../data/repositories/blog_repository_impl.dart';
-import '../../domain/domain.dart';
 import '../../domain/entities/tags.dart';
 import '../widgets/category_info.dart';
 import 'all_blogs_screen.dart';
@@ -239,7 +240,12 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppLightThemeColors.kPrimaryColor,
-        onPressed: () {},
+        onPressed: () {
+          switchScreen(
+            context: context,
+            routeName: AddBlogScreen.routeName,
+          );
+        },
         child: const Icon(
           Icons.add,
           color: Colors.white,
