@@ -47,7 +47,7 @@ class AddBlogScreenState extends State<AddBlogScreen> {
               BlogTagFormField(controller: _blogTagController)
                   .onlyPadding(1.h, 4.h, 0, 0),
               CustomButton(
-                text: 'Update blog',
+                text: 'Add blog',
                 horizontalPadding: 0.0,
                 onPressed: () {
                   final isValid = CustomValidator.validateForm(_addBlogformKey);
