@@ -51,7 +51,7 @@ class AppRouter extends StatelessWidget {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
 
-      initialLocation: '/all-blogs-screen',
+      initialLocation: '/profile-edit-screen',
 
       routes: routes,
       observers: [],
@@ -83,17 +83,5 @@ class AppRouter extends StatelessWidget {
     );
   }
 
-  static GoRouter createRoute() {
-    return GoRouter(
-      redirect: ((context, state) => redirect(state)),
-      initialLocation: "/register-screen",
-      routes: routes,
-      observers: [],
-    );
-  }
 
-  static Future<String?> redirect(GoRouterState state) async {
-    try {} on CacheException {}
-    return null;
-  }
 }
