@@ -6,13 +6,13 @@ import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 
 class BlogHeaderFormField extends StatelessWidget {
-  const BlogHeaderFormField({
-    super.key,
-  });
+  final TextEditingController controller;
+  const BlogHeaderFormField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      controller: controller,
       textFormFieldType: TextFormFieldType.regular,
       hintText: 'Enter blog headline',
       contentPadding: EdgeInsets.symmetric(vertical: 2.h),

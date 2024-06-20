@@ -14,6 +14,9 @@ class EditBlogScreen extends StatefulWidget {
 }
 
 class EditBlogScreenState extends State<EditBlogScreen> {
+  late TextEditingController _blogHeaderController;
+  late TextEditingController _blogContentController;
+  late TextEditingController _blogTagController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +41,13 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                 ).allPadding(20.0)
               ],
             ),
-            const BlogHeaderFormField().verticalPadding(2.h),
-            const BlogContentFormField(),
+            BlogHeaderFormField(controller: _blogHeaderController)
+                .verticalPadding(2.h),
+            BlogContentFormField(controller: _blogContentController),
             const FontFormattingToolbarWidget().topPadding(1.h),
             const AlignmentFormattingToolbarWidget(),
-            const BlogTagFormField().onlyPadding(1.h, 4.h, 0, 0),
+            BlogTagFormField(controller: _blogTagController)
+                .onlyPadding(1.h, 4.h, 0, 0),
             CustomButton(
               text: 'Save changes',
               horizontalPadding: 0.0,
@@ -59,5 +64,21 @@ class EditBlogScreenState extends State<EditBlogScreen> {
         ).horizontalPadding(30.0),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _blogHeaderController.dispose();
+    _blogContentController.dispose();
+    _blogTagController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _blogHeaderController = TextEditingController();
+    _blogContentController = TextEditingController();
+    _blogTagController = TextEditingController();
+    super.initState();
   }
 }
