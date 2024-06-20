@@ -1,7 +1,7 @@
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
 import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
 
-import '../../domain/domain.dart';
 import '../../domain/repositories/blog_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -10,6 +10,7 @@ import '../models/blog_model.dart';
 import '../models/tag_model.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
+  @override
   Future<Either<String,Blog>> viewBlog(int id) async{
     Either<String,BlogModel> result= await BlogRemoteDataSourceImpl().viewBlog(id);
     var output;
@@ -29,7 +30,7 @@ class BlogRepositoryImpl implements BlogRepository {
       return Right(output);
     }
   }
-
+@override
   Future<Either<String,List<Blog>>> viewAllBlogs() async{
     Either<String,List<BlogModel>> result= await BlogRemoteDataSourceImpl().viewAllBlogs();
     List<BlogModel> dataList=[];

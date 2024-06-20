@@ -5,9 +5,9 @@ import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/widgets/widgets.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 
 import '../../data/repositories/blog_repository_impl.dart';
-import '../../domain/domain.dart';
 import '../../domain/entities/tags.dart';
 import '../../domain/entities/user_account.dart';
 
@@ -25,6 +25,8 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
+        shadowColor: Colors.grey.withOpacity(0.1),
         title: Text(
           'My Blogs',
           style: context.textTheme.displayMedium!.copyWith(
@@ -45,58 +47,63 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
               fontWeight: FontWeight.w400,
             ),
             prefixIcon:
-            Assets.svg.blogSearch.path.asSvgImage().horizontalPadding(5.w),
-          ).horizontalPadding(20.0),
+                Assets.svg.blogSearch.path.asSvgImage().horizontalPadding(5.w),
+          ).onlyPadding(0, 10, 20, 20),
         ),
       ),
-      body:FutureBuilder<Either<String,List<Blog>>>(
+      body: FutureBuilder<Either<String, List<Blog>>>(
         future: BlogRepositoryImpl().viewAllBlogs(), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return
-              Center(
-                  child: Text(
-                    'Error: ${snapshot.error}',
-                    style: TextStyle(color: Colors.black),
+            return Center(
+                child: Text(
+              'Error: ${snapshot.error}',
+              style: const TextStyle(color: Colors.black),
             ));
           } else if (snapshot.hasData) {
             print('loading..');
-            Either<String,List<Blog>>? result=snapshot.data;
-            List<Blog> blogs=[];
-            result!.fold(
-                    (error)=>error,
-                    (res)=>blogs=res
-            );
-            
+            Either<String, List<Blog>>? result = snapshot.data;
+            List<Blog> blogs = [];
+            result!.fold((error) => error, (res) => blogs = res);
+
             print('blogs:${blogs[0].tags}');
 
-
-            int blogCount=blogs.length;
+            int blogCount = blogs.length;
 
             return Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: blogCount,
-                      itemBuilder: (context,index) {
-                        if (index == 0) {
-                          return Column(
-                            children: [
-                              SizedBox(
-                                height: 3.h,
-                              ),
-                         BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,id: blogs[index].id,).onlyPadding(0, 10.0, 20.0, 20.0)
-                        ]
-                          );
-                        }
-                        return BlogCard(topic: blogs[index].title,email: blogs[index].userAccount!.email,tag:tagWidget(blogs[index].tags!, context),date: blogs[index].createdDateTime,id: blogs[index].id,).onlyPadding(0, 10.0, 20.0, 20.0);
-                      },
-                    ),
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: blogCount,
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return Column(children: [
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          BlogCard(
+                            topic: blogs[index].title,
+                            email: blogs[index].userAccount!.email,
+                            tag: tagWidget(blogs[index].tags!, context),
+                            date: blogs[index].createdDateTime,
+                            id: blogs[index].id,
+                          ).onlyPadding(0, 10.0, 20.0, 20.0)
+                        ]);
+                      }
+                      return BlogCard(
+                        topic: blogs[index].title,
+                        email: blogs[index].userAccount!.email,
+                        tag: tagWidget(blogs[index].tags!, context),
+                        date: blogs[index].createdDateTime,
+                        id: blogs[index].id,
+                      ).onlyPadding(0, 10.0, 20.0, 20.0);
+                    },
                   ),
-                ],
-              );
+                ),
+              ],
+            );
           } else {
             return Center(child: Text('No data found'));
           }
@@ -118,34 +125,29 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
   }
 }
 
-List<Widget> tagWidget(List<Tag> tags,BuildContext context){
-  List<Widget> output=[];
+List<Widget> tagWidget(List<Tag> tags, BuildContext context) {
+  List<Widget> output = [];
 
   print('tags ${tags}');
 
-  for (Tag tag in tags){
+  for (Tag tag in tags) {
     print('new tag');
-    output.add(
-        Container(
-          margin: EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            color: AppLightThemeColors.kSecondaryBackgroundColor,
-            borderRadius: BorderRadius.circular(3.0),
-          ),
-          child: Text(
-            tag.label!,
-            maxLines: 1,
-            style: context.textTheme.displayLarge!.copyWith(
-              fontSize: 13.sp,
-              color: AppLightThemeColors
-                  .kOnSecondaryBackgroundLightColor,
-            ),
-          ).symmetricPadding(10.0, 5.0),
-        ).verticalPadding(10.0)
-    );
+    output.add(Container(
+      margin: EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        color: AppLightThemeColors.kSecondaryBackgroundColor,
+        borderRadius: BorderRadius.circular(3.0),
+      ),
+      child: Text(
+        tag.label!,
+        maxLines: 1,
+        style: context.textTheme.displayLarge!.copyWith(
+          fontSize: 13.sp,
+          color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
+        ),
+      ).symmetricPadding(10.0, 5.0),
+    ).verticalPadding(10.0));
   }
-
-
 
   print('tagWidget:${output}');
   return output;
