@@ -8,16 +8,19 @@ class ProfileTextField extends StatelessWidget {
     required this.labelText,
     required this.prefixIcon,
     this.onTap,
+    this.controller,
   });
 
   final String labelText;
   final Icon? prefixIcon;
+  final TextEditingController? controller;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: onTap,
+      controller: controller,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
