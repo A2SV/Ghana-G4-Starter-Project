@@ -1,12 +1,17 @@
+import 'dart:math';
+
+import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/features/blog/data/repositories/tag_repository_impl.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
 import '../../../../../generated/assets.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/widgets/blog_card.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
+import '../../domain/entities/tags.dart';
 import '../widgets/category_info.dart';
 import '../widgets/main_drawer.dart';
 
@@ -20,6 +25,12 @@ class BlogsDashboard extends StatefulWidget {
 }
 
 class _BlogsDashboardState extends State<BlogsDashboard> {
+  int _generateRandomNumber() {
+    int min = 10;
+    int max = 300;
+    return min + Random().nextInt(max - min + 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,26 +88,62 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
               ),
             ),
             SizedBox(height: 4.h),
-            Padding(
-              padding: EdgeInsets.only(left: 5.5.w),
-              child: SizedBox(
+            SizedBox(
                 height: 14.h,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    const CategoryInfo(),
-                    SizedBox(width: 5.w),
-                    const CategoryInfo(),
-                    SizedBox(width: 5.w),
-                    const CategoryInfo(),
-                    SizedBox(width: 5.w),
-                    const CategoryInfo(),
-                    SizedBox(width: 5.w),
-                    const CategoryInfo(),
-                  ],
-                ),
-              ),
-            ),
+                child: FutureBuilder(
+                  future: TagRepositoryImpl().viewAllTags(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasData) {
+                      Either<String, List<Tag>>? result = snapshot.data;
+                      List<Tag> tags = [];
+                      result!.fold(
+                        (error) => error,
+                        (res) => tags = res,
+                      );
+
+                      int blogCount = tags.length;
+
+                      return ListView.builder(
+                        itemCount: blogCount,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          if (index == 0) {
+                            return Row(
+                              children: [
+                                SizedBox(width: 5.w),
+                                CategoryInfo(
+                                  title: tags[index].label!,
+                                  updateCount: _generateRandomNumber(),
+                                ),
+                                SizedBox(width: 5.w),
+                              ],
+                            );
+                          }
+                          return Row(
+                            children: [
+                              CategoryInfo(
+                                title: tags[index].label!,
+                                updateCount: _generateRandomNumber(),
+                              ),
+                              SizedBox(width: 5.w),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          "Something went Wrong",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                )),
             SizedBox(height: 2.h),
             CustomTextFormField(
               borderRadiusValue: 30.0,
@@ -110,7 +157,33 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                   .asSvgImage()
                   .horizontalPadding(5.w),
             ).horizontalPadding(20.0),
-            SizedBox(height: 2.h),
+            SizedBox(height: 3.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Recent Blogs",
+                    style: context.textTheme.displayMedium!.copyWith(
+                      fontSize: 19.sp,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    "see all",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: AppLightThemeColors.kPrimaryColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 1.h),
             for (int i = 0; i < 10; i++)
               const BlogCard(
                 tag: [],
