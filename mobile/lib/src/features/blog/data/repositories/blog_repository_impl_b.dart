@@ -40,7 +40,7 @@ class BlogRepositoryImpl implements BlogRepository {
 
   @override
   Future<Either<Failure, Blog>> update(
-      {required String id,
+      {required int id,
       required String? title,
       required String? body,
       required List<TagModel>? tags}) async {

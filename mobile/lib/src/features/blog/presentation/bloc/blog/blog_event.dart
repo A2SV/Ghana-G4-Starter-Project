@@ -22,7 +22,7 @@ final class UpdateBlogEvent extends BlogEvent {
   final String title;
   final String body;
   final List<TagModel> tags;
-  final String id;
+  final int id;
   const UpdateBlogEvent({
     required this.title,
     required this.body,

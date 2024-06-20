@@ -14,7 +14,7 @@ abstract class BlogRemoteDataSource {
     required List<TagModel> tags,
   });
   Future<Blog> update({
-    required String id,
+    required int id,
     required String? title,
     required String? body,
     required List<TagModel>? tags,
@@ -51,7 +51,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
 
   @override
   Future<Blog> update(
-      {required String id,
+      {required int id,
       required String? title,
       required String? body,
       required List<Tag>? tags}) async {
