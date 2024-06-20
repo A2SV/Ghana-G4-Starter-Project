@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 
 import '../../../../../generated/assets.gen.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
+import '../../../auth/authentication.dart';
 import 'custom_drawer_header.dart';
 
 class MainSideDrawer extends StatelessWidget {
   const MainSideDrawer({super.key});
+
+  get context => null;
+
+  void Logout(BuildContext context) {
+    Hive.box(Constants.authBox).put(Constants.token, "");
+    switchScreen(
+      context: context,
+      routeName: LoginScreen.routeName,
+      popAndPush: true,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,6 +196,8 @@ class MainSideDrawer extends StatelessWidget {
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w400,
                 ),
+              ).onPressed(
+                onTap: () => Logout(context),
               ),
             ),
           ),

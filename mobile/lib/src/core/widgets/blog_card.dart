@@ -22,7 +22,8 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.go('/blog-details-screen/${id}');
+        context.push('/blog-details-screen/${id}');
+        // context.go('/blog-details-screen/${id}');
       },
       child: Container(
         decoration: BoxDecoration(

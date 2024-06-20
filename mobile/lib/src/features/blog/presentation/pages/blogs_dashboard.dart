@@ -2,8 +2,12 @@ import 'dart:math';
 
 import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:starter_project/src/core/constants/constants.dart';
+import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/features/auth/authentication.dart';
 import 'package:starter_project/src/features/blog/data/repositories/tag_repository_impl.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
@@ -11,9 +15,11 @@ import '../../../../../generated/assets.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/widgets/blog_card.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
+import '../../data/repositories/blog_repository_impl.dart';
+import '../../domain/domain.dart';
 import '../../domain/entities/tags.dart';
 import '../widgets/category_info.dart';
-import '../widgets/main_drawer.dart';
+import 'all_blogs_screen.dart';
 
 class BlogsDashboard extends StatefulWidget {
   const BlogsDashboard({super.key});
@@ -179,19 +185,54 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                       fontWeight: FontWeight.w500,
                       fontSize: 17.sp,
                     ),
+                  ).onPressed(
+                    onTap: () {
+                      switchScreen(
+                          context: context,
+                          routeName: AllBlogsScreen.routeName);
+                    },
                   ),
                 ],
               ),
             ),
             SizedBox(height: 1.h),
-            for (int i = 0; i < 10; i++)
-              const BlogCard(
-                tag: [],
-                email: "kudusbanna@a2sv.org",
-                topic: "STUDENTS SHOULD FOCUS MORE ON READING",
-                date: "2024-06-20T15:12:32.466Z",
-                id: 12,
-              ).onlyPadding(0, 10.0, 20.0, 20.0),
+            FutureBuilder<Either<String, List<Blog>>>(
+              future: BlogRepositoryImpl()
+                  .viewAllBlogs(), // Change the ID as needed
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                      child: Text(
+                    'Error: ${snapshot.error}',
+                    style: const TextStyle(color: Colors.black),
+                  ));
+                } else if (snapshot.hasData) {
+                  print('loading..');
+                  Either<String, List<Blog>>? result = snapshot.data;
+                  List<Blog> blogs = [];
+                  result!.fold((error) => error, (res) => blogs = res);
+
+                  print('blogs:${blogs[0].tags}');
+
+                  int blogCount = blogs.length;
+
+                  return Column(
+                    children: [
+                      for (int i = 0; i < blogCount; i++)
+                        BlogCard(
+                          topic: blogs[i].title,
+                          email: blogs[i].userAccount!.email,
+                          tag: tagWidget(blogs[i].tags!, context),
+                          date: blogs[i].createdDateTime,
+                          id: blogs[i].id,
+                        ).onlyPadding(0, 10.0, 20.0, 20.0),
+                    ],
+                  );
+                } else {
+                  return Center(child: Text('No data found'));
+                }
+              },
+            ),
             SizedBox(height: 3.h),
           ],
         ),

@@ -33,12 +33,6 @@ class _BlogDetailsState extends State<BlogDetails> {
       appBar: AppBar(
         toolbarHeight: 50,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {
-            context.go('/all-blogs-screen');
-          },
-        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
@@ -51,7 +45,7 @@ class _BlogDetailsState extends State<BlogDetails> {
             .viewBlog(int.parse(widget.id)), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {

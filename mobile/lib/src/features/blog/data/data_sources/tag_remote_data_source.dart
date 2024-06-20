@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+import 'package:starter_project/src/core/constants/constants.dart';
 import 'package:starter_project/src/features/blog/data/models/blog_model.dart';
 import 'package:starter_project/src/features/blog/data/models/tag_model.dart';
 
@@ -7,8 +9,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 
-String token =
-    'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWlraSBUYW1lIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoibWlraUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIxIiwiZXhwIjoxNzE4OTY4MTgyfQ.QP60v4QYqHgrcTAws6qSNtjiXPmwr7-qg2JL3uafiur2pPcrRuwAEUJgSFfXRSPyMroVCrgb8mza559VBwRlbg';
+String token = Hive.box(Constants.authBox).get(Constants.token);
 
 abstract class TagRemoteDataSource {
   //methods
