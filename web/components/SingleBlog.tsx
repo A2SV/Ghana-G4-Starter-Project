@@ -1,68 +1,67 @@
-import React from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import SingleImage from "@/public/single_blog.jpg";
 import ProfileImage from "@/public/profile_picture.png";
+import { useGetBlogByIdQuery } from "../redux/blogApi";
+import { useParams } from "next/navigation";
+import { Tag } from "@/types/blogTypes";
 
-const SingleBlog = () => {
+export default function SingleBlog() {
+  const params = useParams<{ id: string }>();
+
+  const { data, error, isLoading } = useGetBlogByIdQuery({ blogId: params.id });
+  console.log(data);
+  const [blogData, setBlogData] = useState<any>({});
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      setBlogData(data);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading blog data.</div>;
+  }
+
+  if (!data) {
+    return <div>No blog data found.</div>;
+  }
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="ml-5 font-montserrat">
-        <h1 className="top-270 font-imfell text-4xl left-565 pb-5">
-          The essential guide to Competitive Programming
-        </h1>
+        <h1 className="top-270 font-imfell text-4xl left-565 pb-5">{blogData.title}</h1>
         <p className="flex justify-center items-center font-montserrat text-sm pt-4">
-          Programming, tech | 6 min Read
+          {`${blogData?.tags?.map((tag: Tag) => tag.label).join(", ")} | 6 min Read`}
         </p>
       </div>
       <Image className="p-10 w-1586px h-792px" src={SingleImage} alt="single blog" />
       <Image className="pt-200 pb-200 w-20 h-20" src={ProfileImage} alt="profile picture" />
-      <p className="font-imfell pt-3 pb-3 text-gray-600">chaltu kebede | software engineer</p>
-      <p className="text-blue mb-7">@chaltu_kebede</p>
-      <div className="w-9/12 ml-40 flex flex-col font-montserrat text-sm text-gray-500">
-        <p className=" w-4/5 my-4 font-imfell text-black text-2xl">
-          We know that data structure and algorithm can seem hard at first glance. And you may not
-          be familiar with advanced algorithms, but there are simple steps you can follow to see
-          outstanding results in a short period of time.
+      <p className="font-imfell pt-3 pb-3 text-gray-600">
+        {`${blogData?.userAccount?.firstName} ${blogData?.userAccount?.lastName} | Software engineer`}
+      </p>
+      <p className="text-blue mb-7">
+        <a
+          href={`mailto:${blogData?.userAccount?.email}`}
+        >{`@ ${blogData?.userAccount?.firstName}_${blogData?.userAccount?.lastName}`}</a>
+      </p>
+      <div className="flex flex-col justify-center items-center font-montserrat text-sm text-gray-500">
+        <p className="m-7 font-imfell text-black text-2xl flex justify-center">
+          We know that data structure and algorithm can seem hard at first glance. And <br /> you
+          may not be familiar with advanced algorithms, but there are simple steps you <br /> can
+          follow to see outstanding results in a short period of time.
         </p>
 
-        <p className="w-4/5 my-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
-
-        <p className="w-4/5 my-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
-
-        <p className="w-4/5 my-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
-        </p>
-
-        <p className="w-4/5 my-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+        <p className="max-w-[70%]">
+          <div dangerouslySetInnerHTML={{ __html: blogData.body }} />
         </p>
       </div>
     </div>
   );
-};
-
-export default SingleBlog;
+}

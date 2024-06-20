@@ -1,21 +1,22 @@
 "use client";
 
-// import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PostCard from "./PostCard";
-// import { useGetAllBlogsQuery } from "../redux/blogApi";
+import { useGetAllBlogsQuery } from "../redux/blogApi";
+import { BlogPost } from "@/types/blogTypes";
+import Link from "next/link";
 
 const AllPost: React.FC = () => {
-  // const { data, error, isLoading } = useGetAllBlogsQuery();
+  const { data, error, isLoading } = useGetAllBlogsQuery();
 
-  // const [allBlogs, setAllBlogs] = useState<any>([]);
+  const [allBlogs, setAllBlogs] = useState<any>([]);
 
-  // useEffect(() => {
-  //   // console.log(data)
-  //   if (data) {
-  //     console.log(data);
-  //     setAllBlogs(data);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      setAllBlogs(data);
+    }
+  }, [data]);
 
   return (
     <div className="bg-white min-h-screen p-6 w-full max-w-7xl mx-auto">
@@ -36,41 +37,26 @@ const AllPost: React.FC = () => {
           </div>
         </div>
         <div>
-          {/* <div>
-            {isLoading ? (
-              <p>Loading posts...</p>
+          <div>
+            {error ? (
+              <>Oh no, there was an error</>
+            ) : isLoading ? (
+              <>Loading...</>
             ) : (
-              <>
-                {allBlogs.map((post: any) => {
-                  return <p>{post.title}</p>;
-                })}
-              </>
+              allBlogs.map((post: BlogPost) => (
+                <Link key={post.id} href={`/blog/single/${post.id}`}>
+                  <PostCard
+                    author={`${post.userAccount.firstName} ${post.userAccount.lastName}`}
+                    date={post.createdDateTime.substring(0, 10)}
+                    role="SOFTWARE ENGINEER"
+                    title={post.title}
+                    content={post.body}
+                    tags={post.tags.map((tag) => tag.label)}
+                  />
+                </Link>
+              ))
             )}
-          </div> */}
-          <PostCard
-            author="Yididiya Kebede"
-            date="Apr 16, 2022"
-            role="SOFTWARE ENGINEER"
-            title="The essential guide to Competitive Programming"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
-            tags={["UI/UX", "Development"]}
-          />
-          <PostCard
-            author="Yididiya Kebede"
-            date="Apr 16, 2022"
-            role="SOFTWARE ENGINEER"
-            title="The essential guide to Competitive Programming"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
-            tags={["UI/UX", "Development"]}
-          />
-          <PostCard
-            author="Yididiya Kebede"
-            date="Apr 16, 2022"
-            role="SOFTWARE ENGINEER"
-            title="The essential guide to Competitive Programming"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
-            tags={["UI/UX", "Development"]}
-          />
+          </div>
         </div>
         <div className="flex justify-center py-5 mt-5 font-poppins">
           {[1, 2, 3, 4, 5].map((page) => (
