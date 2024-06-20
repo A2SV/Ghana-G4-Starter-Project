@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
 import '../../../../../generated/assets.gen.dart';
@@ -117,7 +119,12 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppLightThemeColors.kPrimaryColor,
-        onPressed: () {},
+        onPressed: () {
+          switchScreen(
+            context: context,
+            routeName: AddBlogScreen.routeName,
+          );
+        },
         child: const Icon(
           Icons.add,
           color: Colors.white,
