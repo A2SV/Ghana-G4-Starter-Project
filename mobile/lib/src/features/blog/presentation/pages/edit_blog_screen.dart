@@ -5,7 +5,7 @@ import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
-import 'package:starter_project/src/features/blog/domain/domain.dart';
+import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 
@@ -59,7 +59,8 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                 text: 'Save changes',
                 horizontalPadding: 0.0,
                 onPressed: () {
-                  final isValid = CustomValidator.validateForm(_editBlogformKey);
+                  final isValid =
+                      CustomValidator.validateForm(_editBlogformKey);
                   if (isValid) {
                     BlocProvider.of<BlogBloc>(context).add(
                       UpdateBlogEvent(
@@ -67,9 +68,10 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                         body: _blogContentController.text,
                         tags: _blogTagController.text
                             .split(' ')
-                            .mapIndexed((tag, index) =>
-                                Tag(id: index, label: tag, description: tag))
-                            .toList(), id: '',
+                            .mapIndexed((tag, index) => TagModel(
+                                id: index, label: tag, description: tag))
+                            .toList(),
+                        id: '',
                       ),
                     );
                   }

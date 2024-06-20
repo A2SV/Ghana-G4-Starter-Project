@@ -5,19 +5,20 @@ import 'package:http/http.dart' as http;
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/error/exception.dart';
 import 'package:starter_project/src/features/blog/data/models/blog_model.dart';
+import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
 abstract class BlogRemoteDataSource {
   Future<Blog> create({
     required String title,
     required String body,
-    required List<Tag> tags,
+    required List<TagModel> tags,
   });
   Future<Blog> update({
     required String id,
     required String? title,
     required String? body,
-    required List<Tag>? tags,
+    required List<TagModel>? tags,
   });
 }
 
@@ -28,7 +29,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   Future<Blog> create(
       {required String title,
       required String body,
-      required List<Tag> tags}) async {
+      required List<TagModel> tags}) async {
     final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
     final response = await client.post(
       Uri.parse(Constants.createBlogAPIEndpoint),
@@ -36,9 +37,14 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'
       },
-      body: json.encode({"title": title, "body": body, "tags": tags}),
+      body: json.encode({
+        "title": title,
+        "body": body,
+        "tags": tags.map((e) => e.toJson()).toList()
+      }),
     );
     if (response.statusCode == 200) {
+      print(json.decode(response.body));
       return BlogModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException(errorMessage: response.body);

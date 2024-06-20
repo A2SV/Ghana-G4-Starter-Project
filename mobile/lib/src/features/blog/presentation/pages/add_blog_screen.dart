@@ -4,7 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
-import 'package:starter_project/src/features/blog/domain/domain.dart';
+import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 
@@ -58,8 +58,8 @@ class AddBlogScreenState extends State<AddBlogScreen> {
                         body: _blogContentController.text,
                         tags: _blogTagController.text
                             .split(' ')
-                            .mapIndexed((tag, index) =>
-                                Tag(id: index, label: tag, description: tag))
+                            .mapIndexed((tag, index) => TagModel(
+                                id: index, label: tag, description: tag))
                             .toList(),
                       ),
                     );

@@ -6,6 +6,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/cubits/app_user/app_user_cubit.dart';
 import 'package:starter_project/src/core/network/network.dart';
+import 'package:starter_project/src/features/blog/data/data_sources/data_sources.dart';
+import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:starter_project/src/features/blog/domain/repositories/repository.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/create_blog_use_case.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_use_case.dart';
+import 'package:starter_project/src/features/blog/presentation/bloc/blog/blog_bloc.dart';
 
 import '../../features/auth/authentication.dart';
 
@@ -15,6 +21,7 @@ Future<void> dpLocatorInit() async {}
 
 Future<void> initDependencies() async {
   _initAuth();
+  _initBlog();
   // Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
   // dpLocator.registerLazySingleton(
   //   () => Hive.box(name: 'blogs'),
@@ -68,6 +75,41 @@ void _initAuth() {
         registerUseCase: dpLocator(),
         loginUseCase: dpLocator(),
         appUserCubit: dpLocator(),
+      ),
+    );
+}
+
+void _initBlog() {
+  // Datasource
+  dpLocator
+    ..registerFactory<BlogRemoteDataSource>(
+      () => BlogRemoteDataSourceImpl(
+        client: dpLocator(),
+      ),
+    )
+    // Repository
+    ..registerFactory<BlogRepository>(
+      () => BlogRepositoryImpl(
+        remoteDataSource: dpLocator(),
+        network: dpLocator(),
+      ),
+    )
+    // Usecases
+    ..registerFactory(
+      () => CreateBlogUseCase(
+        blogRepository: dpLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => UpdateBlogUseCase(
+        blogRepository: dpLocator(),
+      ),
+    )
+    // Bloc
+    ..registerLazySingleton(
+      () => BlogBloc(
+        updateBlogUseCase: dpLocator(),
+        createBlogUseCase: dpLocator(),
       ),
     );
 }

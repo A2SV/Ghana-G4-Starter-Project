@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
 part 'blog_event.dart';

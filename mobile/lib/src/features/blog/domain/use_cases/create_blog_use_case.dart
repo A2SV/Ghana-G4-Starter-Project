@@ -1,12 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:starter_project/src/core/error/failure.dart';
 import 'package:starter_project/src/core/use_case/use_cases.dart';
+import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
 class CreateBlogParams {
   final String title;
   final String body;
-  final List<Tag> tags;
+  final List<TagModel> tags;
 
   CreateBlogParams({
     required this.title,

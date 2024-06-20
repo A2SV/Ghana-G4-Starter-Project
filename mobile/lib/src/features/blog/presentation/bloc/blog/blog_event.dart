@@ -10,7 +10,7 @@ abstract class BlogEvent extends Equatable {
 final class CreateBlogEvent extends BlogEvent {
   final String title;
   final String body;
-  final List<Tag> tags;
+  final List<TagModel> tags;
   const CreateBlogEvent({
     required this.title,
     required this.body,
@@ -21,7 +21,7 @@ final class CreateBlogEvent extends BlogEvent {
 final class UpdateBlogEvent extends BlogEvent {
   final String title;
   final String body;
-  final List<Tag> tags;
+  final List<TagModel> tags;
   final String id;
   const UpdateBlogEvent({
     required this.title,

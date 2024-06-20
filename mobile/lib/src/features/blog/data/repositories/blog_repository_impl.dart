@@ -3,8 +3,8 @@ import 'package:starter_project/src/core/error/exception.dart';
 import 'package:starter_project/src/core/error/failure.dart';
 import 'package:starter_project/src/core/network/network.dart';
 import 'package:starter_project/src/features/blog/data/data_sources/data_sources.dart';
+import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
-import 'package:starter_project/src/features/blog/domain/entities/tag.dart';
 import 'package:starter_project/src/features/blog/domain/repositories/repository.dart';
 
 class BlogRepositoryImpl implements BlogRepository {
@@ -20,7 +20,7 @@ class BlogRepositoryImpl implements BlogRepository {
   Future<Either<Failure, Blog>> create(
       {required String title,
       required String body,
-      required List<Tag> tags}) async {
+      required List<TagModel> tags}) async {
     if (await network.isConnected) {
       try {
         final blog = await remoteDataSource.create(
@@ -43,7 +43,7 @@ class BlogRepositoryImpl implements BlogRepository {
       {required String id,
       required String? title,
       required String? body,
-      required List<Tag>? tags}) async {
+      required List<TagModel>? tags}) async {
     if (await network.isConnected) {
       try {
         final blog = await remoteDataSource.update(
