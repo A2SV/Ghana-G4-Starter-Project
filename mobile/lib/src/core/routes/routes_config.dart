@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/theme/theme_config.dart';
+import 'package:starter_project/src/features/auth/authentication.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
 
 import '../error/error.dart';
 
@@ -42,22 +46,6 @@ switchScreen({
 class AppRouter extends StatelessWidget {
   static final GoRouter router = createRoute();
 
-  static Future<String?> redirect(GoRouterState state) async {
-    try {} on CacheException {}
-    return null;
-  }
-
-  static GoRouter createRoute() {
-    return GoRouter(
-      redirect: ((context, state) => redirect(state)),
-
-      initialLocation: '/profile-edit-screen',
-
-      routes: routes,
-      observers: [],
-    );
-  }
-
   AppRouter({
     super.key,
   }) {
@@ -81,5 +69,20 @@ class AppRouter extends StatelessWidget {
     );
   }
 
+  static GoRouter createRoute() {
+    final token = Hive.box(Constants.authBox).get(Constants.token);
+    return GoRouter(
+      redirect: ((context, state) => redirect(state)),
+      initialLocation: token == null
+          ? '/${LoginScreen.routeName}'
+          : '/${BlogsDashboard.routeName}',
+      routes: routes,
+      observers: [],
+    );
+  }
 
+  static Future<String?> redirect(GoRouterState state) async {
+    try {} on CacheException {}
+    return null;
+  }
 }
