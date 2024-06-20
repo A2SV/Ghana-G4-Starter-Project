@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
+import 'package:dartz/dartz.dart' hide State;
+import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
+import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
+
+import '../../domain/domain.dart';
+
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:dartz/dartz.dart' hide State;
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
@@ -8,9 +16,15 @@ import '../../domain/domain.dart';
 
 class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
+  final String id;
+
+  const BlogDetails({Key? key,required String this.id}):super(key:key);
+
+
+  const BlogDetails({super.key});
 
   @override
-  State<BlogDetails> createState() => _BlogDetailsState();
+  _BlogDetailsState createState() => _BlogDetailsState();
 }
 
 class _BlogDetailsState extends State<BlogDetails> {
@@ -24,30 +38,35 @@ class _BlogDetailsState extends State<BlogDetails> {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () {},
+          onPressed: () {
+            context.go('/all-blogs-screen');
+
+          },
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () {},
           ),
         ],
       ),
-      body: FutureBuilder<Either<String, Blog>>(
-        future: BlogRepositoryImpl().viewBlog(26), // Change the ID as needed
+      body:FutureBuilder<Either<String,Blog>>(
+        future: BlogRepositoryImpl().viewBlog(int.parse(widget.id)), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Text('connecting...'));
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             print('loading..');
-            Either<String, Blog>? result = snapshot.data;
-            Blog blog =
-                Blog(0, 'none', '', '', UserAccount(0, '', '', '', ''), []);
-            result!.fold((error) => error, (res) => blog = res);
-            print(blog.title);
-            return SingleChildScrollView(
+            Either<String,Blog>? result=snapshot.data;
+            Blog blog=Blog(0, 'none', '', '', UserAccount(0,'','','',''), []);
+            result!.fold(
+                (error)=>error,
+                    (res)=>blog=res
+            );
+            print(blog.createdDateTime);
+            return  SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -56,24 +75,10 @@ class _BlogDetailsState extends State<BlogDetails> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black54,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 14, vertical: 6), // Adjust padding
-                            minimumSize: const Size(0, 0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  8), // Adjust border radius
-                            ),
-                          ),
-                          child: const Text(
-                            'Education',
-                            style: TextStyle(fontSize: 10),
-                          ),
+                        Row(
+                          children: tagListWidget(blog),
                         ),
+
                         const Text(
                           '50 minutes ago',
                           style: TextStyle(
@@ -137,4 +142,40 @@ class _BlogDetailsState extends State<BlogDetails> {
       ),
     );
   }
+}
+
+List<Widget> tagListWidget(Blog blog){
+    List<Widget> output=[];
+    print('tags: ${blog.tags}');
+    for (Tag tag in blog.tags!){
+      print('tag: ${tag.label}');
+      output.add(
+        Container(
+          margin: EdgeInsets.all(2),
+          child:ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black54,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 14, vertical: 6), // Adjust padding
+              minimumSize: const Size(0, 0),
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.circular(8), // Adjust border radius
+              ),
+            ),
+            child: Text(
+              tag.label!,
+              style: const TextStyle(fontSize: 10),
+            ),
+          ),
+        )
+
+      );
+    }
+
+
+    return output;
+
 }

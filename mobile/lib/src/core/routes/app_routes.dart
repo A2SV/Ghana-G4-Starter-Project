@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
 
+
 import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
@@ -36,7 +38,9 @@ class AppRoutes {
   static const String allblogsScreen = 'all-blogs-screen';
   static const String profileEditScreen = "profile-edit-screen";
   static const String blogDetails = "blog-details-screen";
+
   static const String blogsDashboard = "blogs-dashboard";
+
 }
 
 //* Custom transition page
@@ -100,6 +104,7 @@ final routes = <GoRoute>[
     name: AppRoutes.editblogScreen,
     path: '/${EditBlogScreen.routeName}',
     builder: (context, state) => const EditBlogScreen(),
+
   ),
   GoRoute(
     name: AppRoutes.allblogsScreen,
@@ -113,8 +118,11 @@ final routes = <GoRoute>[
   ),
   GoRoute(
     name: AppRoutes.blogDetails,
-    path: '/${BlogDetails.routeName}',
-    builder: (context, state) => BlogDetails(),
+    path: '/${BlogDetails.routeName}/:id',
+    builder: (context, state){
+      final id = state.pathParameters['id']!;
+      return BlogDetails(id:id);
+    },
   ),
   GoRoute(
     name: AppRoutes.blogsDashboard,
@@ -122,3 +130,4 @@ final routes = <GoRoute>[
     builder: (context, state) => const BlogsDashboard(),
   ),
 ];
+

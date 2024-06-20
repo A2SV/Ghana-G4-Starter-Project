@@ -33,9 +33,22 @@ class BlogModel{
         createdDateTime=json['createdDateTime'] as String,
         userAccount=UserAccountModel.fromJson(json['userAccount']) as UserAccountModel,
         //tag=TagModel.fromJson(json['tags']) as List<TagModel>
-        tag=[]
+        tag=convertTagList(json['tags'])
 
   ;
+  
+
+}
+
+
+List<TagModel> convertTagList(List<dynamic> tags){
+  List<TagModel> output=[];
+
+  for (var tag in tags){
+    output.add(TagModel.fromJson(tag));
+  }
+
+  return output;
 }
 
 

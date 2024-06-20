@@ -6,11 +6,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 
-String token='eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWlraSBUYW1lIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoibWlraUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIxIiwiZXhwIjoxNzE4NDg2NDE5fQ.rTgjZZxzgpM4fqmWbEi5DW7MitgyLVhFVqkYDjd0fvTNpWvdcuuwX-HsFuqRQiZa_U4MMQXgob2JfI_5kW8ULA';
+String token='eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWlraSBUYW1lIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoibWlraUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiIxIiwiZXhwIjoxNzE4OTY4MTgyfQ.QP60v4QYqHgrcTAws6qSNtjiXPmwr7-qg2JL3uafiur2pPcrRuwAEUJgSFfXRSPyMroVCrgb8mza559VBwRlbg';
 
 abstract class BlogRemoteDataSource {
 
 //methods
+Future<Either<String,BlogModel>> viewBlog(int id);
 Future<Either<String,List<BlogModel>>> viewAllBlogs();
 }
 
@@ -20,7 +21,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
 
     final response = await http.get(Uri.parse(
 
-        'http://blogapp.tryasp.net/api/Blog/'),
+        'http://blogapp.tryasp.net/api/Blog/${id}'),
 
       headers: {
         'Content-Type': 'application/json',
@@ -58,17 +59,21 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
     );
 
 
-    print('Loading from data source......');
+
 
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON.
-      List<Map<String, dynamic>> data = json.decode(response.body);
+      print('Response body: ${ json.decode(response.body)}');
+
+      List<dynamic> data = json.decode(response.body);
       //print('Data: $data');
       List<BlogModel> blogs= [];
+      print(response.body);
 
       for (var item in data){
         blogs.add(BlogModel.fromJson(item));
       }
+      print(blogs);
       return Right(blogs);
 
     } else {
