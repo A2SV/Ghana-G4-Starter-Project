@@ -30,7 +30,9 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<String> updateAccount(int id, String firstName, String lastName, String email) async {
+    print('updating data...');
     String result= await RemoteDataSourceImpl().updateAccount(id: id, firstName: firstName, lastName: lastName, email: email);
+    print('updated...');
     return result;
   }
 }
