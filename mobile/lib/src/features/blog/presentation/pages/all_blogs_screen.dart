@@ -5,9 +5,9 @@ import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/widgets/widgets.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 
 import '../../data/repositories/blog_repository_impl.dart';
-import '../../domain/domain.dart';
 import '../../domain/entities/tags.dart';
 import '../../domain/entities/user_account.dart';
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
 import '../../../../../generated/assets.gen.dart';
@@ -8,7 +10,6 @@ import '../../../../core/theme/app_light_theme_colors.dart';
 import '../../../../core/widgets/blog_card.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
 import '../widgets/category_info.dart';
-import '../widgets/main_drawer.dart';
 
 class BlogsDashboard extends StatefulWidget {
   const BlogsDashboard({super.key});
@@ -118,7 +119,12 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppLightThemeColors.kPrimaryColor,
-        onPressed: () {},
+        onPressed: () {
+          switchScreen(
+            context: context,
+            routeName: AddBlogScreen.routeName,
+          );
+        },
         child: const Icon(
           Icons.add,
           color: Colors.white,

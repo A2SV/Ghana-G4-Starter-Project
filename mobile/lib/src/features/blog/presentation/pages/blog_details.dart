@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:dartz/dartz.dart' hide State;
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
 import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
 
-import '../../domain/domain.dart';
 
 
 class BlogDetails extends StatefulWidget {
@@ -13,6 +13,8 @@ class BlogDetails extends StatefulWidget {
   final String id;
 
   const BlogDetails({Key? key,required String this.id}):super(key:key);
+
+
 
   @override
   _BlogDetailsState createState() => _BlogDetailsState();
