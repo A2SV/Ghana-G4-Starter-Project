@@ -14,7 +14,6 @@ class BlogDetails extends StatefulWidget {
 
   const BlogDetails({Key? key,required String this.id}):super(key:key);
 
-
   @override
   _BlogDetailsState createState() => _BlogDetailsState();
 }
@@ -37,7 +36,7 @@ class _BlogDetailsState extends State<BlogDetails> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () {},
           ),
         ],

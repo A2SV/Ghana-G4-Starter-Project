@@ -2,7 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/theme/theme_config.dart';
+
 import '../error/error.dart';
+
+canPopScreen(BuildContext context) {
+  return context.canPop();
+}
+
+popScreen(BuildContext context, {Object? result}) {
+  if (canPopScreen(context)) {
+    context.pop(result);
+  }
+}
+
+switchScreen({
+  required BuildContext context,
+  required String routeName,
+  Map<String, String>? pathParameters,
+  Map<String, dynamic>? queryParameters,
+  Object? extra,
+  bool popAndPush = false,
+}) {
+  /// Use this when to navigate the user but pop any other screen before
+  popAndPush
+      ? context.goNamed(
+          routeName,
+          pathParameters: pathParameters ?? <String, String>{},
+          queryParameters: queryParameters ?? <String, dynamic>{},
+          extra: extra,
+        )
+      : context.pushNamed(
+          routeName,
+          pathParameters: pathParameters ?? <String, String>{},
+          queryParameters: queryParameters ?? <String, dynamic>{},
+          extra: extra,
+        );
+}
 
 class AppRouter extends StatelessWidget {
   static final GoRouter router = createRoute();
@@ -16,7 +51,7 @@ class AppRouter extends StatelessWidget {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
 
-      initialLocation: '/all-blogs-screen',
+      initialLocation: '/profile-screen',
 
       routes: routes,
       observers: [],
@@ -47,4 +82,6 @@ class AppRouter extends StatelessWidget {
       routerConfig: router,
     );
   }
+
+
 }
