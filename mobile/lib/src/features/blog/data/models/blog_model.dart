@@ -1,4 +1,4 @@
-import 'package:starter_project/src/features/auth/data/models/user_account_model.dart';
+import 'package:starter_project/src/features/auth/authentication.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
@@ -16,17 +16,19 @@ class BlogModel extends Blog {
 
   factory BlogModel.fromJson(Map<String, dynamic> json) {
     return BlogModel(
-      userAccount: UserAccountModel.fromJson(json['userAccount']),
+      userAccountId: json['userAccountId'],
       id: json['id'],
       title: json['title'],
       body: json['body'],
+      userAccount: json['userAccount'] != null
+          ? UserAccountModel.fromJson(json['userAccount'])
+          : null,
       createdDateTime: DateTime.parse(json['createdDateTime']),
-      lastUpdatedDateTime: DateTime.parse(json['lastUpdatedDateTime']),
-      userAccountId: json['userAccountId'],
-      tags: (json['tags'] as List)
-              .map((tag) => TagModel.fromJson(tag))
-              .toList()
-          ,
+      lastUpdatedDateTime: json['lastUpdatedDateTime'] != null
+          ? DateTime.parse(json['lastUpdatedDateTime'])
+          : null,
+      tags:
+          (json['tags'] as List).map((tag) => TagModel.fromJson(tag)).toList(),
     );
   }
 

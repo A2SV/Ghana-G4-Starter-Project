@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/error/exception.dart';
-import 'package:starter_project/src/features/blog/data/models/blog_model.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
@@ -44,7 +43,6 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       }),
     );
     if (response.statusCode == 200) {
-      print(json.decode(response.body));
       return BlogModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException(errorMessage: response.body);

@@ -10,7 +10,7 @@ class Blog extends Equatable {
   final DateTime? createdDateTime;
   final DateTime? lastUpdatedDateTime;
   final int userAccountId;
-  final UserAccount userAccount;
+  final UserAccount? userAccount;
   final List<Tag>? tags;
 
   const Blog({
