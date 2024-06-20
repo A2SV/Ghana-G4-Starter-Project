@@ -3,6 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  smart_auth
+  validation_pro
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
