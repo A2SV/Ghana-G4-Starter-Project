@@ -6,12 +6,14 @@ import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 
 class EditBlogScreen extends StatefulWidget {
   static const String routeName = 'edit-blog-screen';
-  const EditBlogScreen({super.key});
+  final Blog blog;
+  const EditBlogScreen({super.key, required this.blog});
 
   @override
   State<EditBlogScreen> createState() => EditBlogScreenState();
@@ -101,9 +103,10 @@ class EditBlogScreenState extends State<EditBlogScreen> {
 
   @override
   void initState() {
-    _blogHeaderController = TextEditingController();
-    _blogContentController = TextEditingController();
-    _blogTagController = TextEditingController();
+    _blogHeaderController = TextEditingController(text: widget.blog.title);
+    _blogContentController = TextEditingController(text: widget.blog.body);
+    _blogTagController = TextEditingController(
+        text: widget.blog.tags!.map((tag) => tag.label).join(' '));
     super.initState();
   }
 }
