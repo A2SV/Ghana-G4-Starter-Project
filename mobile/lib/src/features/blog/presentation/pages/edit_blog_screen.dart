@@ -33,61 +33,78 @@ class EditBlogScreenState extends State<EditBlogScreen> {
         automaticallyImplyLeading: true,
       ),
       body: SingleChildScrollView(
-        child: Form(
-          key: _editBlogformKey,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 5.h,
-              ),
-              Stack(
-                alignment: Alignment.bottomRight,
+        child: BlocConsumer<BlogBloc, BlogState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return Form(
+              key: _editBlogformKey,
+              child: Column(
                 children: [
-                  const ImageFilePickerWidget(),
-                  FloatingActionButton(
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      const ImageFilePickerWidget(),
+                      FloatingActionButton(
+                        onPressed: () {},
+                        child: Assets.svg.blogEdit.path.asSvgImage(),
+                      ).allPadding(20.0)
+                    ],
+                  ),
+                  BlogHeaderFormField(controller: _blogHeaderController)
+                      .verticalPadding(2.h),
+                  BlogContentFormField(controller: _blogContentController),
+                  const FontFormattingToolbarWidget().topPadding(1.h),
+                  const AlignmentFormattingToolbarWidget(),
+                  BlogTagFormField(controller: _blogTagController)
+                      .onlyPadding(1.h, 4.h, 0, 0),
+                  CustomButton(
+                    text: 'Save changes',
+                    horizontalPadding: 0.0,
+                    onPressed: () {
+                      final isValid =
+                          CustomValidator.validateForm(_editBlogformKey);
+                      if (isValid) {
+                        BlocProvider.of<BlogBloc>(context).add(
+                          UpdateBlogEvent(
+                            title: _blogHeaderController.text,
+                            body: _blogContentController.text,
+                            tags: _blogTagController.text
+                                .split(' ')
+                                .mapIndexed((tag, index) => TagModel(
+                                    id: index, label: tag, description: tag))
+                                .toList(),
+                            id: widget.blog.id ?? 0,
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  CustomButton(
+                    text: 'Delete Blog',
+                    horizontalPadding: 0.0,
+                    gradient: false,
                     onPressed: () {},
-                    child: Assets.svg.blogEdit.path.asSvgImage(),
-                  ).allPadding(20.0)
+                    textStyle: context.textTheme.bodyMedium!.copyWith(
+                      fontSize: 18.sp,
+                      color: context.colorScheme.error,
+                      fontWeight: FontWeight.bold,
+                      // fontFamily: FontFamily.urbanist,
+                    ),
+                    borderColor: context.colorScheme.error,
+                  ),
+                  SizedBox(
+                    height: 6.h,
+                  ),
                 ],
-              ),
-              BlogHeaderFormField(controller: _blogHeaderController)
-                  .verticalPadding(2.h),
-              BlogContentFormField(controller: _blogContentController),
-              const FontFormattingToolbarWidget().topPadding(1.h),
-              const AlignmentFormattingToolbarWidget(),
-              BlogTagFormField(controller: _blogTagController)
-                  .onlyPadding(1.h, 4.h, 0, 0),
-              CustomButton(
-                text: 'Save changes',
-                horizontalPadding: 0.0,
-                onPressed: () {
-                  final isValid =
-                      CustomValidator.validateForm(_editBlogformKey);
-                  if (isValid) {
-                    BlocProvider.of<BlogBloc>(context).add(
-                      UpdateBlogEvent(
-                        title: _blogHeaderController.text,
-                        body: _blogContentController.text,
-                        tags: _blogTagController.text
-                            .split(' ')
-                            .mapIndexed((tag, index) => TagModel(
-                                id: index, label: tag, description: tag))
-                            .toList(),
-                        id: '',
-                      ),
-                    );
-                  }
-                },
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              const DeleteButton(),
-              SizedBox(
-                height: 6.h,
-              ),
-            ],
-          ).horizontalPadding(30.0),
+              ).horizontalPadding(30.0),
+            );
+          },
         ),
       ),
     );
