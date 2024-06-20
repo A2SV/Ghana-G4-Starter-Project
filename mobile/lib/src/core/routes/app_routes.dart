@@ -116,6 +116,7 @@ final routes = <GoRoute>[
     path: '/${ProfileEditPage.routeName}',
     builder: (context, state) => const ProfileEditPage(),
   ),
+
   GoRoute(
     name: AppRoutes.blogDetails,
     path: '/${BlogDetails.routeName}/:id',

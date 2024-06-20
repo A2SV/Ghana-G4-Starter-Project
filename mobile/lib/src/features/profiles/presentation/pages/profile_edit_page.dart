@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
+import 'package:starter_project/src/features/profiles/domain/domain.dart';
 import 'package:starter_project/src/features/profiles/presentation/widgets/profile_text_field.dart';
 
+import '../../data/data.dart';
 import '../widgets/profile_drop_down_field.dart';
 
 class ProfileEditPage extends StatefulWidget {
@@ -16,8 +19,12 @@ class ProfileEditPage extends StatefulWidget {
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
+
+
 class _ProfileEditPageState extends State<ProfileEditPage> {
   final GlobalKey _formKey = GlobalKey<FormState>();
+  TextEditingController nameController=TextEditingController();
+  TextEditingController emailController=TextEditingController();
 
   void _showAndroidDatePicker() async {
     final DateTime now = DateTime.now();
@@ -30,6 +37,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
         firstDate: firstDate,
         lastDate: lastDate);
   }
+
+
+
 
   void _showIOSDatePicker() {
     showModalBottomSheet(
@@ -175,9 +185,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    const ProfileTextField(
+                    ProfileTextField(
                       labelText: "Binyam Odu",
                       prefixIcon: Icon(Icons.person_outline),
+                      controller: nameController,
                     ),
                     const SizedBox(height: 10),
                     ProfileTextField(
@@ -187,9 +198,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                       prefixIcon: Icon(Icons.calendar_month),
                     ),
                     const SizedBox(height: 10),
-                    const ProfileTextField(
+                    ProfileTextField(
                       labelText: "binyam@a2sv.org",
                       prefixIcon: Icon(Icons.email_outlined),
+                      controller: emailController,
                     ),
                     const SizedBox(height: 10),
                     const Row(
@@ -213,6 +225,32 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                     const SizedBox(height: 10),
                     const ProfileDropDownField(
                       items: ["Male", "Female", "Anything else"],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: TextButton(
+                        onPressed: () {
+                          //Navigator.of(context).pop();
+                          ProfileRepositoryImpl().updateAccount(2, nameController.text,nameController.text, emailController.text);
+                          //GoRouter.of(context).pop();
+                        },
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          minimumSize: const Size(double.infinity, 37),
+                          padding: const EdgeInsets.symmetric(vertical: 7),
+                          backgroundColor: AppLightThemeColors.kPrimaryColor,
+                        ),
+                        child: Text(
+                          "Update",
+                          style: context.textTheme.bodyMedium!.copyWith(
+                            fontSize: 18.sp,
+                            color: context.colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

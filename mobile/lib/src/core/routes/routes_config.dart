@@ -50,7 +50,9 @@ class AppRouter extends StatelessWidget {
   static GoRouter createRoute() {
     return GoRouter(
       redirect: ((context, state) => redirect(state)),
-      initialLocation: '/blogs-dashboard',
+
+      initialLocation: '/profile-edit-screen',
+
       routes: routes,
       observers: [],
     );
@@ -78,4 +80,6 @@ class AppRouter extends StatelessWidget {
       routerConfig: router,
     );
   }
+
+
 }
