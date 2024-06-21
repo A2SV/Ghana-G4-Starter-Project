@@ -5,7 +5,7 @@ import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
 class UpdateBlogParams {
-  final String id;
+  final int id;
   final String title;
   final String body;
   final List<TagModel> tags;
