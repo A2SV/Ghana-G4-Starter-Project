@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  backend:
+    image: backend_image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+      - "8081:443"
+    environment:
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "8081"
+      ASPNETCORE_ENVIRONMENT: "Production"
+      HOST: ${HOST}
+      USER_ID: ${USER_ID}
+      PASSWORD: ${PASSWORD}
+      PORT: ${PORT}
+      DATABASE: ${DATABASE}
+      POOLING: ${POOLING}
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets/:/root/.microsoft/usersecrets
+      - ${USERPROFILE}/.aspnet/https:/root/.aspnet/https/
+      - .:/app
