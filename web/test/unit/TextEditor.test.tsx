@@ -11,19 +11,20 @@ jest.mock("@/components/MarkdownEditor", () => {
 
 describe("BlogCreatorPage", () => {
   test("renders the MarkdownEditor", () => {
-    render(<BlogCreatorPage />);
+    const mockOnChange = jest.fn();
+    render(<BlogCreatorPage value="" onChange={mockOnChange} />);
 
     const textarea = screen.getByTestId("markdown-editor");
     expect(textarea).toBeInTheDocument();
   });
 
-  test("logs content changes", () => {
-    const consoleSpy = jest.spyOn(console, "log");
-    render(<BlogCreatorPage />);
+  test("calls onChange with the new content", () => {
+    const mockOnChange = jest.fn();
+    render(<BlogCreatorPage value="" onChange={mockOnChange} />);
 
     const textarea = screen.getByTestId("markdown-editor");
     fireEvent.change(textarea, { target: { value: "Hello, world!" } });
 
-    expect(consoleSpy).toHaveBeenCalledWith("Hello, world!");
+    expect(mockOnChange).toHaveBeenCalledWith("Hello, world!");
   });
 });

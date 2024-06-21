@@ -5,7 +5,9 @@ import BlogHeader from "@/components/BlogHeader";
 
 describe("BlogHeader", () => {
   test("renders the title input", () => {
-    render(<BlogHeader />);
+    const mockOnChange = jest.fn();
+
+    render(<BlogHeader value="" onChange={mockOnChange} />);
 
     const titleInput = screen.getByPlaceholderText(/enter the title of the blog/i);
 

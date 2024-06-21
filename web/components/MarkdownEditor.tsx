@@ -1,19 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
-const MarkdownEditor: React.FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
-  const [value, setValue] = useState("");
+interface MarkdownEditorProps {
+  value: string;
+  onChange: (content: string) => void;
+}
 
-  const handleChange = (value: string) => {
-    setValue(value);
+const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
+  const handleContentChange = (value: string) => {
     onChange(value);
   };
 
   return (
     <div className="markdown-editor break-before-all">
-      <SimpleMDE value={value} onChange={handleChange} />
+      <SimpleMDE value={value} onChange={handleContentChange} />
     </div>
   );
 };
