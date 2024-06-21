@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blog App
+
+A demo blog app as a starter project to kickstart project
 
 ## Getting Started
 
-First, run the development server:
+Kindly ensure you have the following installed:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Nodejs
+- Typescript
+
+## Setting up and running
+
+1. Clone the repo:
+
+```
+git clone https://github.com/A2SV/Ghana-G4-Starter-Project.git
+cd web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install node modules:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm i
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Incase of an error, do this:
 
-## Learn More
+```
+delete package-lock.json and node modules
 
-To learn more about Next.js, take a look at the following resources:
+npm config set legacy-peer-deps true
+npm i
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Run the app:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+npm run dev
+```
 
-## Deploy on Vercel
+## Technologies Used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Nodejs
+- Typescript
+- NextJs
+- Tailwind
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contribution
+
+- Create branches only through Jira.
+
+### Opening Pull Requests
+
+- Stage `git add . `
+- Commit `git commit -m "(action(eg. feat, fix) ): summary of what you have done in that commit" `
+- Checkout to web branch `git checkout web`
+- Pull latest changes from main `git pull`
+- Checkout out to your branch `git checkout (your branch) `
+- Rebase from web `git rebase web`
+- Handle/Resolve Conflicts (if needed)
+- Stage `git add .`
+- Commit `git commit -m (eg.)"rebased from web"`
+- Push `git push`
+- Create a PR to the web branch.
