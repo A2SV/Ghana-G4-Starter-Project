@@ -1,16 +1,9 @@
-import React from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import AllPost from "@/components/AllPost";
+import React from 'react'
 
-const App = () => {
+const DefaultPage = () => {
   return (
-    <div>
-      <Header />
-      <AllPost />
-      <Footer />
-    </div>
-  );
-};
+    <div>Hello World</div>
+  )
+}
 
-export default App;
+export default DefaultPage
