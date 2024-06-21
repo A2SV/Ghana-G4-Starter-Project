@@ -1,11 +1,21 @@
+"use client";
 import React from "react";
+
 import Header from "./Header";
 import ProfileNavigation from "./ProfileNavigation";
 import ProfileBlogsCard from "./ProfileBlogsCard";
 import Footer from "./Footer";
 import Link from "next/link";
+import { useMyBlogsQuery } from "@/redux/myBlogsApi";
+import { Blog } from "@/types/myBlogTypes";
 
-const ProfileBlogs = () => {
+const ProfileBlogs: React.FC = () => {
+  const userAccountId = 3;
+  const { data: blogs, error, isLoading } = useMyBlogsQuery({ userAccountId });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading blogs</div>;
+
   return (
     <div>
       <Header />
@@ -28,10 +38,7 @@ const ProfileBlogs = () => {
       </div>
 
       <div className="px-[50px] py-[30px] flex md:flex-row flex-col flex-wrap justify-between mb-[100px] items-center">
-        <ProfileBlogsCard />
-        <ProfileBlogsCard />
-        <ProfileBlogsCard />
-        <ProfileBlogsCard />
+        {blogs && blogs.map((blog: Blog) => <ProfileBlogsCard key={blog.id} blog={blog} />)}
       </div>
 
       <Footer />

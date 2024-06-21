@@ -2,9 +2,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { PublicEnvScript } from "next-runtime-env";
-
-import { Provider as StoreProvider } from "react-redux";
 import { store } from "@/redux/store";
+import { Provider } from "react-redux";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +17,9 @@ export default function RootLayout({
       <head>
         <PublicEnvScript />
       </head>
-      <StoreProvider store={store}>
+      <Provider store={store}>
         <body className={inter.className}>{children}</body>
-      </StoreProvider>
+      </Provider>
     </html>
   );
 }

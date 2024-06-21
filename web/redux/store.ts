@@ -1,12 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { createBlogApi } from "./createBlogApi";
+import { env } from "next-runtime-env";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { blogApi } from "@/redux/blogApi";
+import { myBlogsApi } from "./myBlogsApi";
+import { getTagsApi } from "./getTagsApi";
 
 export const store = configureStore({
   reducer: {
-    [blogApi.reducerPath]: blogApi.reducer,
+    [createBlogApi.reducerPath]: createBlogApi.reducer,
+    [myBlogsApi.reducerPath]: myBlogsApi.reducer,
+    [getTagsApi.reducerPath]: getTagsApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(blogApi.middleware),
+
+  devTools: env("NEXT_PUBLIC_NODE_ENV") !== "production",
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({}).concat([
+      createBlogApi.middleware,
+      myBlogsApi.middleware,
+      getTagsApi.middleware,
+    ]),
 });
 
 setupListeners(store.dispatch);
