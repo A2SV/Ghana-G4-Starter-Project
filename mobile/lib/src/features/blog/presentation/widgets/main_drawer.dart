@@ -15,15 +15,6 @@ class MainSideDrawer extends StatelessWidget {
 
   get context => null;
 
-  void Logout(BuildContext context) {
-    Hive.box(Constants.authBox).put(Constants.token, "");
-    switchScreen(
-      context: context,
-      routeName: LoginScreen.routeName,
-      popAndPush: true,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -197,12 +188,21 @@ class MainSideDrawer extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ).onPressed(
-                onTap: () => Logout(context),
+                onTap: () => logout(context),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  void logout(BuildContext context) {
+    Hive.box(Constants.authBox).put(Constants.token, null);
+    switchScreen(
+      context: context,
+      routeName: LoginScreen.routeName,
+      popAndPush: true,
     );
   }
 }

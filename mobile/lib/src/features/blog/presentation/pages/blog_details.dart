@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:dartz/dartz.dart' hide State;
 import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
 import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
 
-
-import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
-import 'package:dartz/dartz.dart' hide State;
-import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
-import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
-
-import '../../domain/domain.dart';
 
 class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
