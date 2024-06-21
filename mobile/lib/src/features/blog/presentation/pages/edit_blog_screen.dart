@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
+import 'package:starter_project/src/core/routes/routes_config.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
@@ -34,7 +38,32 @@ class EditBlogScreenState extends State<EditBlogScreen> {
       ),
       body: SingleChildScrollView(
         child: BlocConsumer<BlogBloc, BlogState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is BlogFailure) {
+              CustomSnackBar.errorSnackBar(
+                context: context,
+                message: state.message,
+              );
+            } else if (state is BlogDeleted) {
+              CustomSnackBar.successSnackBar(
+                context: context,
+                message: state.message,
+              );
+              popScreen(context);
+            } else if (state is BlogSuccess) {
+              CustomSnackBar.successSnackBar(
+                context: context,
+                message: 'Blog updated successfully',
+              );
+              popScreen(context);
+            }
+            // else if (state is BlogLoading) {
+            //   CustomSnackBar.warningSnackBar(
+            //     context: context,
+            //     message: 'Please wait...',
+            //   );
+            // }
+          },
           builder: (context, state) {
             return Form(
               key: _editBlogformKey,
@@ -62,6 +91,13 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                       .onlyPadding(1.h, 4.h, 0, 0),
                   CustomButton(
                     text: 'Save changes',
+                    showSuffixWidget: true,
+                    suffixWidget: state is BlogSaving
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          ).horizontalPadding(20.0)
+                        : Container(),
+                    disabled: state is BlogLoading,
                     horizontalPadding: 0.0,
                     onPressed: () {
                       final isValid =
@@ -87,9 +123,22 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                   ),
                   CustomButton(
                     text: 'Delete Blog',
+                    showSuffixWidget: true,
+                    suffixWidget: state is BlogLoading
+                        ? const CircularProgressIndicator(
+                            color: Colors.red,
+                          ).horizontalPadding(20.0)
+                        : Container(),
+                    disabled: state is BlogLoading,
                     horizontalPadding: 0.0,
                     gradient: false,
-                    onPressed: () {},
+                    onPressed: () {
+                      BlocProvider.of<BlogBloc>(context).add(
+                        DeleteBlogEvent(
+                          id: widget.blog.id ?? 0,
+                        ),
+                      );
+                    },
                     textStyle: context.textTheme.bodyMedium!.copyWith(
                       fontSize: 18.sp,
                       color: context.colorScheme.error,

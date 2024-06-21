@@ -1,5 +1,10 @@
 part of 'blog_bloc.dart';
 
+final class BlogDeleted extends BlogState {
+  final String message;
+  const BlogDeleted(this.message);
+}
+
 final class BlogFailure extends BlogState {
   final String message;
   const BlogFailure(this.message);
@@ -8,6 +13,8 @@ final class BlogFailure extends BlogState {
 class BlogInitial extends BlogState {}
 
 final class BlogLoading extends BlogState {}
+
+final class BlogSaving extends BlogState {}
 
 abstract class BlogState extends Equatable {
   const BlogState();

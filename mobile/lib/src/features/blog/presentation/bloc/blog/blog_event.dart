@@ -30,3 +30,10 @@ final class UpdateBlogEvent extends BlogEvent {
     required this.id,
   });
 }
+
+final class DeleteBlogEvent extends BlogEvent {
+  final int id;
+  const DeleteBlogEvent({
+    required this.id,
+  });
+}

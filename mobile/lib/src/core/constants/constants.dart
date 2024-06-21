@@ -5,4 +5,5 @@ class Constants{
   static String loginAPIEndpoint = 'http://blogapp.tryasp.net/api/UserAccount/login';
   static String createBlogAPIEndpoint = 'http://blogapp.tryasp.net/api/Blog/create';
   static String updateBlogAPIEndpoint = 'http://blogapp.tryasp.net/api/Blog/update';
+  static String deleteBlogAPIEndpoint = 'http://blogapp.tryasp.net/api/Blog/delete/';
 }

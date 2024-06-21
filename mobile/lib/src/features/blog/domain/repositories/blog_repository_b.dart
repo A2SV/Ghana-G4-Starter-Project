@@ -9,6 +9,9 @@ abstract class BlogRepository {
     required String body,
     required List<TagModel> tags,
   });
+  Future<Either<Failure, String>> delete({
+    required int id,
+  });
   Future<Either<Failure, Blog>> update({
     required int id,
     required String? title,
