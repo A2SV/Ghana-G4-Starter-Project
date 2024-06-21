@@ -10,6 +10,7 @@ import 'package:starter_project/src/features/blog/data/data_sources/data_sources
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl_b.dart';
 import 'package:starter_project/src/features/blog/domain/repositories/repository.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/create_blog_use_case_b.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/delete_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/blog/blog_bloc.dart';
 
@@ -105,11 +106,17 @@ void _initBlog() {
         blogRepository: dpLocator(),
       ),
     )
+    ..registerFactory(
+      () => DeleteBlogUseCase(
+        blogRepository: dpLocator(),
+      ),
+    )
     // Bloc
     ..registerLazySingleton(
       () => BlogBloc(
         updateBlogUseCase: dpLocator(),
         createBlogUseCase: dpLocator(),
+        deleteBlogUseCase: dpLocator(),
       ),
     );
 }

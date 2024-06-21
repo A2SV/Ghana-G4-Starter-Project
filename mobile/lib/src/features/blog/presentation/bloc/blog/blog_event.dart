@@ -22,11 +22,18 @@ final class UpdateBlogEvent extends BlogEvent {
   final String title;
   final String body;
   final List<TagModel> tags;
-  final String id;
+  final int id;
   const UpdateBlogEvent({
     required this.title,
     required this.body,
     required this.tags,
+    required this.id,
+  });
+}
+
+final class DeleteBlogEvent extends BlogEvent {
+  final int id;
+  const DeleteBlogEvent({
     required this.id,
   });
 }

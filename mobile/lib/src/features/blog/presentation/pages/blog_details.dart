@@ -1,18 +1,47 @@
-import 'package:flutter/material.dart';
-import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:dartz/dartz.dart' hide State;
+import 'package:flutter/material.dart';
+import 'package:starter_project/src/core/routes/routes_config.dart';
+import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl.dart';
 import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
 import 'package:starter_project/src/features/blog/domain/entities/tags.dart';
 import 'package:starter_project/src/features/blog/domain/entities/user_account.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
 
+List<Widget> tagListWidget(Blog blog) {
+  List<Widget> output = [];
+  
+  for (Tag tag in blog.tags!) {
+    print('tag: ${tag.label}');
+    output.add(Container(
+      margin: const EdgeInsets.all(2),
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black54,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(
+              horizontal: 14, vertical: 6), // Adjust padding
+          minimumSize: const Size(0, 0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8), // Adjust border radius
+          ),
+        ),
+        child: Text(
+          tag.label!,
+          style: const TextStyle(fontSize: 10),
+        ),
+      ),
+    ));
+  }
+
+  return output;
+}
 
 class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
   final String id;
 
-  const BlogDetails({Key? key, required String this.id}) : super(key: key);
-
-
+  const BlogDetails({super.key, required this.id});
 
   @override
   _BlogDetailsState createState() => _BlogDetailsState();
@@ -72,10 +101,10 @@ class _BlogDetailsState extends State<BlogDetails> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       blog.title!,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
@@ -83,10 +112,10 @@ class _BlogDetailsState extends State<BlogDetails> {
                   ),
                   const SizedBox(height: 8),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       blog.userAccount!.email!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 17, 12, 12),
                       ),
                     ),
@@ -98,10 +127,10 @@ class _BlogDetailsState extends State<BlogDetails> {
                   ),
                   const SizedBox(height: 23),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(16, 0, 16, 40),
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 40),
                     child: Text(
                       blog.body!,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black,
                           fontWeight: FontWeight.w300),
@@ -111,47 +140,25 @@ class _BlogDetailsState extends State<BlogDetails> {
               ),
             );
           } else {
-            return Center(child: Text('No data found'));
+            return const Center(child: Text('No data found'));
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          BlogRepositoryImpl().viewBlog(26);
+          final res = await BlogRepositoryImpl().viewBlog(int.parse(widget.id));
+          if (res.isRight()) {
+            final blog = res.getOrElse(
+                () => Blog(0, '', '', '', UserAccount(0, '', '', '', ''), []));
+            switchScreen(
+                context: context,
+                routeName: EditBlogScreen.routeName,
+                extra: blog);
+          }
         },
         backgroundColor: const Color(0xFF436CC9),
         child: const Icon(Icons.edit, color: Colors.white),
       ),
     );
   }
-}
-
-List<Widget> tagListWidget(Blog blog) {
-  List<Widget> output = [];
-  print('tags: ${blog.tags}');
-  for (Tag tag in blog.tags!) {
-    print('tag: ${tag.label}');
-    output.add(Container(
-      margin: EdgeInsets.all(2),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black54,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(
-              horizontal: 14, vertical: 6), // Adjust padding
-          minimumSize: const Size(0, 0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8), // Adjust border radius
-          ),
-        ),
-        child: Text(
-          tag.label!,
-          style: const TextStyle(fontSize: 10),
-        ),
-      ),
-    ));
-  }
-
-  return output;
 }

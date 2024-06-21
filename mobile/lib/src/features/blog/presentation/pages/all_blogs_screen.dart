@@ -68,7 +68,6 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
             List<Blog> blogs = [];
             result!.fold((error) => error, (res) => blogs = res);
 
-            print('blogs:${blogs[0].tags}');
 
             int blogCount = blogs.length;
 

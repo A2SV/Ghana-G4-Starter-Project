@@ -13,8 +13,11 @@ abstract class BlogRemoteDataSource {
     required String body,
     required List<TagModel> tags,
   });
+  Future<String> delete({
+    required int id,
+  });
   Future<Blog> update({
-    required String id,
+    required int id,
     required String? title,
     required String? body,
     required List<TagModel>? tags,
@@ -50,8 +53,25 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   }
 
   @override
+  Future<String> delete({required int id}) async {
+    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final response = await client.post(
+      Uri.parse('${Constants.deleteBlogAPIEndpoint}$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
+    );
+    if (response.statusCode == 200) {
+      return 'Blog deleted successfully';
+    } else {
+      throw ServerException(errorMessage: response.body);
+    }
+  }
+
+  @override
   Future<Blog> update(
-      {required String id,
+      {required int id,
       required String? title,
       required String? body,
       required List<Tag>? tags}) async {
@@ -64,6 +84,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       },
       body: json.encode({"id": id, "title": title, "body": body, "tags": tags}),
     );
+    print(response.body);
     if (response.statusCode == 200) {
       return BlogModel.fromJson(json.decode(response.body));
     } else {
