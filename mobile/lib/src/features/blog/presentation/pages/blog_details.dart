@@ -9,7 +9,7 @@ import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_s
 
 List<Widget> tagListWidget(Blog blog) {
   List<Widget> output = [];
-  print('tags: ${blog.tags}');
+  
   for (Tag tag in blog.tags!) {
     print('tag: ${tag.label}');
     output.add(Container(
