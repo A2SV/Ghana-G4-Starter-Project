@@ -24,7 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-DotNetEnv.Env.TraversePath().Load("../dev.env");
+DotNetEnv.Env.Load();
 var host = System.Environment.GetEnvironmentVariable("HOST");
 var user_id = System.Environment.GetEnvironmentVariable("USER_ID");
 var password = System.Environment.GetEnvironmentVariable("PASSWORD");
