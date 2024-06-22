@@ -22,6 +22,9 @@ abstract class BlogRemoteDataSource {
     required String? body,
     required List<TagModel>? tags,
   });
+
+  Future<List<BlogModel>> viewAllBlogs();
+  Future<BlogModel> viewBlog(int id);
 }
 
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
@@ -84,11 +87,51 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       },
       body: json.encode({"id": id, "title": title, "body": body, "tags": tags}),
     );
-    print(response.body);
     if (response.statusCode == 200) {
       return BlogModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException(errorMessage: response.body);
+    }
+  }
+
+  @override
+  Future<List<BlogModel>> viewAllBlogs() async {
+    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final response = await http.get(
+      Uri.parse(Constants.viewBlogsAPIEndpoint),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      List<BlogModel> blogs = [];
+      for (var item in data) {
+        blogs.add(BlogModel.fromJson(item));
+      }
+      return blogs;
+    } else {
+      throw ServerException(errorMessage: response.body);
+    }
+  }
+
+  @override
+  Future<BlogModel> viewBlog(int id) async {
+    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final response = await http.get(
+      Uri.parse('${Constants.viewBlogsAPIEndpoint}$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return BlogModel.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException(errorMessage: 'Blog not found');
     }
   }
 }

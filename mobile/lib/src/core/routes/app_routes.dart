@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/login_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
-//import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding3/login.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';

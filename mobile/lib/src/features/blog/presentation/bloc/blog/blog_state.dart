@@ -9,6 +9,10 @@ final class BlogFailure extends BlogState {
   final String message;
   const BlogFailure(this.message);
 }
+final class TagFailure extends TagState {
+  final String message;
+  const TagFailure(this.message);
+}
 
 class BlogInitial extends BlogState {}
 
@@ -22,8 +26,18 @@ abstract class BlogState extends Equatable {
   @override
   List<Object> get props => [];
 }
+abstract class TagState extends Equatable {
+  const TagState();
+
+  @override
+  List<Object> get props => [];
+}
 
 final class BlogSuccess extends BlogState {
   final Blog blog;
   const BlogSuccess(this.blog);
+}
+final class TagSuccess extends TagState {
+  final Tag tag;
+  const TagSuccess(this.tag);
 }

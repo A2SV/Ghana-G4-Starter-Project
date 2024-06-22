@@ -5,9 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blog_details.dart';
 
-import '../../features/blog/domain/entities/tags.dart';
 
 class BlogCard extends StatelessWidget {
   final String? topic;
@@ -22,7 +20,7 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/blog-details-screen/${id}');
+        context.push('/blog-details-screen/$id');
         // context.go('/blog-details-screen/${id}');
       },
       child: Container(
@@ -75,7 +73,7 @@ class BlogCard extends StatelessWidget {
                         height: 11.h,
                         width: 40.w,
                         child: Text(
-                          this.topic!,
+                          topic!,
                           softWrap: true,
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
@@ -86,9 +84,9 @@ class BlogCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Wrap(children: this.tag!),
+                      Wrap(children: tag!),
                       Text(
-                        this.email!,
+                        email!,
                         maxLines: 1,
                         style: context.textTheme.displaySmall!.copyWith(
                           color: AppLightThemeColors.kDarkTextColor,
@@ -105,7 +103,7 @@ class BlogCard extends StatelessWidget {
             Text(
               // this.date!,
               DateFormat.yMMMd().format(
-                  DateFormat('yyyy-MM-dd').parse(this.date!.substring(0, 10))),
+                  DateFormat('yyyy-MM-dd').parse(date!.substring(0, 10))),
               style: context.textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,

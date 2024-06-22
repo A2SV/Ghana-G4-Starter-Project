@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/error/exception.dart';
 import 'package:starter_project/src/features/auth/data/models/login_return_model.dart';
-import 'package:starter_project/src/features/auth/data/models/user_account_model.dart';
+import 'package:starter_project/src/core/models/user_account_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoginReturnModel> login({

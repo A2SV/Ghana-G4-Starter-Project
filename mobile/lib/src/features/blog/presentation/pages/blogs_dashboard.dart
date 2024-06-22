@@ -1,55 +1,32 @@
 import 'dart:math';
 
-import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
-import 'package:starter_project/src/features/auth/authentication.dart';
-import 'package:starter_project/src/features/blog/data/repositories/tag_repository_impl.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
+import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
 import '../../../../../generated/assets.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
-import '../../../../core/widgets/blog_card.dart';
 import '../../../../core/widgets/custom_textformfield.dart';
-import '../../data/repositories/blog_repository_impl.dart';
-import '../../domain/entities/tags.dart';
-import '../widgets/category_info.dart';
 import 'all_blogs_screen.dart';
 
 class BlogsDashboard extends StatefulWidget {
-  const BlogsDashboard({super.key});
   static const routeName = "blogs-dashboard";
+  const BlogsDashboard({super.key});
 
   @override
   State<BlogsDashboard> createState() => _BlogsDashboardState();
 }
 
 class _BlogsDashboardState extends State<BlogsDashboard> {
-  int _generateRandomNumber() {
-    int min = 10;
-    int max = 300;
-    return min + Random().nextInt(max - min + 1);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state is AuthSuccess){
-          print('User logged in');
-        }
-        else if (state is AuthFailure){
-          print('User not logged in');
-        }
-        else if (state is AuthLoading){
-          print('Loading');
-        }
-      },
+    return BlocConsumer<BlogBloc, BlogState>(
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -107,63 +84,64 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                 ),
                 SizedBox(height: 4.h),
                 SizedBox(
-                    height: 14.h,
-                    child: FutureBuilder(
-                      future: TagRepositoryImpl().viewAllTags(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        } else if (snapshot.hasData) {
-                          Either<String, List<Tag>>? result = snapshot.data;
-                          List<Tag> tags = [];
-                          result!.fold(
-                            (error) => error,
-                            (res) => tags = res,
-                          );
+                  height: 14.h,
+                  // child: FutureBuilder(
+                  //   future: TagRepositoryImpl().viewAllTags(),
+                  //   builder: (context, snapshot) {
+                  //     if (snapshot.connectionState ==
+                  //         ConnectionState.waiting) {
+                  //       return const Center(
+                  //           child: CircularProgressIndicator());
+                  //     } else if (snapshot.hasData) {
+                  //       Either<String, List<Tag>>? result = snapshot.data;
+                  //       List<Tag> tags = [];
+                  //       result!.fold(
+                  //         (error) => error,
+                  //         (res) => tags = res,
+                  //       );
 
-                          int blogCount = tags.length;
+                  //       int blogCount = tags.length;
 
-                          return ListView.builder(
-                            itemCount: blogCount,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              if (index == 0) {
-                                return Row(
-                                  children: [
-                                    SizedBox(width: 5.w),
-                                    CategoryInfo(
-                                      title: tags[index].label!,
-                                      updateCount: _generateRandomNumber(),
-                                    ),
-                                    SizedBox(width: 5.w),
-                                  ],
-                                );
-                              }
-                              return Row(
-                                children: [
-                                  CategoryInfo(
-                                    title: tags[index].label!,
-                                    updateCount: _generateRandomNumber(),
-                                  ),
-                                  SizedBox(width: 5.w),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          return const Center(
-                            child: Text(
-                              "Something went Wrong",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          );
-                        }
-                      },
-                    )),
+                  //       return ListView.builder(
+                  //         itemCount: blogCount,
+                  //         scrollDirection: Axis.horizontal,
+                  //         itemBuilder: (context, index) {
+                  //           if (index == 0) {
+                  //             return Row(
+                  //               children: [
+                  //                 SizedBox(width: 5.w),
+                  //                 CategoryInfo(
+                  //                   title: tags[index].label!,
+                  //                   updateCount: _generateRandomNumber(),
+                  //                 ),
+                  //                 SizedBox(width: 5.w),
+                  //               ],
+                  //             );
+                  //           }
+                  //           return Row(
+                  //             children: [
+                  //               CategoryInfo(
+                  //                 title: tags[index].label!,
+                  //                 updateCount: _generateRandomNumber(),
+                  //               ),
+                  //               SizedBox(width: 5.w),
+                  //             ],
+                  //           );
+                  //         },
+                  //       );
+                  //     } else {
+                  //       return const Center(
+                  //         child: Text(
+                  //           "Something went Wrong",
+                  //           style: TextStyle(
+                  //             color: Colors.black,
+                  //           ),
+                  //         ),
+                  //       );
+                  //     }
+                  //   },
+                  // )
+                ),
                 SizedBox(height: 2.h),
                 CustomTextFormField(
                   borderRadiusValue: 30.0,
@@ -201,6 +179,9 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                         ),
                       ).onPressed(
                         onTap: () {
+                          BlocProvider.of<BlogBloc>(context).add(
+                            const ViewAllBlogsEvent(),
+                          );
                           switchScreen(
                               context: context,
                               routeName: AllBlogsScreen.routeName);
@@ -210,42 +191,42 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                   ),
                 ),
                 SizedBox(height: 1.h),
-                FutureBuilder<Either<String, List<Blog>>>(
-                  future: BlogRepositoryImpl()
-                      .viewAllBlogs(), // Change the ID as needed
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                          child: Text(
-                        'Error: ${snapshot.error}',
-                        style: const TextStyle(color: Colors.black),
-                      ));
-                    } else if (snapshot.hasData) {
-                      print('loading..');
-                      Either<String, List<Blog>>? result = snapshot.data;
-                      List<Blog> blogs = [];
-                      result!.fold((error) => error, (res) => blogs = res);
+                // FutureBuilder<Either<String, List<Blog>>>(
+                //   future: BlogRepositoryImpl()
+                //       .viewAllBlogs(), // Change the ID as needed
+                //   builder: (context, snapshot) {
+                //     if (snapshot.hasError) {
+                //       return Center(
+                //           child: Text(
+                //         'Error: ${snapshot.error}',
+                //         style: const TextStyle(color: Colors.black),
+                //       ));
+                //     } else if (snapshot.hasData) {
+                //       print('loading..');
+                // Either<String, List<Blog>>? result = snapshot.data;
+                // Either<String, List<Blog>>? result = null;
+                // List<Blog> blogs = [];
+                // result!.fold((error) => error, (res) => blogs = res);
 
+                // int blogCount = blogs.length;
 
-                      int blogCount = blogs.length;
-
-                      return Column(
-                        children: [
-                          for (int i = 0; i < blogCount; i++)
-                            BlogCard(
-                              topic: blogs[i].title,
-                              email: blogs[i].userAccount!.email,
-                              tag: tagWidget(blogs[i].tags!, context),
-                              date: blogs[i].createdDateTime,
-                              id: blogs[i].id,
-                            ).onlyPadding(0, 10.0, 20.0, 20.0),
-                        ],
-                      );
-                    } else {
-                      return Center(child: Text('No data found'));
-                    }
-                  },
-                ),
+                // return Column(
+                //   children: [
+                //     for (int i = 0; i < blogCount; i++)
+                //       BlogCard(
+                //         topic: blogs[i].title,
+                //         email: blogs[i].userAccount!.email,
+                //         tag: tagWidget(blogs[i].tags!, context),
+                //         date: blogs[i].createdDateTime,
+                //         id: blogs[i].id,
+                //       ).onlyPadding(0, 10.0, 20.0, 20.0),
+                //   ],
+                // );
+                //     } else {
+                //       return const Center(child: Text('No data found'));
+                //     }
+                //   },
+                // ),
                 SizedBox(height: 3.h),
               ],
             ),
@@ -266,5 +247,11 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
         );
       },
     );
+  }
+
+  int _generateRandomNumber() {
+    int min = 10;
+    int max = 300;
+    return min + Random().nextInt(max - min + 1);
   }
 }

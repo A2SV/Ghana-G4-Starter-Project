@@ -10,7 +10,7 @@ import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 

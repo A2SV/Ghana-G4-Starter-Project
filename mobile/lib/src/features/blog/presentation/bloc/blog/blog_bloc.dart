@@ -2,9 +2,16 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter_project/src/features/blog/data/models/models.dart';
-import 'package:starter_project/src/features/blog/domain/domain.dart';
+import 'package:starter_project/src/core/use_case/use_case.dart';
+import 'package:starter_project/src/features/blog/data/models/tag_model_b.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
+import 'package:starter_project/src/features/blog/domain/entities/tag_b.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/create_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/delete_blog_use_case_b.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_use_case_b.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/view_all_tags_use_case_b.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/view_blog_use_case.dart';
 
 part 'blog_event.dart';
 part 'blog_state.dart';
@@ -13,19 +20,30 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
   final CreateBlogUseCase _createBlogUseCase;
   final UpdateBlogUseCase _updateBlogUseCase;
   final DeleteBlogUseCase _deleteBlogUseCase;
+  final ViewAllBlogUseCase _viewAllBlogUseCase;
+  final ViewBlogUseCase _viewBlogUseCase;
+  final ViewTagsUseCase _viewTagsUseCase;
 
   BlogBloc({
     required UpdateBlogUseCase updateBlogUseCase,
+    required ViewAllBlogUseCase viewAllBlogUseCase,
     required DeleteBlogUseCase deleteBlogUseCase,
+    required ViewBlogUseCase viewBlogUseCase,
     required CreateBlogUseCase createBlogUseCase,
+    required ViewTagsUseCase viewTagsUseCase,
   })  : _updateBlogUseCase = updateBlogUseCase,
         _createBlogUseCase = createBlogUseCase,
         _deleteBlogUseCase = deleteBlogUseCase,
+        _viewAllBlogUseCase = viewAllBlogUseCase,
+        _viewBlogUseCase = viewBlogUseCase,
+        _viewTagsUseCase = viewTagsUseCase,
         super(BlogInitial()) {
     on<BlogEvent>((_, emit) => emit(BlogLoading()));
     on<CreateBlogEvent>(_onCreateBlog);
     on<UpdateBlogEvent>(_onUpdateBlog);
     on<DeleteBlogEvent>(_onDeleteBlog);
+    on<ViewAllBlogsEvent>(_onViewAllBlogs);
+    on<ViewBlogEvent>(_onViewBlog);
   }
 
   void _emitBlogSuccess(
@@ -33,6 +51,12 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     Emitter<BlogState> emit,
   ) {
     emit(BlogSuccess(blog));
+  }
+  void _emitTagSuccess(
+    Tag tag,
+    Emitter<TagState> emit,
+  ) {
+    emit(TagSuccess(tag));
   }
 
   FutureOr<void> _onCreateBlog(
@@ -78,6 +102,36 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
       (blog) => _emitBlogSuccess(blog, emit),
+    );
+    return null;
+  }
+
+  FutureOr<void> _onViewAllBlogs(
+      ViewAllBlogsEvent event, Emitter<BlogState> emit) async {
+    final res = await _viewAllBlogUseCase(NoParams());
+    res.fold(
+      (failure) => emit(BlogFailure(failure.errorMessage)),
+      (blog) => _emitBlogSuccess(blog[0], emit),
+    );
+    return null;
+  }
+
+  FutureOr<void> _onViewBlog(
+      ViewBlogEvent event, Emitter<BlogState> emit) async {
+    final res = await _viewBlogUseCase(ViewBlogParams(id: event.id));
+    res.fold(
+      (failure) => emit(BlogFailure(failure.errorMessage)),
+      (blog) => _emitBlogSuccess(blog, emit),
+    );
+    return null;
+  }
+
+  FutureOr<void> _onViewTags(
+      ViewTagsEvent event, Emitter<TagState> emit) async {
+    final res = await _viewTagsUseCase(NoParams());
+    res.fold(
+      (failure) => emit(TagFailure(failure.errorMessage)),
+      (tag) => _emitTagSuccess(tag[0], emit),
     );
     return null;
   }

@@ -1,4 +1,4 @@
-import 'package:starter_project/src/features/auth/data/models/user_account_model.dart';
+import 'package:starter_project/src/core/models/user_account_model.dart';
 
 import 'package:starter_project/src/features/auth/domain/domain.dart';
 

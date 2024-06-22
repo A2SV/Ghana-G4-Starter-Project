@@ -2,14 +2,44 @@ import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
+import 'package:starter_project/src/core/dp_injection/dependency_injection.dart';
+import 'package:starter_project/src/core/error/error.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
+import 'package:starter_project/src/core/use_case/use_cases.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/widgets/widgets.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
+import 'package:starter_project/src/features/blog/domain/entities/tag_b.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
 
-import '../../data/repositories/blog_repository_impl.dart';
-import '../../domain/entities/tags.dart';
-import '../../domain/entities/user_account.dart';
+
+List<Widget> tagWidget(List<Tag> tags, BuildContext context) {
+  List<Widget> output = [];
+
+  print('tags $tags');
+
+  for (Tag tag in tags) {
+    print('new tag');
+    output.add(Container(
+      margin: const EdgeInsets.all(2),
+      decoration: BoxDecoration(
+        color: AppLightThemeColors.kSecondaryBackgroundColor,
+        borderRadius: BorderRadius.circular(3.0),
+      ),
+      child: Text(
+        tag.label,
+        maxLines: 1,
+        style: context.textTheme.displayLarge!.copyWith(
+          fontSize: 13.sp,
+          color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
+        ),
+      ).symmetricPadding(10.0, 5.0),
+    ).verticalPadding(10.0));
+  }
+
+  print('tagWidget:$output');
+  return output;
+}
 
 class AllBlogsScreen extends StatefulWidget {
   static const String routeName = 'all-blogs-screen';
@@ -51,8 +81,9 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
           ).onlyPadding(0, 10, 20, 20),
         ),
       ),
-      body: FutureBuilder<Either<String, List<Blog>>>(
-        future: BlogRepositoryImpl().viewAllBlogs(), // Change the ID as needed
+      body: FutureBuilder<Either<Failure, List<Blog>>>(
+        future: ViewAllBlogUseCase(blogRepository: dpLocator())
+            .call(NoParams()), // Change the ID as needed
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -64,10 +95,9 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
             ));
           } else if (snapshot.hasData) {
             print('loading..');
-            Either<String, List<Blog>>? result = snapshot.data;
+            Either<Failure, List<Blog>>? result = snapshot.data;
             List<Blog> blogs = [];
             result!.fold((error) => error, (res) => blogs = res);
-
 
             int blogCount = blogs.length;
 
@@ -86,7 +116,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
                             topic: blogs[index].title,
                             email: blogs[index].userAccount!.email,
                             tag: tagWidget(blogs[index].tags!, context),
-                            date: blogs[index].createdDateTime,
+                            date: blogs[index].createdDateTime.toString(),
                             id: blogs[index].id,
                           ).onlyPadding(0, 10.0, 20.0, 20.0)
                         ]);
@@ -95,7 +125,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
                         topic: blogs[index].title,
                         email: blogs[index].userAccount!.email,
                         tag: tagWidget(blogs[index].tags!, context),
-                        date: blogs[index].createdDateTime,
+                        date: blogs[index].createdDateTime.toString(),
                         id: blogs[index].id,
                       ).onlyPadding(0, 10.0, 20.0, 20.0);
                     },
@@ -104,7 +134,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
               ],
             );
           } else {
-            return Center(child: Text('No data found'));
+            return const Center(child: Text('No data found'));
           }
         },
       ),
@@ -122,32 +152,4 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
     _searchController = TextEditingController();
     super.initState();
   }
-}
-
-List<Widget> tagWidget(List<Tag> tags, BuildContext context) {
-  List<Widget> output = [];
-
-  print('tags ${tags}');
-
-  for (Tag tag in tags) {
-    print('new tag');
-    output.add(Container(
-      margin: EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        color: AppLightThemeColors.kSecondaryBackgroundColor,
-        borderRadius: BorderRadius.circular(3.0),
-      ),
-      child: Text(
-        tag.label!,
-        maxLines: 1,
-        style: context.textTheme.displayLarge!.copyWith(
-          fontSize: 13.sp,
-          color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
-        ),
-      ).symmetricPadding(10.0, 5.0),
-    ).verticalPadding(10.0));
-  }
-
-  print('tagWidget:${output}');
-  return output;
 }
