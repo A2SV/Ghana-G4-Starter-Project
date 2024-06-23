@@ -1,15 +1,12 @@
-import { render, screen, RenderOptions } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Header from "../../components/Header";
-import { SessionProvider, SessionProviderProps } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { ReactElement } from "react";
 
 // Custom render function with proper typing
-const customRender = (
-  ui: ReactElement,
-
-) => {
-  return render(<SessionProvider >{ui}</SessionProvider>);
+const customRender = (ui: ReactElement) => {
+  return render(<SessionProvider>{ui}</SessionProvider>);
 };
 
 describe("Header", () => {
