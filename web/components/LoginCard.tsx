@@ -3,10 +3,9 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import { env } from "next-runtime-env";
 import Image from "next/image";
 import ErrorIcon from "@/public/ErrorIcon.svg";
+import { signIn } from "next-auth/react";
 
 export default function LoginCard() {
   const [email, setEmail] = useState<string>("");
@@ -21,26 +20,25 @@ export default function LoginCard() {
     setLoading(true);
     setError(null);
 
-    const user = { email, password };
-
     try {
-      const loginUrl = env("NEXT_PUBLIC_BASE_URL") + "UserAccount/login";
-      const response = await axios.post(loginUrl, user);
+      const response = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
 
-      const token = response.data.token;
-      sessionStorage.setItem("token", token);
-      router.push("/profile/myblogs");
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        setError(error.response?.data);
+      if (response?.error) {
+        setError(response.error);
+        setLoading(false);
+        console.error(response.error);
       } else {
-        setError("An unexpected error occurred.");
+        router.push("/");
       }
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+      setLoading(false);
     }
-
-    setLoading(false);
   };
-
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };

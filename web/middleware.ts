@@ -2,40 +2,32 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 import createMiddleware from "next-intl/middleware";
+import { env } from "next-runtime-env";
 
 export const middleware = async (req: NextRequest): Promise<NextResponse> => {
   const { pathname } = req.nextUrl;
-  const secret = process.env.NEXTAUTH_SECRET;
-  const salt = process.env.NEXTAUTH_SALT;
 
-  if (!secret || !salt) {
-    throw new Error("NEXTAUTH_SECRET or NEXTAUTH_SALT is not defined in environment variables");
-  }
-
-  const session = await getToken({ req, secret, salt });
+  const session = await getToken({ req, secret: env("NEXTAUTH_SECRET") });
 
   const url = req.nextUrl.clone();
 
-  if (pathname === "/admin") {
-    url.pathname = "/admin/dashboard";
-    return NextResponse.redirect(url);
-  }
-
-  if (pathname === "/auth") {
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
-  }
-
-  if (pathname.startsWith("/auth")) {
-    if (session !== null) {
-      url.pathname = "/admin/dashboard";
+  if (pathname === "/login" || pathname === "/signup") {
+    if (session) {
+      url.pathname = "/blog";
       return NextResponse.redirect(url);
     }
   }
 
-  if (pathname.startsWith("/admin")) {
-    if (session === null) {
-      url.pathname = "/auth/login";
+  if (pathname.startsWith("/profile")) {
+    if (!session) {
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
+  }
+
+  if (pathname.startsWith("/blog")) {
+    if (!session) {
+      url.pathname = "/login";
       return NextResponse.redirect(url);
     }
   }
@@ -44,7 +36,7 @@ export const middleware = async (req: NextRequest): Promise<NextResponse> => {
 };
 
 export const config = {
-  matcher: ["/admin/:path*", "/auth/:path*", "/(am|en)/:path*"],
+  matcher: ["/login", "/signup", "/profile/:path*", "/blog/:path*"],
 };
 
 export default createMiddleware({

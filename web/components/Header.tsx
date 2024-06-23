@@ -1,10 +1,18 @@
+"use client";
 import Link from "next/link";
 import React from "react";
-import headerImage from "../public/header_image.jpg";
 import A2SVImage from "../public/Group 25.png";
+import AvatarImage from "@/public/avatarimage.jpg";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import { Avatar, Dropdown } from "flowbite-react";
 
 const Header = () => {
+  const { data: session } = useSession();
+  const userIsLoggedIn = !!session;
+  const handleSignout = async () => {
+    await signOut();
+  };
   return (
     <div className="h-32 flex justify-between items-center px-4  font-sans">
       <div>
@@ -22,11 +30,34 @@ const Header = () => {
           Profile
         </Link>
       </div>
-      <Link href="#">
-        <div className="relative">
-          <Image width={40} className="rounded-full" src={headerImage} alt="Profile image" />
+      {userIsLoggedIn ? (
+        <Link href="#">
+          <div className="w-[70px] h-[70px]">
+            <Dropdown
+              label={<Avatar alt="User settings" img={AvatarImage.src} rounded />}
+              arrowIcon={false}
+              inline
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">
+                  {session?.user?.firstName} {session?.user?.lastName}
+                </span>
+                <span className="block truncate text-sm font-medium">{session?.user?.email}</span>
+              </Dropdown.Header>
+              <Dropdown.Divider />
+              <Dropdown.Item>
+                <div onClick={handleSignout}>Sign out</div>
+              </Dropdown.Item>
+            </Dropdown>
+          </div>
+        </Link>
+      ) : (
+        <div>
+          <Link href="/login">
+            <button className="bg-blue text-white px-4 py-2 rounded-md">Login</button>
+          </Link>
         </div>
-      </Link>
+      )}
     </div>
   );
 };

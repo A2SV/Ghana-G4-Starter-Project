@@ -7,9 +7,8 @@ declare module "next-auth" {
    * with additional user fields.
    */
   interface User {
-    role?: string | null;
-    first_name?: string | null;
-    last_name?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
     email?: string | null;
     token: string | null;
     image?: string | null;
