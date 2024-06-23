@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { SessionProvider } from "next-auth/react"; // Import SessionProvider
 
 import ProfileBlogs from "@/components/ProfileBlogs";
@@ -146,54 +146,50 @@ const mockBlogs = [
 ];
 
 describe("ProfileBlogs", () => {
-    beforeEach(() => {
-      useMyBlogsQuery.mockReturnValue({
-        data: mockBlogs,
-        isLoading: false,
-        error: null,
-      });
+  beforeEach(() => {
+    useMyBlogsQuery.mockReturnValue({
+      data: mockBlogs,
+      isLoading: false,
+      error: null,
     });
-  
-    
-    it("renders ProfileBlogs component", () => {
-      // Wrap ProfileBlogs with SessionProvider in your test
-      render(
-        <SessionProvider>
-          <ProfileBlogs />
-        </SessionProvider>
-      );
-    });
-  
-    it("displays 'Manage blogs' text correctly", () => {
-      // Wrap ProfileBlogs with SessionProvider in your test
-      render(
-        <SessionProvider>
-          <ProfileBlogs />
-        </SessionProvider>
-      );
-      expect(screen.getByText("Manage blogs")).toBeInTheDocument();
-    });
-  
-    it("displays 'Edit, Delete and View the Status of your blogs' text correctly", () => {
-      // Wrap ProfileBlogs with SessionProvider in your test
-      render(
-        <SessionProvider>
-          <ProfileBlogs />
-        </SessionProvider>
-      );
-      expect(screen.getByText("Edit, Delete and View the Status of your blogs")).toBeInTheDocument();
-    });
-  
-  
-  
-    it("renders ProfileBlogsCard components", () => {
-      // Wrap ProfileBlogs with SessionProvider in your test
-      render(
-        <SessionProvider>
-          <ProfileBlogs />
-        </SessionProvider>
-      );
-      // Assuming each ProfileBlogsCard renders 1 image
-    }); // <- Add this closing curly brace
   });
-  
+
+  it("renders ProfileBlogs component", () => {
+    // Wrap ProfileBlogs with SessionProvider in your test
+    render(
+      <SessionProvider>
+        <ProfileBlogs />
+      </SessionProvider>
+    );
+  });
+
+  it("displays 'Manage blogs' text correctly", () => {
+    // Wrap ProfileBlogs with SessionProvider in your test
+    render(
+      <SessionProvider>
+        <ProfileBlogs />
+      </SessionProvider>
+    );
+    expect(screen.getByText("Manage blogs")).toBeInTheDocument();
+  });
+
+  it("displays 'Edit, Delete and View the Status of your blogs' text correctly", () => {
+    // Wrap ProfileBlogs with SessionProvider in your test
+    render(
+      <SessionProvider>
+        <ProfileBlogs />
+      </SessionProvider>
+    );
+    expect(screen.getByText("Edit, Delete and View the Status of your blogs")).toBeInTheDocument();
+  });
+
+  it("renders ProfileBlogsCard components", () => {
+    // Wrap ProfileBlogs with SessionProvider in your test
+    render(
+      <SessionProvider>
+        <ProfileBlogs />
+      </SessionProvider>
+    );
+    // Assuming each ProfileBlogsCard renders 1 image
+  }); // <- Add this closing curly brace
+});
