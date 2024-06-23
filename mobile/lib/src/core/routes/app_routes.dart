@@ -58,11 +58,7 @@ final routes = <GoRoute>[
     },
   ),
 
-  GoRoute(
-    name: AppRoutes.allblogsScreen,
-    path: '/${AllBlogsScreen.routeName}',
-    builder: (context, state) => const AllBlogsScreen(),
-  ),
+
   GoRoute(
     name: AppRoutes.profileEditScreen,
     path: '/${ProfileEditPage.routeName}',

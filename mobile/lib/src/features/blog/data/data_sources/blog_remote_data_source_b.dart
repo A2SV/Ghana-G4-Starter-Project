@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/error/exception.dart';
+import 'package:starter_project/src/features/auth/authentication.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
 import 'package:starter_project/src/features/blog/domain/domain.dart';
 
@@ -29,13 +30,14 @@ abstract class BlogRemoteDataSource {
 
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   final http.Client client;
-  BlogRemoteDataSourceImpl({required this.client});
+  final Box<LoginReturnModel> box;
+  BlogRemoteDataSourceImpl({required this.client,required this.box,});
   @override
   Future<Blog> create(
       {required String title,
       required String body,
       required List<TagModel> tags}) async {
-    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final token = box.get(Constants.loginReturn)!.token;
     final response = await client.post(
       Uri.parse(Constants.createBlogAPIEndpoint),
       headers: {
@@ -57,7 +59,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
 
   @override
   Future<String> delete({required int id}) async {
-    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final token = box.get(Constants.loginReturn)!.token;
     final response = await client.post(
       Uri.parse('${Constants.deleteBlogAPIEndpoint}$id'),
       headers: {
@@ -78,7 +80,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       required String? title,
       required String? body,
       required List<Tag>? tags}) async {
-    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final token = box.get(Constants.loginReturn)!.token;
     final response = await client.post(
       Uri.parse(Constants.updateBlogAPIEndpoint),
       headers: {
@@ -96,7 +98,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
 
   @override
   Future<List<BlogModel>> viewAllBlogs() async {
-    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final token = box.get(Constants.loginReturn)!.token;
     final response = await http.get(
       Uri.parse(Constants.viewBlogsAPIEndpoint),
       headers: {
@@ -104,7 +106,6 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
         'Authorization': 'Bearer $token',
       },
     );
-
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
       List<BlogModel> blogs = [];
@@ -119,7 +120,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
 
   @override
   Future<BlogModel> viewBlog(int id) async {
-    final token = Hive.box(Constants.authBox).get(Constants.token) ?? "";
+    final token = box.get(Constants.loginReturn)!.token;
     final response = await http.get(
       Uri.parse('${Constants.viewBlogsAPIEndpoint}$id'),
       headers: {

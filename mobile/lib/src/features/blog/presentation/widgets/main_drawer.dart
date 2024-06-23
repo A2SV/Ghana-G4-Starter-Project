@@ -198,7 +198,8 @@ class MainSideDrawer extends StatelessWidget {
   }
 
   void logout(BuildContext context) {
-    Hive.box(Constants.authBox).put(Constants.token, null);
+
+    Hive.box(Constants.authBox).put(Constants.loginReturn, null);
     switchScreen(
       context: context,
       routeName: LoginScreen.routeName,

@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/error/exception.dart';
-import 'package:starter_project/src/features/auth/data/models/login_return_model.dart';
 import 'package:starter_project/src/core/models/user_account_model.dart';
+import 'package:starter_project/src/features/auth/data/models/login_return_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoginReturnModel> login({
@@ -41,8 +40,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     if (response.statusCode == 200) {
       final res = json.decode(response.body);
-      Hive.box(Constants.authBox).put(Constants.token, res['token']);
-
       return LoginReturnModel.fromJson(res);
     } else {
       throw ServerException(errorMessage: response.body);

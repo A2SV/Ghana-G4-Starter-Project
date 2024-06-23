@@ -39,7 +39,6 @@ final class UpdateBlogEvent extends BlogEvent {
 }
 
 final class ViewAllBlogsEvent extends BlogEvent {
-  const ViewAllBlogsEvent();
 }
 
 final class ViewBlogEvent extends BlogEvent {

@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/cubits/app_user/app_user_cubit.dart';
 import 'package:starter_project/src/core/network/network.dart';
+import 'package:starter_project/src/features/auth/domain/use_cases/is_user_logged_in_use_case.dart';
+import 'package:starter_project/src/features/auth/domain/use_cases/logout_use_case.dart';
 import 'package:starter_project/src/features/blog/data/data_sources/data_sources.dart';
 import 'package:starter_project/src/features/blog/data/data_sources/tag_remote_data_source.dart';
 import 'package:starter_project/src/features/blog/data/repositories/blog_repository_impl_b.dart';
@@ -33,12 +35,17 @@ Future<void> initDependencies() async {
   // );
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
-  await Hive.openBox(Constants.authBox);
+  Hive.registerAdapter(UserAccountModelAdapter());
+  Hive.registerAdapter(LoginReturnModelAdapter());
+  await Hive.openBox<LoginReturnModel>(Constants.authBox);
+  dpLocator.registerLazySingleton(
+    () => Hive.box<LoginReturnModel>(Constants.authBox),
+  );
   dpLocator.registerLazySingleton(() => http.Client());
 
   dpLocator.registerFactory(() => InternetConnectionChecker());
   // core
-  dpLocator.registerLazySingleton(
+  dpLocator.registerLazySingleton<AppUserCubit>(
     () => AppUserCubit(),
   );
   dpLocator.registerLazySingleton<Network>(
@@ -58,10 +65,16 @@ void _initAuth() {
         client: dpLocator(),
       ),
     )
+    ..registerFactory<AuthLocalDataSource>(
+      () => AuthLocalDataSourceImpl(
+        hiveBox: dpLocator(),
+      ),
+    )
     // Repository
     ..registerFactory<AuthRepository>(
       () => AuthRepositoryImpl(
         remoteDataSource: dpLocator(),
+        localDataSource: dpLocator(),
         network: dpLocator(),
       ),
     )
@@ -76,12 +89,24 @@ void _initAuth() {
         authRepository: dpLocator(),
       ),
     )
+    ..registerFactory(
+      () => LogOutUseCase(
+        authRepository: dpLocator()
+      ),
+    )
+    ..registerFactory(
+      () => IsUserLoggedInUseCase(
+        authRepository: dpLocator(),
+      ),
+    )
     // Bloc
     ..registerLazySingleton(
       () => AuthBloc(
         registerUseCase: dpLocator(),
         loginUseCase: dpLocator(),
         appUserCubit: dpLocator(),
+        logOutUseCase: dpLocator(),
+        isUserLoggedInUseCase: dpLocator(),
       ),
     );
 }
@@ -92,11 +117,13 @@ void _initBlog() {
     ..registerFactory<BlogRemoteDataSource>(
       () => BlogRemoteDataSourceImpl(
         client: dpLocator(),
+        box: dpLocator()
       ),
     )
     ..registerFactory<TagRemoteDataSource>(
       () => TagRemoteDataSourceImpl(
         client: dpLocator(),
+        box: dpLocator()
       ),
     )
     // Repository

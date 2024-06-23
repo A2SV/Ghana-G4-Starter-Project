@@ -9,7 +9,7 @@ class Blog extends Equatable {
   final String body;
   final DateTime? createdDateTime;
   final DateTime? lastUpdatedDateTime;
-  final int userAccountId;
+  final int? userAccountId;
   final UserAccount? userAccount;
   final List<Tag>? tags;
 
