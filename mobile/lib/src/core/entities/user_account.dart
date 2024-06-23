@@ -5,8 +5,8 @@ class UserAccount extends Equatable {
   final String? firstName;
   final String? lastName;
   final String email;
-  final String passwordHash;
-  final String passwordSalt;
+  final String? passwordHash;
+  final String? passwordSalt;
   final DateTime? createdDateTime;
   final DateTime? lastUpdatedDateTime;
 
