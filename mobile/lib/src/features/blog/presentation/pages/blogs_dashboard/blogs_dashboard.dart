@@ -104,10 +104,7 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                       SizedBox(height: 4.h),
                       SizedBox(
                         height: 14.h,
-                        child: BlocProvider(
-                          create: (_) => dpLocator<TagBloc>(),
-                          child: const TagsSection(),
-                        ),
+                        child:const TagsSection(),
                       ),
                       SizedBox(height: 2.h),
                       CustomTextFormField(

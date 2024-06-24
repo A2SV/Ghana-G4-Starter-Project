@@ -82,10 +82,7 @@ class _TagsSectionState extends State<TagsSection> {
             ),
           );
         }
-        if (state is TagLoading) {
-          CustomSnackBar.warningSnackBar(
-              context: context, message: 'Fetching tags');
-        } else if (state is TagSuccess) {
+      if (state is TagSuccess) {
           CustomSnackBar.warningSnackBar(
               context: context, message: 'Tags fetched');
         }

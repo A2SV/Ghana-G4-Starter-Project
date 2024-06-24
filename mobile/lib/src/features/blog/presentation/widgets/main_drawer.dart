@@ -4,7 +4,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
-import 'package:starter_project/src/features/auth/presentation/pages/profile_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/my_blogs_screen.dart';
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
