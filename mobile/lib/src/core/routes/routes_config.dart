@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart' as hive;
 import 'package:starter_project/src/core/core.dart';
@@ -75,14 +74,9 @@ class AppRouter extends StatelessWidget {
     final loginReturn =
         dpLocator.call<hive.Box<LoginReturnModel>>().get(Constants.loginReturn);
     return GoRouter(
-      redirect: (BuildContext context, GoRouterState state) {
-        if (state.matchedLocation == "/" && loginReturn != null) {
-          return "/${BlogsDashboard.routeName}";
-        }
-
-        return state.matchedLocation;
-      },
-      initialLocation: "/",
+      initialLocation: (loginReturn != null)
+          ? "/${BlogsDashboard.routeName}"
+          : "/${LoginScreen.routeName}",
       routes: routes,
       observers: [],
     );
