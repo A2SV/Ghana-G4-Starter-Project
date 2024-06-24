@@ -21,6 +21,14 @@ class BlogDetailsState extends State<BlogDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            if (context.read<BlogBloc>().state is ViewBlog) {
+              context.read<BlogBloc>().add(ViewMyBlogsEvent());
+              popScreen(context);
+            }
+          },
+        ),
         toolbarHeight: 50,
         backgroundColor: Colors.white,
         actions: [

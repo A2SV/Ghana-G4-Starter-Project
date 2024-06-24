@@ -51,7 +51,7 @@ class _MyBlogsScreenState extends State<MyBlogsScreen> {
       body: BlocConsumer<BlogBloc, BlogState>(
         listener: (context, state) {
           if (state is BlogDeleted) {
-            BlocProvider.of<BlogBloc>(context).add(ViewAllBlogsEvent());
+            BlocProvider.of<BlogBloc>(context).add(ViewMyBlogsEvent());
           }
           if (state is BlogFailure) {
             CustomSnackBar.errorSnackBar(
@@ -59,13 +59,12 @@ class _MyBlogsScreenState extends State<MyBlogsScreen> {
               message: state.message,
             );
           }
-          // if (state is ViewBlog) {
-          //   context.read<BlogBloc>().add(ViewMyBlogsEvent());
-          // }
+         
         },
         builder: (context, state) {
           print(state.toString());
-          return (state is BlogSuccess)
+          return 
+          (state is ViewBlogs)
               ? (state.blogs.isEmpty)
                   ? Center(
                       child: Text(
@@ -102,7 +101,6 @@ class _MyBlogsScreenState extends State<MyBlogsScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    context.read<BlogBloc>().close();
     super.dispose();
   }
 

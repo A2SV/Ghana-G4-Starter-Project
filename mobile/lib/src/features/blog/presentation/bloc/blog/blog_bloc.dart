@@ -105,7 +105,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     final res = await _viewAllBlogUseCase(NoParams());
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (blogs) => _emitBlogSuccess(blogs, emit),
+      (blogs) => emit(ViewBlogs(blogs: blogs)),
     );
     return null;
   }
@@ -125,7 +125,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     final res = await _viewMyBlogUseCase(NoParams());
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (blogs) => _emitBlogSuccess(blogs, emit),
+      (blogs) => emit(ViewBlogs(blogs: blogs)),
     );
     return null;
   }
