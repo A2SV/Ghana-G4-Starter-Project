@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter_project/src/core/routes/routes_config.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
-
+import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
 
 class BlogDetails extends StatefulWidget {
   static const String routeName = 'blog-details-screen';
@@ -141,16 +142,12 @@ class BlogDetailsState extends State<BlogDetails> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          // final res = await BlogRepositoryImpl().viewBlog(int.parse(widget.id));
-          // if (res.isRight()) {
-          //   final blog = res.getOrElse(
-          //       () => Blog(0, '', '', '', UserAccount(0, '', '', '', ''), []));
-          //   switchScreen(
-          //       context: context,
-          //       routeName: EditBlogScreen.routeName,
-          //       extra: blog);
-          // }
+        onPressed: () {
+          switchScreen(
+            context: context,
+            routeName: EditBlogScreen.routeName,
+            extra: (context.read<BlogBloc>().state as ViewBlog).blog,
+          );
         },
         backgroundColor: const Color(0xFF436CC9),
         child: const Icon(
