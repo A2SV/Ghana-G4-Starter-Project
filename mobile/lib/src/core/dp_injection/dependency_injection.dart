@@ -20,6 +20,7 @@ import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_u
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_tags_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_blog_use_case.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/view_my_blog_use_case.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 
 import '../../features/auth/authentication.dart';
@@ -149,6 +150,11 @@ void _initBlog() {
         blogRepository: dpLocator(),
       ),
     )
+    ..registerFactory(
+      () => ViewMyBlogUseCase(
+        blogRepository: dpLocator(),
+      ),
+    )
     // Bloc
     ..registerLazySingleton(
       () => BlogBloc(
@@ -157,6 +163,7 @@ void _initBlog() {
         deleteBlogUseCase: dpLocator(),
         viewAllBlogUseCase: dpLocator(),
         viewBlogUseCase: dpLocator(),
+        viewMyBlogUseCase: dpLocator(),
       ),
     );
 }

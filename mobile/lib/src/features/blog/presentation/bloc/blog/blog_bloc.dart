@@ -10,6 +10,7 @@ import 'package:starter_project/src/features/blog/domain/use_cases/delete_blog_u
 import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_blog_use_case.dart';
+import 'package:starter_project/src/features/blog/domain/use_cases/view_my_blog_use_case.dart';
 
 part 'blog_event.dart';
 part 'blog_state.dart';
@@ -20,10 +21,12 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
   final DeleteBlogUseCase _deleteBlogUseCase;
   final ViewAllBlogUseCase _viewAllBlogUseCase;
   final ViewBlogUseCase _viewBlogUseCase;
+  final ViewMyBlogUseCase _viewMyBlogUseCase;
 
   BlogBloc({
     required UpdateBlogUseCase updateBlogUseCase,
     required ViewAllBlogUseCase viewAllBlogUseCase,
+    required ViewMyBlogUseCase viewMyBlogUseCase,
     required DeleteBlogUseCase deleteBlogUseCase,
     required ViewBlogUseCase viewBlogUseCase,
     required CreateBlogUseCase createBlogUseCase,
@@ -32,6 +35,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
         _deleteBlogUseCase = deleteBlogUseCase,
         _viewAllBlogUseCase = viewAllBlogUseCase,
         _viewBlogUseCase = viewBlogUseCase,
+        _viewMyBlogUseCase = viewMyBlogUseCase,
         super(BlogInitial()) {
     on<BlogEvent>((_, emit) => emit(BlogLoading()));
     on<CreateBlogEvent>(_onCreateBlog);
@@ -39,6 +43,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     on<DeleteBlogEvent>(_onDeleteBlog);
     on<ViewAllBlogsEvent>(_onViewAllBlogs);
     on<ViewBlogEvent>(_onViewBlog);
+    on<ViewMyBlogsEvent>(_onViewMyBlog);
   }
 
   void _emitBlogSuccess(
@@ -111,6 +116,16 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
       (blog) => emit(ViewBlog(blog: blog)),
+    );
+    return null;
+  }
+
+  FutureOr<void> _onViewMyBlog(
+      ViewMyBlogsEvent event, Emitter<BlogState> emit) async {
+    final res = await _viewMyBlogUseCase(NoParams());
+    res.fold(
+      (failure) => emit(BlogFailure(failure.errorMessage)),
+      (blogs) => _emitBlogSuccess(blogs, emit),
     );
     return null;
   }

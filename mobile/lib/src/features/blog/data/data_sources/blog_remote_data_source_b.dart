@@ -24,6 +24,7 @@ abstract class BlogRemoteDataSource {
     required List<TagModel>? tags,
   });
 
+  Future<List<BlogModel>> viewMyBlogs();
   Future<List<BlogModel>> viewAllBlogs();
   Future<BlogModel> viewBlog(int id);
 }
@@ -136,6 +137,30 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       return BlogModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException(errorMessage: 'Blog not found');
+    }
+  }
+
+  @override
+  Future<List<BlogModel>> viewMyBlogs() async {
+    final loginReturn = box.get(Constants.loginReturn);
+    final response = await http.get(
+      Uri.parse(
+          '${Constants.viewMyBlogsAPIEndpoint}${loginReturn!.userAccount.id}'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${loginReturn.token}',
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      List<BlogModel> blogs = [];
+      for (var item in data) {
+        blogs.add(BlogModel.fromJson(item));
+      }
+      return blogs;
+    } else {
+      throw ServerException(errorMessage: response.body);
     }
   }
 }

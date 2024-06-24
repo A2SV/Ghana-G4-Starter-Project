@@ -5,6 +5,7 @@ import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/profile_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/my_blogs_screen.dart';
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
 import '../../../../../generated/assets.gen.dart';
@@ -134,6 +135,12 @@ class _MainSideDrawerState extends State<MainSideDrawer> {
                             color: Colors.white,
                           ),
                           ListTile(
+                            onTap: () {
+                              switchScreen(
+                                context: context,
+                                routeName: MyBlogsScreen.routeName,
+                              );
+                            },
                             leading: Assets.svg.myBlog.path.asSvgImage(),
                             title: Text(
                               "My blogs",

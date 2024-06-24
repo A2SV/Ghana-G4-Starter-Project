@@ -40,6 +40,8 @@ final class UpdateBlogEvent extends BlogEvent {
 
 final class ViewAllBlogsEvent extends BlogEvent {
 }
+final class ViewMyBlogsEvent extends BlogEvent {
+}
 
 final class ViewBlogEvent extends BlogEvent {
   final int id;

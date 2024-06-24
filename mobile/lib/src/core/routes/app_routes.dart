@@ -8,6 +8,7 @@ import 'package:starter_project/src/features/blog/presentation/pages/add_blog_sc
 import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/my_blogs_screen.dart';
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
 import '../../features/blog/presentation/pages/blog_details.dart';
@@ -66,6 +67,11 @@ final routes = <GoRoute>[
     name: AppRoutes.allblogsScreen,
     path: '/${AllBlogsScreen.routeName}',
     builder: (context, state) => const AllBlogsScreen(),
+  ),
+  GoRoute(
+    name: AppRoutes.myblogsScreen,
+    path: '/${MyBlogsScreen.routeName}',
+    builder: (context, state) => const MyBlogsScreen(),
   ),
 
   GoRoute(
@@ -126,4 +132,6 @@ class AppRoutes {
   static const String blogDetails = "blog-details-screen";
 
   static const String blogsDashboard = "blogs-dashboard";
+  static const String myblogsScreen = "my-blogs-screen";
+  
 }

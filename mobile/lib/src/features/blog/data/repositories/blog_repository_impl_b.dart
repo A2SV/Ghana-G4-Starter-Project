@@ -108,4 +108,19 @@ class BlogRepositoryImpl implements BlogRepository {
       return Left(NetworkFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, List<Blog>>> viewMyBlogs() async{
+    if (await network.isConnected) {
+      try {
+        final message = await remoteDataSource.viewMyBlogs();
+        return Right(message);
+      } on ServerException catch (e) {
+        return Left(
+            ServerFailure(errorMessage: e.errorMessage ?? "Server Error"));
+      }
+    } else {
+      return Left(NetworkFailure());
+    }
+  }
 }
