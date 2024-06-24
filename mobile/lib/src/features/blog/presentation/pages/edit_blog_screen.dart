@@ -44,6 +44,11 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                 context: context,
                 message: state.message,
               );
+              context.read<BlogBloc>().add(
+                ViewBlogEvent(id: widget.blog.id ?? 0),
+              );
+              popScreen(context);
+              
             } else if (state is BlogDeleted) {
               CustomSnackBar.successSnackBar(
                 context: context,
