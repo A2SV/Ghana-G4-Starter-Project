@@ -1,30 +1,176 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
-import 'package:starter_project/src/features/profiles/domain/domain.dart';
+import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/features/auth/data/models/models.dart';
+import 'package:starter_project/src/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:starter_project/src/features/profiles/data/repositories/profile_repository_impl.dart';
 import 'package:starter_project/src/features/profiles/presentation/widgets/profile_text_field.dart';
 
-import '../../data/data.dart';
 import '../widgets/profile_drop_down_field.dart';
 
 class ProfileEditPage extends StatefulWidget {
-  const ProfileEditPage({super.key});
-
   static const String routeName = "profile-edit-screen";
+
+  const ProfileEditPage({super.key});
 
   @override
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
-
-
 class _ProfileEditPageState extends State<ProfileEditPage> {
   final GlobalKey _formKey = GlobalKey<FormState>();
-  TextEditingController nameController=TextEditingController();
-  TextEditingController emailController=TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Edit Profile",
+          style: context.textTheme.titleSmall!,
+        ),
+        centerTitle: true,
+      ),
+      body: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 100.w,
+                  height: 19.h,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        child: CircleAvatar(
+                          backgroundColor: AppLightThemeColors.kTextFieldColor,
+                          radius: 16.w,
+                          backgroundImage:
+                              const AssetImage("assets/images/superman.png"),
+                        ),
+                      ),
+                      Positioned(
+                        top: 12.h,
+                        left: 55.w,
+                        child: SizedBox(
+                          width: 8.w,
+                          height: 8.w,
+                          child: FloatingActionButton.small(
+                            elevation: 0,
+                            backgroundColor: AppLightThemeColors.kPrimaryColor,
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.edit_outlined,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 3.h),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        ProfileTextField(
+                          labelText:
+                              ((context.read<AuthBloc>().state as AuthSuccess)
+                                      .user as UserAccountModel)
+                                  .fullName(),
+                          prefixIcon: const Icon(Icons.person_outline),
+                          controller: nameController,
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileTextField(
+                          key: const ValueKey("Date input"),
+                          onTap: _showIOSDatePicker,
+                          labelText: "27/05/1991",
+                          prefixIcon: const Icon(Icons.calendar_month),
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileTextField(
+                          labelText:
+                              (context.read<AuthBloc>().state as AuthSuccess)
+                                  .user
+                                  .email,
+                          prefixIcon: const Icon(Icons.email_outlined),
+                          controller: emailController,
+                        ),
+                        const SizedBox(height: 10),
+                        const Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: ProfileDropDownField(
+                                items: ["+1 (US)", "+233 (GH)"],
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Expanded(
+                              flex: 5,
+                              child: ProfileTextField(
+                                labelText: "(308) 555-0121",
+                                prefixIcon: null,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        const ProfileDropDownField(
+                          items: ["Male", "Female", "Anything else"],
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: TextButton(
+                            onPressed: () {
+                              //Navigator.of(context).pop();
+                              ProfileRepositoryImpl().updateAccount(
+                                  2,
+                                  nameController.text,
+                                  nameController.text,
+                                  emailController.text);
+                              //GoRouter.of(context).pop();
+                            },
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              minimumSize: const Size(double.infinity, 37),
+                              padding: const EdgeInsets.symmetric(vertical: 7),
+                              backgroundColor:
+                                  AppLightThemeColors.kPrimaryColor,
+                            ),
+                            child: Text(
+                              "Update",
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                fontSize: 18.sp,
+                                color: context.colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   void _showAndroidDatePicker() async {
     final DateTime now = DateTime.now();
@@ -37,9 +183,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
         firstDate: firstDate,
         lastDate: lastDate);
   }
-
-
-
 
   void _showIOSDatePicker() {
     showModalBottomSheet(
@@ -127,138 +270,6 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           ],
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Edit Profile",
-          style: context.textTheme.titleSmall!,
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              width: 100.w,
-              height: 19.h,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned(
-                    child: CircleAvatar(
-                      backgroundColor: AppLightThemeColors.kTextFieldColor,
-                      radius: 16.w,
-                      backgroundImage:
-                          const AssetImage("assets/images/superman.png"),
-                    ),
-                  ),
-                  Positioned(
-                    top: 12.h,
-                    left: 55.w,
-                    child: SizedBox(
-                      width: 8.w,
-                      height: 8.w,
-                      child: FloatingActionButton.small(
-                        elevation: 0,
-                        backgroundColor: AppLightThemeColors.kPrimaryColor,
-                        onPressed: () {},
-                        child: const Icon(
-                          Icons.edit_outlined,
-                          size: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 3.h),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    ProfileTextField(
-                      labelText: "Binyam Odu",
-                      prefixIcon: Icon(Icons.person_outline),
-                      controller: nameController,
-                    ),
-                    const SizedBox(height: 10),
-                    ProfileTextField(
-                      key: const ValueKey("Date input"),
-                      onTap: _showIOSDatePicker,
-                      labelText: "27/05/1991",
-                      prefixIcon: Icon(Icons.calendar_month),
-                    ),
-                    const SizedBox(height: 10),
-                    ProfileTextField(
-                      labelText: "binyam@a2sv.org",
-                      prefixIcon: Icon(Icons.email_outlined),
-                      controller: emailController,
-                    ),
-                    const SizedBox(height: 10),
-                    const Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: ProfileDropDownField(
-                            items: ["+1 (US)", "+233 (GH)"],
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Expanded(
-                          flex: 5,
-                          child: ProfileTextField(
-                            labelText: "(308) 555-0121",
-                            prefixIcon: null,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    const ProfileDropDownField(
-                      items: ["Male", "Female", "Anything else"],
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: TextButton(
-                        onPressed: () {
-                          //Navigator.of(context).pop();
-                          ProfileRepositoryImpl().updateAccount(2, nameController.text,nameController.text, emailController.text);
-                          //GoRouter.of(context).pop();
-                        },
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          minimumSize: const Size(double.infinity, 37),
-                          padding: const EdgeInsets.symmetric(vertical: 7),
-                          backgroundColor: AppLightThemeColors.kPrimaryColor,
-                        ),
-                        child: Text(
-                          "Update",
-                          style: context.textTheme.bodyMedium!.copyWith(
-                            fontSize: 18.sp,
-                            color: context.colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
