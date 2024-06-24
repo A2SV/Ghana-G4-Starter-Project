@@ -43,7 +43,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
   }
 
   void _emitBlogSuccess(
-    Blog blog,
+    List<Blog> blog,
     Emitter<BlogState> emit,
   ) {
     emit(BlogSuccess(blog));
@@ -57,7 +57,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (user) => _emitBlogSuccess(user, emit),
+      (blog) => emit(BlogCreated()),
     );
     return null;
   }
@@ -91,7 +91,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
 
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (blog) => _emitBlogSuccess(blog, emit),
+      (blog) => emit(BlogUpdated()),
     );
     return null;
   }
@@ -101,7 +101,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     final res = await _viewAllBlogUseCase(NoParams());
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (blog) => _emitBlogSuccess(blog[0], emit),
+      (blogs) => _emitBlogSuccess(blogs, emit),
     );
     return null;
   }
@@ -111,7 +111,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     final res = await _viewBlogUseCase(ViewBlogParams(id: event.id));
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (blog) => _emitBlogSuccess(blog, emit),
+      (blog) => emit(ViewBlog()),
     );
     return null;
   }

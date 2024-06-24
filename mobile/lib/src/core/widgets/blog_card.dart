@@ -5,22 +5,17 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
-
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 
 class BlogCard extends StatelessWidget {
-  final String? topic;
-  final List<Widget>? tag;
-  final String? email;
-  final String? date;
-  final int? id;
-  const BlogCard(
-      {super.key, this.topic, this.tag, this.email, this.date, this.id});
+  final Blog blog;
+  const BlogCard({super.key, required this.blog});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/blog-details-screen/$id');
+        context.push('/blog-details-screen/${blog.id}');
         // context.go('/blog-details-screen/${id}');
       },
       child: Container(
@@ -73,7 +68,7 @@ class BlogCard extends StatelessWidget {
                         height: 11.h,
                         width: 40.w,
                         child: Text(
-                          topic!,
+                          blog.title,
                           softWrap: true,
                           maxLines: 4,
                           overflow: TextOverflow.ellipsis,
@@ -84,9 +79,32 @@ class BlogCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Wrap(children: tag!),
+                      Wrap(
+                        children: blog.tags
+                                ?.map((tag) => Container(
+                                      margin: const EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        color: AppLightThemeColors
+                                            .kSecondaryBackgroundColor,
+                                        borderRadius:
+                                            BorderRadius.circular(3.0),
+                                      ),
+                                      child: Text(
+                                        tag.label,
+                                        maxLines: 1,
+                                        style: context.textTheme.displayLarge!
+                                            .copyWith(
+                                          fontSize: 13.sp,
+                                          color: AppLightThemeColors
+                                              .kOnSecondaryBackgroundLightColor,
+                                        ),
+                                      ).symmetricPadding(10.0, 5.0),
+                                    ).verticalPadding(10.0))
+                                .toList() ??
+                            [],
+                      ),
                       Text(
-                        email!,
+                        blog.userAccount!.email,
                         maxLines: 1,
                         style: context.textTheme.displaySmall!.copyWith(
                           color: AppLightThemeColors.kDarkTextColor,
@@ -101,9 +119,11 @@ class BlogCard extends StatelessWidget {
               height: 2.h,
             ),
             Text(
-              // this.date!,
               DateFormat.yMMMd().format(
-                  DateFormat('yyyy-MM-dd').parse(date!.substring(0, 10))),
+                DateFormat('yyyy-MM-dd').parse(
+                  blog.createdDateTime.toString(),
+                ),
+              ),
               style: context.textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.w300,
                 fontSize: 14.sp,

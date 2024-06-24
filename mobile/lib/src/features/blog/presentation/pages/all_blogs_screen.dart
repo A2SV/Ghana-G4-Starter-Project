@@ -13,33 +13,33 @@ import 'package:starter_project/src/features/blog/domain/entities/tag_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
 
 
-List<Widget> tagWidget(List<Tag> tags, BuildContext context) {
-  List<Widget> output = [];
+// List<Widget> tagWidget(List<Tag> tags, BuildContext context) {
+//   List<Widget> output = [];
 
-  print('tags $tags');
+//   print('tags $tags');
 
-  for (Tag tag in tags) {
-    print('new tag');
-    output.add(Container(
-      margin: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        color: AppLightThemeColors.kSecondaryBackgroundColor,
-        borderRadius: BorderRadius.circular(3.0),
-      ),
-      child: Text(
-        tag.label,
-        maxLines: 1,
-        style: context.textTheme.displayLarge!.copyWith(
-          fontSize: 13.sp,
-          color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
-        ),
-      ).symmetricPadding(10.0, 5.0),
-    ).verticalPadding(10.0));
-  }
+//   for (Tag tag in tags) {
+//     print('new tag');
+//     output.add(Container(
+//       margin: const EdgeInsets.all(2),
+//       decoration: BoxDecoration(
+//         color: AppLightThemeColors.kSecondaryBackgroundColor,
+//         borderRadius: BorderRadius.circular(3.0),
+//       ),
+//       child: Text(
+//         tag.label,
+//         maxLines: 1,
+//         style: context.textTheme.displayLarge!.copyWith(
+//           fontSize: 13.sp,
+//           color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
+//         ),
+//       ).symmetricPadding(10.0, 5.0),
+//     ).verticalPadding(10.0));
+//   }
 
-  print('tagWidget:$output');
-  return output;
-}
+//   print('tagWidget:$output');
+//   return output;
+// }
 
 class AllBlogsScreen extends StatefulWidget {
   static const String routeName = 'all-blogs-screen';
@@ -112,21 +112,11 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
                           SizedBox(
                             height: 3.h,
                           ),
-                          BlogCard(
-                            topic: blogs[index].title,
-                            email: blogs[index].userAccount!.email,
-                            tag: tagWidget(blogs[index].tags!, context),
-                            date: blogs[index].createdDateTime.toString(),
-                            id: blogs[index].id,
+                          BlogCard(blog: blogs[index],
                           ).onlyPadding(0, 10.0, 20.0, 20.0)
                         ]);
                       }
-                      return BlogCard(
-                        topic: blogs[index].title,
-                        email: blogs[index].userAccount!.email,
-                        tag: tagWidget(blogs[index].tags!, context),
-                        date: blogs[index].createdDateTime.toString(),
-                        id: blogs[index].id,
+                      return BlogCard(blog: blogs[index]
                       ).onlyPadding(0, 10.0, 20.0, 20.0);
                     },
                   ),

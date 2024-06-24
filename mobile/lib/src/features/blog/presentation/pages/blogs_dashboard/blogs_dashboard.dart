@@ -9,6 +9,7 @@ import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/features/auth/authentication.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/recent_blogs_section.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/tags_section.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/main_drawer.dart';
 
@@ -151,42 +152,7 @@ class _BlogsDashboardState extends State<BlogsDashboard> {
                       ),
                     ),
                     SizedBox(height: 1.h),
-                    // FutureBuilder<Either<String, List<Blog>>>(
-                    //   future: BlogRepositoryImpl()
-                    //       .viewAllBlogs(), // Change the ID as needed
-                    //   builder: (context, snapshot) {
-                    //     if (snapshot.hasError) {
-                    //       return Center(
-                    //           child: Text(
-                    //         'Error: ${snapshot.error}',
-                    //         style: const TextStyle(color: Colors.black),
-                    //       ));
-                    //     } else if (snapshot.hasData) {
-                    //       print('loading..');
-                    // Either<String, List<Blog>>? result = snapshot.data;
-                    // Either<String, List<Blog>>? result = null;
-                    // List<Blog> blogs = [];
-                    // result!.fold((error) => error, (res) => blogs = res);
-
-                    // int blogCount = blogs.length;
-
-                    // return Column(
-                    //   children: [
-                    //     for (int i = 0; i < blogCount; i++)
-                    //       BlogCard(
-                    //         topic: blogs[i].title,
-                    //         email: blogs[i].userAccount!.email,
-                    //         tag: tagWidget(blogs[i].tags!, context),
-                    //         date: blogs[i].createdDateTime,
-                    //         id: blogs[i].id,
-                    //       ).onlyPadding(0, 10.0, 20.0, 20.0),
-                    //   ],
-                    // );
-                    //     } else {
-                    //       return const Center(child: Text('No data found'));
-                    //     }
-                    //   },
-                    // ),
+                    const RecentBlogs(),
                     SizedBox(height: 3.h),
                   ],
                 ),

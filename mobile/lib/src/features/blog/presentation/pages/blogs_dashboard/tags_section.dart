@@ -19,12 +19,14 @@ class _TagsSectionState extends State<TagsSection> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TagBloc, TagState>(
-      builder: (context, state) => (state is TagLoading)
-          ? Text(
-              'Fetching tags',
-              style: context.textTheme.bodySmall!.copyWith(
-                fontStyle: FontStyle.italic,
-                color: Colors.red,
+      builder: (context, state) => (state is TagInitial)
+          ? Center(
+              child: Text(
+                'Fetching tags',
+                style: context.textTheme.bodySmall!.copyWith(
+                  fontStyle: FontStyle.italic,
+                  color: Colors.red,
+                ),
               ),
             )
           : (state is TagSuccess)
@@ -67,15 +69,18 @@ class _TagsSectionState extends State<TagsSection> {
               : Center(
                   child: Text(
                     'Something went wrong',
-                    style: context.textTheme.bodySmall,
+                    style: context.textTheme.bodySmall!
+                        .copyWith(color: Colors.red),
                   ),
                 ),
       listener: (context, state) {
         if (state is TagInitial) {
-          const Text('initial',
-              style: TextStyle(
-                color: Colors.red,
-              ));
+          const Text(
+            'initial',
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          );
         }
         if (state is TagLoading) {
           CustomSnackBar.warningSnackBar(
