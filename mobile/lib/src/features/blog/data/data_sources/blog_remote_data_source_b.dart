@@ -85,7 +85,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
       required String? body,
       required List<Tag>? tags}) async {
     final token = box.get(Constants.loginReturn)!.token;
-    final response = await client.post(
+    final response = await client.put(
       Uri.parse(Constants.updateBlogAPIEndpoint),
       headers: {
         'Content-Type': 'application/json',
@@ -151,7 +151,6 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
         'Authorization': 'Bearer ${loginReturn.token}',
       },
     );
-    print(response.body);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
       List<BlogModel> blogs = [];

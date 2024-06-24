@@ -59,6 +59,9 @@ class _MyBlogsScreenState extends State<MyBlogsScreen> {
               message: state.message,
             );
           }
+          // if (state is ViewBlog) {
+          //   context.read<BlogBloc>().add(ViewMyBlogsEvent());
+          // }
         },
         builder: (context, state) {
           print(state.toString());

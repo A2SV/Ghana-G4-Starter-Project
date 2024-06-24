@@ -86,7 +86,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
               context: context,
               message: state.message,
             );
-          }
+          } 
         },
         builder: (context, state) {
           print(state.toString());

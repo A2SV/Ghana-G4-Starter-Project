@@ -49,7 +49,6 @@ class AddBlogScreenState extends State<AddBlogScreen> {
             }
           },
           builder: (context, state) {
-            print(state.toString());
             return Form(
               key: _addBlogformKey,
               child: Column(

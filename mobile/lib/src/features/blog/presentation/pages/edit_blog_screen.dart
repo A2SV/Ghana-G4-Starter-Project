@@ -57,12 +57,16 @@ class EditBlogScreenState extends State<EditBlogScreen> {
               );
               popScreen(context);
             }
-            // else if (state is BlogLoading) {
-            //   CustomSnackBar.warningSnackBar(
-            //     context: context,
-            //     message: 'Please wait...',
-            //   );
-            // }
+            else if (state is BlogUpdated) {
+              CustomSnackBar.warningSnackBar(
+                context: context,
+                message: 'Blog updated successfully',
+              );
+              context.read<BlogBloc>().add(
+                ViewBlogEvent(id: widget.blog.id ?? 0),
+              );
+              popScreen(context);
+            }
           },
           builder: (context, state) {
             return Form(
