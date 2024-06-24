@@ -5,6 +5,7 @@ import 'package:starter_project/src/core/core.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/profile_screen.dart';
+import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
 import '../../../../../generated/assets.gen.dart';
 import '../../../../core/theme/app_light_theme_colors.dart';
@@ -29,9 +30,6 @@ class _MainSideDrawerState extends State<MainSideDrawer> {
             routeName: LoginScreen.routeName,
             popAndPush: true,
           );
-        }
-        if (state is AuthSuccess) {
-          print('res ');
         }
       },
       builder: (context, state) {

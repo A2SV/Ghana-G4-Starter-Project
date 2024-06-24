@@ -59,7 +59,9 @@ class UserAccountModel extends UserAccount {
       lastUpdatedDateTime: DateTime.now(),
     );
   }
-
+String fullName(){
+  return "$firstName $lastName";
+}
   Map<String, dynamic> toJson() {
     return {
       'id': id,
