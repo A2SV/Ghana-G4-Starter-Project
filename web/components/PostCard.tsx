@@ -33,10 +33,11 @@ const PostCard: React.FC<PostCardProps> = ({ author, role, date, title, content,
       <div className="flex flex-col md:flex-row px-6 mt-0 w-full">
         <div className="md:w-2/3">
           <h3 className="text-xl font-bold mb-2">{title}</h3>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Tab System On React : 3 ways to do it.</h3>
-          </div>
-          <p className="text-gray-400 mr-10 mb-5">{content}</p>
+
+          <div
+            dangerouslySetInnerHTML={{ __html: content }}
+            className="text-gray-400 mr-10 mb-5 line-clamp-4"
+          />
         </div>
         <div className="flex h-1/3 md:w-1/3 justify-end mt-0">
           <Image src={blogImage} alt="content" className="w-full h-auto" />
