@@ -70,7 +70,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     );
 
     res.fold(
-      (failure) => emit(BlogFailure(failure.errorMessage)),
+      (failure) => emit(BlogDeleteFailure(failure.errorMessage)),
       (message) => emit(BlogDeleted(message)),
     );
     return null;

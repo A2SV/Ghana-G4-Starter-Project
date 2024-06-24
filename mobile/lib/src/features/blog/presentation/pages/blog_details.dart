@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter_project/src/core/routes/routes_config.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
+import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
 
@@ -29,7 +30,21 @@ class BlogDetailsState extends State<BlogDetails> {
           ),
         ],
       ),
-      body: BlocBuilder<BlogBloc, BlogState>(
+      body: BlocConsumer<BlogBloc, BlogState>(
+        listener: (context, state) {
+          if (state is BlogDeleted) {
+            CustomSnackBar.errorSnackBar(
+              context: context,
+              message: 'Blog has been deleted',
+            );
+            popScreen(context);
+          }
+          if (state is BlogDeleteFailure) {
+            context.read<BlogBloc>().add(
+                  ViewBlogEvent(id: widget.id),
+                );
+          }
+        },
         builder: (context, state) {
           return (state is BlogLoading)
               ? const Center(
@@ -58,13 +73,11 @@ class BlogDetailsState extends State<BlogDetails> {
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 14,
-                                                      vertical:
-                                                          6), // Adjust padding
+                                                      vertical: 6),
                                               minimumSize: const Size(0, 0),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        8), // Adjust border radius
+                                                    BorderRadius.circular(8),
                                               ),
                                             ),
                                             child: Text(
@@ -128,17 +141,23 @@ class BlogDetailsState extends State<BlogDetails> {
                         ],
                       ),
                     )
-                  : RefreshIndicator(
-                      child: Center(
-                        child: Text(
-                          'Something went wrong, drag down to reload',
-                          style: context.textTheme.bodySmall!.copyWith(
-                            color: context.colorScheme.error,
+                  : (state is BlogFailure)
+                      ? GestureDetector(
+                          onTap: () async {
+                            context.read<BlogBloc>().add(
+                                  ViewBlogEvent(id: widget.id),
+                                );
+                          },
+                          child: Center(
+                            child: Text(
+                              state.message,
+                              style: context.textTheme.bodySmall!.copyWith(
+                                color: context.colorScheme.error,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      onRefresh: () async {},
-                    );
+                        )
+                      : Container();
         },
       ),
       floatingActionButton: FloatingActionButton(

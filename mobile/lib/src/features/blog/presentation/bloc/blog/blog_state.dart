@@ -18,6 +18,10 @@ final class BlogLoading extends BlogState {}
 
 final class BlogSaving extends BlogState {}
 
+final class BlogDeleteFailure extends BlogFailure {
+  const BlogDeleteFailure(super.message);
+}
+
 abstract class BlogState extends Equatable {
   const BlogState();
 

@@ -31,7 +31,10 @@ abstract class BlogRemoteDataSource {
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   final http.Client client;
   final Box<LoginReturnModel> box;
-  BlogRemoteDataSourceImpl({required this.client,required this.box,});
+  BlogRemoteDataSourceImpl({
+    required this.client,
+    required this.box,
+  });
   @override
   Future<Blog> create(
       {required String title,
@@ -60,7 +63,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   @override
   Future<String> delete({required int id}) async {
     final token = box.get(Constants.loginReturn)!.token;
-    final response = await client.post(
+    final response = await client.delete(
       Uri.parse('${Constants.deleteBlogAPIEndpoint}$id'),
       headers: {
         'Content-Type': 'application/json',
