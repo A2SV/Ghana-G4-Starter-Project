@@ -10,7 +10,6 @@ import 'package:starter_project/src/features/blog/domain/use_cases/create_blog_u
 import 'package:starter_project/src/features/blog/domain/use_cases/delete_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
-import 'package:starter_project/src/features/blog/domain/use_cases/view_all_tags_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_blog_use_case.dart';
 
 part 'blog_event.dart';
@@ -22,7 +21,6 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
   final DeleteBlogUseCase _deleteBlogUseCase;
   final ViewAllBlogUseCase _viewAllBlogUseCase;
   final ViewBlogUseCase _viewBlogUseCase;
-  final ViewTagsUseCase _viewTagsUseCase;
 
   BlogBloc({
     required UpdateBlogUseCase updateBlogUseCase,
@@ -30,13 +28,11 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     required DeleteBlogUseCase deleteBlogUseCase,
     required ViewBlogUseCase viewBlogUseCase,
     required CreateBlogUseCase createBlogUseCase,
-    required ViewTagsUseCase viewTagsUseCase,
   })  : _updateBlogUseCase = updateBlogUseCase,
         _createBlogUseCase = createBlogUseCase,
         _deleteBlogUseCase = deleteBlogUseCase,
         _viewAllBlogUseCase = viewAllBlogUseCase,
         _viewBlogUseCase = viewBlogUseCase,
-        _viewTagsUseCase = viewTagsUseCase,
         super(BlogInitial()) {
     on<BlogEvent>((_, emit) => emit(BlogLoading()));
     on<CreateBlogEvent>(_onCreateBlog);
@@ -51,12 +47,6 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     Emitter<BlogState> emit,
   ) {
     emit(BlogSuccess(blog));
-  }
-  void _emitTagSuccess(
-    Tag tag,
-    Emitter<TagState> emit,
-  ) {
-    emit(TagSuccess(tag));
   }
 
   FutureOr<void> _onCreateBlog(
@@ -126,13 +116,5 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     return null;
   }
 
-  FutureOr<void> _onViewTags(
-      ViewTagsEvent event, Emitter<TagState> emit) async {
-    final res = await _viewTagsUseCase(NoParams());
-    res.fold(
-      (failure) => emit(TagFailure(failure.errorMessage)),
-      (tag) => _emitTagSuccess(tag[0], emit),
-    );
-    return null;
-  }
+  
 }

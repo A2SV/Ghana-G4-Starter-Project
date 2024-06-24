@@ -14,7 +14,7 @@ import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 import 'package:starter_project/src/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login-screen';

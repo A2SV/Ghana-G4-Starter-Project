@@ -47,7 +47,3 @@ final class ViewBlogEvent extends BlogEvent {
     required this.id,
   });
 }
-
-final class ViewTagsEvent extends BlogEvent {
-  const ViewTagsEvent();
-}

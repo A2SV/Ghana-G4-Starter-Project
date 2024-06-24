@@ -32,8 +32,8 @@ class TagRemoteDataSourceImpl implements TagRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-      List<Map<String, dynamic>> data = json.decode(response.body);
-      List<TagModel> tags = data.map((tag) => TagModel.fromJson(tag)).toList();
+      List<dynamic> data = json.decode(response.body);
+      List<TagModel> tags = data.map<TagModel>((tag) => TagModel.fromJson(tag)).toList();
       return tags;
     } else {
       throw ServerException(errorMessage: 'Tag not found');

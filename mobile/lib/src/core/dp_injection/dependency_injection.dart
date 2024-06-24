@@ -20,7 +20,7 @@ import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_u
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_blogs_use_case.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_all_tags_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/view_blog_use_case.dart';
-import 'package:starter_project/src/features/blog/presentation/bloc/blog/blog_bloc.dart';
+import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 
 import '../../features/auth/authentication.dart';
 
@@ -55,6 +55,7 @@ Future<void> initDependencies() async {
   );
   _initAuth();
   _initBlog();
+  _initTag();
 }
 
 void _initAuth() {
@@ -90,9 +91,7 @@ void _initAuth() {
       ),
     )
     ..registerFactory(
-      () => LogOutUseCase(
-        authRepository: dpLocator()
-      ),
+      () => LogOutUseCase(authRepository: dpLocator()),
     )
     ..registerFactory(
       () => IsUserLoggedInUseCase(
@@ -115,26 +114,11 @@ void _initBlog() {
   // Datasource
   dpLocator
     ..registerFactory<BlogRemoteDataSource>(
-      () => BlogRemoteDataSourceImpl(
-        client: dpLocator(),
-        box: dpLocator()
-      ),
-    )
-    ..registerFactory<TagRemoteDataSource>(
-      () => TagRemoteDataSourceImpl(
-        client: dpLocator(),
-        box: dpLocator()
-      ),
+      () => BlogRemoteDataSourceImpl(client: dpLocator(), box: dpLocator()),
     )
     // Repository
     ..registerFactory<BlogRepository>(
       () => BlogRepositoryImpl(
-        remoteDataSource: dpLocator(),
-        network: dpLocator(),
-      ),
-    )
-    ..registerFactory<TagRepository>(
-      () => TagRepositoryImpl(
         remoteDataSource: dpLocator(),
         network: dpLocator(),
       ),
@@ -165,11 +149,6 @@ void _initBlog() {
         blogRepository: dpLocator(),
       ),
     )
-    ..registerFactory(
-      () => ViewTagsUseCase(
-        tagRepository: dpLocator(),
-      ),
-    )
     // Bloc
     ..registerLazySingleton(
       () => BlogBloc(
@@ -178,6 +157,31 @@ void _initBlog() {
         deleteBlogUseCase: dpLocator(),
         viewAllBlogUseCase: dpLocator(),
         viewBlogUseCase: dpLocator(),
+      ),
+    );
+}
+
+void _initTag() {
+  dpLocator
+    ..registerFactory<TagRemoteDataSource>(
+      () => TagRemoteDataSourceImpl(
+        client: dpLocator(),
+        box: dpLocator(),
+      ),
+    )
+    ..registerFactory<TagRepository>(
+      () => TagRepositoryImpl(
+        remoteDataSource: dpLocator(),
+        network: dpLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => ViewTagsUseCase(
+        tagRepository: dpLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => TagBloc(
         viewTagsUseCase: dpLocator(),
       ),
     );

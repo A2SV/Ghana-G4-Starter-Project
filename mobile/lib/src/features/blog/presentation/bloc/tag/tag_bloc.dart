@@ -20,19 +20,12 @@ class TagBloc extends Bloc<TagEvent, TagState> {
     on<ViewTagsEvent>(_onViewTags);
   }
 
-  void _emitTagSuccess(
-    Tag tag,
-    Emitter<TagState> emit,
-  ) {
-    emit(TagSuccess(tag));
-  }
-
   FutureOr<void> _onViewTags(
       ViewTagsEvent event, Emitter<TagState> emit) async {
     final res = await _viewTagsUseCase(NoParams());
     res.fold(
       (failure) => emit(TagFailure(failure.errorMessage)),
-      (tag) => _emitTagSuccess(tag[0], emit),
+      (tags) => emit(TagSuccess(tags)),
     );
     return null;
   }

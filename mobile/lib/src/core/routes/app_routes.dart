@@ -7,7 +7,7 @@ import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 

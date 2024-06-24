@@ -17,6 +17,6 @@ abstract class TagState extends Equatable {
   List<Object> get props => [];
 }
 final class TagSuccess extends TagState {
-  final Tag tag;
-  const TagSuccess(this.tag);
+  final List<Tag> tags;
+  const TagSuccess(this.tags);
 }

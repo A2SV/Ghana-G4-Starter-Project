@@ -7,7 +7,7 @@ import 'package:starter_project/src/core/dp_injection/dp_injection.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/theme/theme_config.dart';
 import 'package:starter_project/src/features/auth/authentication.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 
 import '../error/error.dart';
 
