@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter_project/src/core/use_case/use_case.dart';
 import 'package:starter_project/src/features/blog/data/models/tag_model_b.dart';
 import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
-import 'package:starter_project/src/features/blog/domain/entities/tag_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/create_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/delete_blog_use_case_b.dart';
 import 'package:starter_project/src/features/blog/domain/use_cases/update_blog_use_case_b.dart';
@@ -111,10 +110,8 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     final res = await _viewBlogUseCase(ViewBlogParams(id: event.id));
     res.fold(
       (failure) => emit(BlogFailure(failure.errorMessage)),
-      (blog) => emit(ViewBlog()),
+      (blog) => emit(ViewBlog(blog: blog)),
     );
     return null;
   }
-
-  
 }

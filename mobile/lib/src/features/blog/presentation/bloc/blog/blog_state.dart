@@ -32,4 +32,7 @@ final class BlogSuccess extends BlogState {
 
 final class BlogUpdated extends BlogState {}
 
-final class ViewBlog extends BlogState {}
+final class ViewBlog extends BlogState {
+  final Blog blog;
+  const ViewBlog({required this.blog});
+}
