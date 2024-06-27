@@ -39,6 +39,23 @@ class BlogRepositoryImpl implements BlogRepository {
   }
 
   @override
+  Future<Either<Failure, String>> delete({required int id}) async {
+    if (await network.isConnected) {
+      try {
+        final message = await remoteDataSource.delete(
+          id: id,
+        );
+        return Right(message);
+      } on ServerException catch (e) {
+        return Left(
+            ServerFailure(errorMessage: e.errorMessage ?? "Server Error"));
+      }
+    } else {
+      return Left(NetworkFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, Blog>> update(
       {required int id,
       required String? title,
@@ -61,14 +78,42 @@ class BlogRepositoryImpl implements BlogRepository {
       return Left(NetworkFailure());
     }
   }
-  
+
   @override
-  Future<Either<Failure, String>> delete({required int id}) async {
+  Future<Either<Failure, List<Blog>>> viewAllBlogs() async {
     if (await network.isConnected) {
       try {
-        final message = await remoteDataSource.delete(
-          id: id,
-        );
+        final message = await remoteDataSource.viewAllBlogs();
+        return Right(message);
+      } on ServerException catch (e) {
+        return Left(
+            ServerFailure(errorMessage: e.errorMessage ?? "Server Error"));
+      }
+    } else {
+      return Left(NetworkFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Blog>> viewBlog(int id) async {
+    if (await network.isConnected) {
+      try {
+        final message = await remoteDataSource.viewBlog(id);
+        return Right(message);
+      } on ServerException catch (e) {
+        return Left(
+            ServerFailure(errorMessage: e.errorMessage ?? "Server Error"));
+      }
+    } else {
+      return Left(NetworkFailure());
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<Blog>>> viewMyBlogs() async{
+    if (await network.isConnected) {
+      try {
+        final message = await remoteDataSource.viewMyBlogs();
         return Right(message);
       } on ServerException catch (e) {
         return Left(

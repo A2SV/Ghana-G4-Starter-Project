@@ -18,4 +18,8 @@ abstract class BlogRepository {
     required String? body,
     required List<TagModel>? tags,
   });
+
+  Future<Either<Failure, List<Blog>>> viewMyBlogs();
+  Future<Either<Failure, List<Blog>>> viewAllBlogs();
+  Future<Either<Failure, Blog>> viewBlog(int id);
 }

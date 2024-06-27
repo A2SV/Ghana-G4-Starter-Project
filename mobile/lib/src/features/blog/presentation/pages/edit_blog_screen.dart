@@ -10,7 +10,7 @@ import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/core/validator/validator.dart';
 import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/features/blog/data/models/models.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'package:starter_project/src/features/blog/presentation/widgets/widgets.dart';
 
@@ -44,6 +44,11 @@ class EditBlogScreenState extends State<EditBlogScreen> {
                 context: context,
                 message: state.message,
               );
+              context.read<BlogBloc>().add(
+                ViewBlogEvent(id: widget.blog.id ?? 0),
+              );
+              popScreen(context);
+              
             } else if (state is BlogDeleted) {
               CustomSnackBar.successSnackBar(
                 context: context,
@@ -57,12 +62,16 @@ class EditBlogScreenState extends State<EditBlogScreen> {
               );
               popScreen(context);
             }
-            // else if (state is BlogLoading) {
-            //   CustomSnackBar.warningSnackBar(
-            //     context: context,
-            //     message: 'Please wait...',
-            //   );
-            // }
+            else if (state is BlogUpdated) {
+              CustomSnackBar.warningSnackBar(
+                context: context,
+                message: 'Blog updated successfully',
+              );
+              context.read<BlogBloc>().add(
+                ViewBlogEvent(id: widget.blog.id ?? 0),
+              );
+              popScreen(context);
+            }
           },
           builder: (context, state) {
             return Form(

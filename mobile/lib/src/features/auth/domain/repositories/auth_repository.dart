@@ -15,4 +15,6 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
+  Either<Failure, LoginReturn> getUser();
+  Future<Either<Failure, void>> logOut();
 }

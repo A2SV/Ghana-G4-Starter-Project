@@ -1,8 +1,14 @@
 part of 'blog_bloc.dart';
 
+final class BlogCreated extends BlogState {}
+
 final class BlogDeleted extends BlogState {
   final String message;
   const BlogDeleted(this.message);
+}
+
+final class BlogDeleteFailure extends BlogFailure {
+  const BlogDeleteFailure(super.message);
 }
 
 final class BlogFailure extends BlogState {
@@ -24,6 +30,20 @@ abstract class BlogState extends Equatable {
 }
 
 final class BlogSuccess extends BlogState {
+  final List<Blog> blogs;
+  const BlogSuccess(this.blogs);
+}
+
+final class BlogUpdated extends BlogState {}
+
+// final class ViewBlog extends BlogSuccess {
+final class ViewBlog extends BlogState {
   final Blog blog;
-  const BlogSuccess(this.blog);
+  const ViewBlog({required this.blog});
+}
+
+final class ViewBlogs extends BlogSuccess {
+  @override
+  final List<Blog> blogs;
+  const ViewBlogs({required this.blogs}) : super(blogs);
 }

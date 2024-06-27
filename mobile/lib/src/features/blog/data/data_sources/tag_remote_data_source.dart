@@ -1,51 +1,42 @@
-import 'package:hive/hive.dart';
-import 'package:starter_project/src/core/constants/constants.dart';
-import 'package:starter_project/src/features/blog/data/models/blog_model.dart';
-import 'package:starter_project/src/features/blog/data/models/tag_model.dart';
-
-import '../../domain/domain.dart';
-
-import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:dartz/dartz.dart';
 
-String token = Hive.box(Constants.authBox).get(Constants.token);
+import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
+import 'package:starter_project/src/core/constants/constants.dart';
+import 'package:starter_project/src/core/error/error.dart';
+import 'package:starter_project/src/features/auth/authentication.dart';
+import 'package:starter_project/src/features/blog/data/models/tag_model_b.dart';
 
 abstract class TagRemoteDataSource {
-  //methods
-  Future<Either<String, List<TagModel>>> viewAllTags();
+  Future<List<TagModel>> viewAllTags();
 }
 
 class TagRemoteDataSourceImpl implements TagRemoteDataSource {
+  final http.Client client;
+  final Box<LoginReturnModel> box;
+
+  const TagRemoteDataSourceImpl({
+    required this.client,
+    required this.box,
+  });
+
   @override
-  Future<Either<String, List<TagModel>>> viewAllTags() async {
-    final response = await http.get(
-      Uri.parse('http://blogapp.tryasp.net/api/Tag'),
+  Future<List<TagModel>> viewAllTags() async {
+    final token = box.get(Constants.loginReturn)!.token;
+    final response = await client.get(
+      Uri.parse(Constants.viewTagsAPIEndpoint),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token', // Include the auth token
+        'Authorization': 'Bearer $token',
       },
     );
 
     if (response.statusCode == 200) {
-      // If the server returns a 200 OK response, parse the JSON.
-      print('Response body: ${json.decode(response.body)}');
-
       List<dynamic> data = json.decode(response.body);
-      //print('Data: $data');
-      List<TagModel> tags = [];
-      print(response.body);
-
-      for (var item in data) {
-        tags.add(TagModel.fromJson(item));
-      }
-      print(tags);
-      return Right(tags);
+      List<TagModel> tags = data.map<TagModel>((tag) => TagModel.fromJson(tag)).toList();
+      return tags;
     } else {
-      print('failed to load data');
-      // If the server did not return a 200 OK response, throw an exception.
-      //throw Exception('Failed to load data');
-      return Left('Failed to load data');
+      throw ServerException(errorMessage: 'Tag not found');
     }
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart' as hive;
 import 'package:starter_project/src/core/core.dart';
+import 'package:starter_project/src/core/dp_injection/dp_injection.dart';
 import 'package:starter_project/src/core/routes/routes.dart';
 import 'package:starter_project/src/core/theme/theme_config.dart';
 import 'package:starter_project/src/features/auth/authentication.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 
 import '../error/error.dart';
 
@@ -70,12 +71,12 @@ class AppRouter extends StatelessWidget {
   }
 
   static GoRouter createRoute() {
-    final token = Hive.box(Constants.authBox).get(Constants.token);
+    final loginReturn =
+        dpLocator.call<hive.Box<LoginReturnModel>>().get(Constants.loginReturn);
     return GoRouter(
-      redirect: ((context, state) => redirect(state)),
-      initialLocation: token == null
-          ? '/${LoginScreen.routeName}'
-          : '/${BlogsDashboard.routeName}',
+      initialLocation: (loginReturn != null)
+          ? "/${BlogsDashboard.routeName}"
+          : "/${LoginScreen.routeName}",
       routes: routes,
       observers: [],
     );

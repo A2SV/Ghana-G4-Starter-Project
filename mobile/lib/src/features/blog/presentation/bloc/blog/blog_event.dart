@@ -18,6 +18,13 @@ final class CreateBlogEvent extends BlogEvent {
   });
 }
 
+final class DeleteBlogEvent extends BlogEvent {
+  final int id;
+  const DeleteBlogEvent({
+    required this.id,
+  });
+}
+
 final class UpdateBlogEvent extends BlogEvent {
   final String title;
   final String body;
@@ -31,9 +38,14 @@ final class UpdateBlogEvent extends BlogEvent {
   });
 }
 
-final class DeleteBlogEvent extends BlogEvent {
+final class ViewAllBlogsEvent extends BlogEvent {
+}
+final class ViewMyBlogsEvent extends BlogEvent {
+}
+
+final class ViewBlogEvent extends BlogEvent {
   final int id;
-  const DeleteBlogEvent({
+  const ViewBlogEvent({
     required this.id,
   });
 }

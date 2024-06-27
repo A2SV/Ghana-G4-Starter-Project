@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/generated/assets.gen.dart';
 import 'package:starter_project/generated/fonts.gen.dart';
+import 'package:starter_project/src/core/cubits/app_user/app_user_cubit.dart';
 import 'package:starter_project/src/core/routes/routes_config.dart';
 import 'package:starter_project/src/core/theme/app_light_theme_colors.dart';
 import 'package:starter_project/src/core/utils/custom_extensions.dart';
@@ -13,8 +14,7 @@ import 'package:starter_project/src/core/widgets/custom_button.dart';
 import 'package:starter_project/src/core/widgets/custom_textformfield.dart';
 import 'package:starter_project/src/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blog_details.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login-screen';
@@ -48,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 context: context,
                 routeName: BlogsDashboard.routeName,
                 popAndPush: true,
+                extra: state.user,
               );
             }
           },

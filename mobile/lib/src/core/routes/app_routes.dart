@@ -3,13 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/login_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/otp_screen.dart';
 import 'package:starter_project/src/features/auth/presentation/pages/register_screen.dart';
-import 'package:starter_project/src/features/blog/domain/entities/blog.dart';
-//import 'package:starter_project/src/features/on_boarding/presentation/pages/on_boarding3/login.dart';
-
+import 'package:starter_project/src/features/blog/domain/entities/blog_b.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/add_blog_screen.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/all_blogs_screen.dart';
-import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/blogs_dashboard/blogs_dashboard.dart';
 import 'package:starter_project/src/features/blog/presentation/pages/edit_blog_screen.dart';
+import 'package:starter_project/src/features/blog/presentation/pages/my_blogs_screen.dart';
 import 'package:starter_project/src/features/profiles/presentation/pages/profile_screen.dart';
 
 import '../../features/blog/presentation/pages/blog_details.dart';
@@ -60,14 +59,19 @@ final routes = <GoRoute>[
   ),
 
   GoRoute(
+    name: AppRoutes.profileEditScreen,
+    path: '/${ProfileEditPage.routeName}',
+    builder: (context, state) => const ProfileEditPage(),
+  ),
+  GoRoute(
     name: AppRoutes.allblogsScreen,
     path: '/${AllBlogsScreen.routeName}',
     builder: (context, state) => const AllBlogsScreen(),
   ),
   GoRoute(
-    name: AppRoutes.profileEditScreen,
-    path: '/${ProfileEditPage.routeName}',
-    builder: (context, state) => const ProfileEditPage(),
+    name: AppRoutes.myblogsScreen,
+    path: '/${MyBlogsScreen.routeName}',
+    builder: (context, state) => const MyBlogsScreen(),
   ),
 
   GoRoute(
@@ -75,9 +79,10 @@ final routes = <GoRoute>[
     path: '/${BlogDetails.routeName}/:id',
     builder: (context, state) {
       final id = state.pathParameters['id']!;
-      return BlogDetails(id: id);
+      return BlogDetails(id: int.parse(id));
     },
   ),
+
   GoRoute(
     name: AppRoutes.blogsDashboard,
     path: '/${BlogsDashboard.routeName}',
@@ -127,4 +132,6 @@ class AppRoutes {
   static const String blogDetails = "blog-details-screen";
 
   static const String blogsDashboard = "blogs-dashboard";
+  static const String myblogsScreen = "my-blogs-screen";
+  
 }

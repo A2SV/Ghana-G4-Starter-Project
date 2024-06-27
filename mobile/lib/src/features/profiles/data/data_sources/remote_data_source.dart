@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:starter_project/src/features/profiles/data/data.dart';
+import 'package:starter_project/src/features/profiles/data/models/user_account_model.dart';
 
 abstract class RemoteDataSource {
   Future<Either<String,UserAccountModel>> getAccount({required int? id});
@@ -49,7 +50,6 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<String> updateAccount({required int? id, required String? firstName, required String? lastName, required String? email}) async{
-    // TODO: implement updateAccount
     final url = Uri.parse('http://blogapp.tryasp.net/api/UserAccount/update');
 
     final Map<String, dynamic> data = {
@@ -71,10 +71,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-      print('Request successful: ${response.body}');
       return 'Request successful: ${response.body}' ;
     } else {
-      print('Request failed: ${response.statusCode}');
       return 'Request failed: ${response.statusCode}';
     }
 

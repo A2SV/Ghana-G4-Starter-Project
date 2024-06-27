@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:starter_project/src/core/cubits/app_user/app_user_cubit.dart';
-import 'package:starter_project/src/features/blog/presentation/bloc/blog/blog_bloc.dart';
-
+import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 import 'src/core/dp_injection/dependency_injection.dart';
 import 'src/core/routes/routes_config.dart';
 import 'src/features/auth/presentation/bloc/auth/auth_bloc.dart';
@@ -22,6 +21,9 @@ void main() async {
       ),
       BlocProvider(
         create: (_) => dpLocator<BlogBloc>(),
+      ),
+      BlocProvider(
+        create: (_) => dpLocator<TagBloc>(),
       ),
     ],
     child: const MyApp(),

@@ -35,12 +35,12 @@ class AddBlogScreenState extends State<AddBlogScreen> {
       body: SingleChildScrollView(
         child: BlocConsumer<BlogBloc, BlogState>(
           listener: (context, state) {
-           if (state is BlogFailure) {
+            if (state is BlogFailure) {
               CustomSnackBar.errorSnackBar(
                 context: context,
                 message: state.message,
               );
-            } else if (state is BlogSuccess) {
+            } else if (state is BlogCreated) {
               CustomSnackBar.successSnackBar(
                 context: context,
                 message: 'Blog added successfully',

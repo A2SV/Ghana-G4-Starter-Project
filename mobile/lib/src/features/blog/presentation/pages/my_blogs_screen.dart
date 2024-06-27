@@ -8,43 +8,15 @@ import 'package:starter_project/src/core/utils/custom_snackbar.dart';
 import 'package:starter_project/src/core/widgets/widgets.dart';
 import 'package:starter_project/src/features/blog/presentation/bloc/bloc.dart';
 
-// List<Widget> tagWidget(List<Tag> tags, BuildContext context) {
-//   List<Widget> output = [];
-
-//   print('tags $tags');
-
-//   for (Tag tag in tags) {
-//     print('new tag');
-//     output.add(Container(
-//       margin: const EdgeInsets.all(2),
-//       decoration: BoxDecoration(
-//         color: AppLightThemeColors.kSecondaryBackgroundColor,
-//         borderRadius: BorderRadius.circular(3.0),
-//       ),
-//       child: Text(
-//         tag.label,
-//         maxLines: 1,
-//         style: context.textTheme.displayLarge!.copyWith(
-//           fontSize: 13.sp,
-//           color: AppLightThemeColors.kOnSecondaryBackgroundLightColor,
-//         ),
-//       ).symmetricPadding(10.0, 5.0),
-//     ).verticalPadding(10.0));
-//   }
-
-//   print('tagWidget:$output');
-//   return output;
-// }
-
-class AllBlogsScreen extends StatefulWidget {
-  static const String routeName = 'all-blogs-screen';
-  const AllBlogsScreen({super.key});
+class MyBlogsScreen extends StatefulWidget {
+  static const String routeName = 'my-blogs-screen';
+  const MyBlogsScreen({super.key});
 
   @override
-  State<AllBlogsScreen> createState() => _AllBlogsScreenState();
+  State<MyBlogsScreen> createState() => _MyBlogsScreenState();
 }
 
-class _AllBlogsScreenState extends State<AllBlogsScreen> {
+class _MyBlogsScreenState extends State<MyBlogsScreen> {
   late final TextEditingController _searchController;
   @override
   Widget build(BuildContext context) {
@@ -53,7 +25,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
         surfaceTintColor: Colors.white,
         shadowColor: Colors.grey.withOpacity(0.1),
         title: Text(
-          'All Blogs',
+          'My Blogs',
           style: context.textTheme.displayMedium!.copyWith(
             color: AppLightThemeColors.kDarkTextColor,
             fontSize: 18.sp,
@@ -79,18 +51,20 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
       body: BlocConsumer<BlogBloc, BlogState>(
         listener: (context, state) {
           if (state is BlogDeleted) {
-            BlocProvider.of<BlogBloc>(context).add(ViewAllBlogsEvent());
+            BlocProvider.of<BlogBloc>(context).add(ViewMyBlogsEvent());
           }
           if (state is BlogFailure) {
             CustomSnackBar.errorSnackBar(
               context: context,
               message: state.message,
             );
-          } 
+          }
+         
         },
         builder: (context, state) {
           print(state.toString());
-          return (state is BlogSuccess)
+          return 
+          (state is ViewBlogs)
               ? (state.blogs.isEmpty)
                   ? Center(
                       child: Text(
@@ -133,6 +107,7 @@ class _AllBlogsScreenState extends State<AllBlogsScreen> {
   @override
   void initState() {
     _searchController = TextEditingController();
+    context.read<BlogBloc>().add(ViewMyBlogsEvent());
     super.initState();
   }
 }
